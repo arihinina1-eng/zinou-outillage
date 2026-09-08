@@ -523,8 +523,27 @@
             <input id="formOfferPrice" type="number" class="w-full bg-slate-950 border border-amber-500/50 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
           </div>
           <div class="sm:col-span-2">
-            <label class="block mb-1 text-slate-400" data-i18n="formImageLabel">رابط الصورة:</label>
-            <input required id="formImage" type="url" placeholder="https://..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+            <label class="block mb-1 text-slate-400" data-i18n="formImageLabel">صورة العتاد (رفع من الجهاز):</label>
+            <div class="flex flex-col sm:flex-row items-center gap-3">
+              <label class="flex-1 w-full flex flex-col items-center justify-center border-2 border-dashed border-slate-700 hover:border-amber-500 rounded-2xl p-4 cursor-pointer bg-slate-950/60 transition group">
+                <svg class="w-7 h-7 text-slate-400 group-hover:text-amber-400 mb-1 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+                <span class="text-xs font-bold text-slate-300 group-hover:text-amber-400" data-i18n="uploadPrompt">اضغط لاختيار صورة من هاتفك أو حاسوبك</span>
+                <span class="text-[10px] text-slate-500 mt-0.5">PNG, JPG, WEBP (يتم تحسينها وحفظها تلقائياً)</span>
+                <input id="formImageFile" type="file" accept="image/*" class="hidden" onchange="handleDeviceImageUpload(event)">
+              </label>
+              
+              <!-- Image Preview Container -->
+              <div id="imagePreviewWrapper" class="relative w-24 h-24 rounded-2xl overflow-hidden bg-slate-950 border border-slate-700 shrink-0 hidden">
+                <img id="imagePreview" src="" class="w-full h-full object-cover">
+                <button type="button" onclick="clearUploadedImage()" class="absolute top-1 right-1 bg-rose-600/90 text-white rounded-full p-1 hover:bg-rose-500 cursor-pointer shadow-md" title="حذف">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+              </div>
+            </div>
+            <!-- Hidden input to hold the processed image base64 -->
+            <input type="hidden" id="formImageBase64" value="">
           </div>
           <div class="sm:col-span-2">
             <label class="block mb-1 text-slate-400" data-i18n="formDescLabel">مواصفات ونبذة تفصيلية:</label>
@@ -619,7 +638,9 @@
         formStockLabel: "الكمية المتوفرة:",
         formPriceLabel: "السعر الأصلي:",
         formOfferPriceLabel: "سعر التخفيض (OFFRE):",
-        formImageLabel: "رابط الصورة:",
+        formImageLabel: "صورة العتاد (رفع من الجهاز):",
+        uploadPrompt: "اضغط لاختيار صورة من هاتفك أو حاسوبك",
+        imageRequiredMsg: "يرجى اختيار صورة للسلعة من جهازك!",
         formDescLabel: "مواصفات ونبذة تفصيلية:",
         cancelBtn: "إلغاء",
         saveProductBtn: "حفظ ونشر السلعة",
@@ -693,7 +714,9 @@
         formStockLabel: "Quantité en stock:",
         formPriceLabel: "Prix initial:",
         formOfferPriceLabel: "Prix promo (OFFRE):",
-        formImageLabel: "URL de l'image:",
+        formImageLabel: "Photo de l'article (depuis l'appareil):",
+        uploadPrompt: "Cliquez pour choisir une photo depuis votre appareil",
+        imageRequiredMsg: "Veuillez sélectionner une image depuis votre appareil!",
         formDescLabel: "Description détaillée:",
         cancelBtn: "Annuler",
         saveProductBtn: "Enregistrer l'article",
@@ -767,7 +790,9 @@
         formStockLabel: "Available Quantity:",
         formPriceLabel: "Original Price:",
         formOfferPriceLabel: "Promo Price (OFFER):",
-        formImageLabel: "Image URL:",
+        formImageLabel: "Product Image (Upload from device):",
+        uploadPrompt: "Click to upload an image from your device",
+        imageRequiredMsg: "Please select an image from your device!",
         formDescLabel: "Detailed Description:",
         cancelBtn: "Cancel",
         saveProductBtn: "Save & Publish Tool",
@@ -1420,9 +1445,72 @@
       `).join("");
     }
 
+    /* Process and Compress Uploaded Image from User Device */
+    window.handleDeviceImageUpload = function(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+          // Compress & scale to prevent exceeding browser storage limit
+          const maxDim = 800;
+          let width = img.width;
+          let height = img.height;
+          if (width > height) {
+            if (width > maxDim) {
+              height = Math.round((height * maxDim) / width);
+              width = maxDim;
+            }
+          } else {
+            if (height > maxDim) {
+              width = Math.round((width * maxDim) / height);
+              height = maxDim;
+            }
+          }
+
+          const canvas = document.createElement("canvas");
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, width, height);
+
+          const compressedBase64 = canvas.toDataURL("image/jpeg", 0.8);
+          document.getElementById("formImageBase64").value = compressedBase64;
+          
+          const previewImg = document.getElementById("imagePreview");
+          const previewWrapper = document.getElementById("imagePreviewWrapper");
+          if (previewImg && previewWrapper) {
+            previewImg.src = compressedBase64;
+            previewWrapper.classList.remove("hidden");
+          }
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    };
+
+    window.clearUploadedImage = function() {
+      const fileInput = document.getElementById("formImageFile");
+      if (fileInput) fileInput.value = "";
+      const base64Input = document.getElementById("formImageBase64");
+      if (base64Input) base64Input.value = "";
+      const previewImg = document.getElementById("imagePreview");
+      if (previewImg) previewImg.src = "";
+      const previewWrapper = document.getElementById("imagePreviewWrapper");
+      if (previewWrapper) previewWrapper.classList.add("hidden");
+    };
+
     window.saveProduct = function(e) {
       e.preventDefault();
       const editId = document.getElementById("editProductId").value;
+      const imgData = document.getElementById("formImageBase64").value;
+
+      if (!imgData) {
+        showToast(i18nData[currentLang].imageRequiredMsg, "error");
+        return;
+      }
       
       const newProd = {
         id: editId ? parseInt(editId) : Date.now(),
@@ -1436,7 +1524,7 @@
         stock: parseInt(document.getElementById("formStock").value),
         price: parseFloat(document.getElementById("formPrice").value),
         offerPrice: document.getElementById("formOfferPrice").value ? parseFloat(document.getElementById("formOfferPrice").value) : null,
-        img: document.getElementById("formImage").value,
+        img: imgData,
         desc: document.getElementById("formDesc").value
       };
 
@@ -1468,7 +1556,16 @@
       document.getElementById("formStock").value = p.stock;
       document.getElementById("formPrice").value = p.price;
       document.getElementById("formOfferPrice").value = p.offerPrice || "";
-      document.getElementById("formImage").value = p.img;
+      
+      // Load existing image into preview
+      document.getElementById("formImageBase64").value = p.img;
+      const previewImg = document.getElementById("imagePreview");
+      const previewWrapper = document.getElementById("imagePreviewWrapper");
+      if (previewImg && previewWrapper) {
+        previewImg.src = p.img;
+        previewWrapper.classList.remove("hidden");
+      }
+
       document.getElementById("formDesc").value = getLocalized(p.desc);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
@@ -1491,7 +1588,7 @@
       document.getElementById("formStock").value = "1";
       document.getElementById("formPrice").value = "";
       document.getElementById("formOfferPrice").value = "";
-      document.getElementById("formImage").value = "";
+      clearUploadedImage();
       document.getElementById("formDesc").value = "";
     };
 
