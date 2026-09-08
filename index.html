@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zinou Outillage | عتاد صناعي وتجهيزات الحرفيين</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Cairo Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    * {
+      font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+    }
+    
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #020617;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #f59e0b;
+    }
+
+    @keyframes brandsRTL {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(50%); }
+    }
+    @keyframes brandsLTR {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .brands-track-rtl {
+      display: flex;
+      width: max-content;
+      animation: brandsRTL 35s linear infinite;
+    }
+    .brands-track-ltr {
+      display: flex;
+      width: max-content;
+      animation: brandsLTR 35s linear infinite;
+    }
+    .brands-track-rtl:hover, .brands-track-ltr:hover {
+      animation-play-state: paused;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-amber-500 selection:text-slate-950">
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="fixed bottom-5 right-5 z-[100] flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- Header -->
+  <header class="bg-slate-900/95 backdrop-blur-md border-b border-slate-800 sticky top-0 z-40 shadow-2xl">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+      
+      <!-- Brand & Drawer Trigger Button -->
+      <div class="flex items-center gap-3">
+        <!-- Drawer Toggle Button -->
+        <button 
+          type="button"
+          onclick="toggleCategoriesDrawer()" 
+          class="px-3.5 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-xl text-xs font-black flex items-center gap-2 transition active:scale-95 shadow-md shadow-amber-500/10 cursor-pointer"
+          title="الفئات والأقسام"
+        >
+          <svg class="w-4 h-4 text-slate-950 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+          <span id="i18n-drawerBtn">الفئات والأقسام</span>
+        </button>
+
+        <!-- Brand Logo (Coded Typographic Identity matching reference) -->
+        <div class="flex items-center cursor-pointer select-none" dir="ltr" onclick="resetAllFilters()" title="Zinou Outillage">
+          <svg viewBox="0 0 375 62" class="h-8 sm:h-10 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Zinou Text in Vibrant Yellow -->
+            <text 
+              x="2" 
+              y="42" 
+              fill="#FACC15" 
+              font-family="'Impact', 'Arial Black', sans-serif" 
+              font-weight="900" 
+              font-style="italic" 
+              font-size="44" 
+              letter-spacing="-0.5"
+            >Zinou</text>
+
+            <!-- Outillage Text in Clean White -->
+            <text 
+              x="138" 
+              y="42" 
+              fill="#FFFFFF" 
+              font-family="'Impact', 'Arial Black', sans-serif" 
+              font-weight="900" 
+              font-style="italic" 
+              font-size="44" 
+              letter-spacing="-0.5"
+            >Outillage</text>
+
+            <!-- Bottom Yellow Accent Bar with dynamic angled bevel cut -->
+            <polygon points="2,48 358,48 370,52 358,56 2,56" fill="#FACC15" />
+          </svg>
+        </div>
+      </div>
+
+      <!-- Actions: Lang, Direct Call, Admin, Cart -->
+      <div class="flex items-center gap-2">
+        <!-- Language Selector -->
+        <select 
+          id="langSelect" 
+          onchange="changeLanguage(this.value)" 
+          class="bg-slate-800 text-white text-xs font-bold border border-slate-700 rounded-xl px-2.5 py-2 outline-none cursor-pointer hover:bg-slate-700 transition"
+        >
+          <option value="ar">🇩🇿 العربية</option>
+          <option value="fr">🇫🇷 Français</option>
+          <option value="en">🇬🇧 English</option>
+        </select>
+
+        <!-- Direct Phone Call -->
+        <a 
+          href="tel:0555000000" 
+          class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 font-bold rounded-xl text-xs flex items-center gap-1.5 transition active:scale-95"
+          title="اتصل بالهاتف"
+        >
+          <svg class="w-3.5 h-3.5 text-amber-500" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+          </svg>
+          <span class="hidden sm:inline" id="i18n-call">اتصل الآن</span>
+        </a>
+
+        <!-- Admin Control Button -->
+        <button 
+          type="button"
+          onclick="openAdminModal()" 
+          class="p-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-amber-400 rounded-xl border border-slate-700 text-xs font-bold transition cursor-pointer" 
+          title="لوحة الإدارة"
+        >
+          <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+          </svg>
+        </button>
+
+        <!-- Cart Button -->
+        <button 
+          type="button"
+          onclick="toggleModal('cartModal')" 
+          class="relative p-2.5 bg-slate-800 hover:bg-slate-700 text-white rounded-xl border border-slate-700 transition cursor-pointer"
+          title="السلة"
+        >
+          <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+          </svg>
+          <span id="cartCountBadge" class="absolute -top-1.5 -right-1.5 bg-rose-600 text-white text-[10px] font-black px-1.5 py-0.2 rounded-full ring-2 ring-slate-900 min-w-4 text-center">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Famous Global Brands Marquee Ticker -->
+  <section class="relative bg-slate-950/95 border-b border-slate-800/80 py-2.5 overflow-hidden select-none shadow-inner">
+    <div class="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-slate-950 to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-slate-950 to-transparent z-10 pointer-events-none"></div>
+
+    <div class="overflow-hidden">
+      <div id="brandsTrack" class="brands-track-rtl items-center gap-4 cursor-pointer">
+        <!-- Repeat set 1 -->
+        <button type="button" onclick="filterByBrand('Hilti')" class="flex items-center gap-2 px-3.5 py-1 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-red-500/50 text-slate-300 hover:text-white transition shrink-0">
+          <span class="w-2 h-2 rounded-full bg-red-600"></span>
+          <span class="font-black text-xs tracking-wider text-red-500">HILTI</span>
+          <span class="text-[10px] text-slate-500 font-mono">Liechtenstein</span>
+        </button>
+        <button type="button" onclick="filterByBrand('Milwaukee')" class="flex items-center gap-2 px-3.5 py-1 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-red-600/50 text-slate-300 hover:text-white transition shrink-0">
+          <span class="w-2 h-2 rounded-full bg-red-500"></span>
+          <span class="font-black text-xs tracking-wider text-red-400">MILWAUKEE</span>
+          <span class="text-[10px] text-slate-500 font-mono">USA</span>
+        </button>
+        <button type="button" onclick="filterByBrand('Makita')" class="flex items-center gap-2 px-3.5 py-1 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-teal-500/50 text-slate-300 hover:text-white transition shrink-0">
+          <span class="w-2 h-2 rounded-full bg-teal-500"></span>
+          <span class="font-black text-xs tracking-wider text-teal-400">MAKITA</span>
+          <span class="text-[10px] text-slate-500 font-mono">Japan</span>
+        </button>
+        <button type="button" onclick="filterByBrand('DeWalt')" class="flex items-center gap-2 px-3.5 py-1 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-400/50 text-slate-300 hover:text-white transition shrink-0">
+          <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+          <span class="font-black text-xs tracking-wider text-amber-400">DEWALT</span>
+          <span class="text-[10px] text-slate-500 font-mono">USA</span>
+        </button>
+        <button type="button" onclick="filterByBrand('Bosch')" class="flex items-center gap-2 px-3.5 py-1 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-sky-500/50 text-slate-300 hover:text-white transition shrink-0">
+          <span class="w-2 h-2 rounded-full bg-sky-500"></span>
+          <span class="font-black text-xs tracking-wider text-sky-400">BOSCH PRO</span>
+          <span class="text-[10px] text-slate-500 font-mono">Germany</span>
+        </button>
+        <button type="button" onclick="filterByBrand('Fluke')" class="flex items-center gap-2 px-3.5 py-1 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-yellow-400/50 text-slate-300 hover:text-white transition shrink-0">
+          <span class="w-2 h-2 rounded-full bg-yellow-400"></span>
+          <span class="font-black text-xs tracking-wider text-yellow-400">FLUKE</span>
+          <span class="text-[10px] text-slate-500 font-mono">USA</span>
+        </button>
+        <button type="button" onclick="filterByBrand('Sony')" class="flex items-center gap-2 px-3.5 py-1 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-indigo-400/50 text-slate-300 hover:text-white transition shrink-0">
+          <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+          <span class="font-black text-xs tracking-wider text-indigo-400">SONY</span>
+          <span class="text-[10px] text-slate-500 font-mono">Japan</span>
+        </button>
+        <button type="button" onclick="filterByBrand('Xiaomi')" class="flex items-center gap-2 px-3.5 py-1 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-orange-400/50 text-slate-300 hover:text-white transition shrink-0">
+          <span class="w-2 h-2 rounded-full bg-orange-500"></span>
+          <span class="font-black text-xs tracking-wider text-orange-400">XIAOMI</span>
+          <span class="text-[10px] text-slate-500 font-mono">Tech</span>
+        </button>
+
+        <!-- Repeat set 2 for smooth loop -->
+        <button type="button" onclick="filterByBrand('Hilti')" class="flex items-center gap-2 px-3.5 py-1 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-red-500/50 text-slate-300 hover:text-white transition shrink-0">
+          <span class="w-2 h-2 rounded-full bg-red-600"></span>
+          <span class="font-black text-xs tracking-wider text-red-500">HILTI</span>
+          <span class="text-[10px] text-slate-500 font-mono">Liechtenstein</span>
+        </button>
+        <button type="button" onclick="filterByBrand('Milwaukee')" class="flex items-center gap-2 px-3.5 py-1 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-red-600/50 text-slate-300 hover:text-white transition shrink-0">
+          <span class="w-2 h-2 rounded-full bg-red-500"></span>
+          <span class="font-black text-xs tracking-wider text-red-400">MILWAUKEE</span>
+          <span class="text-[10px] text-slate-500 font-mono">USA</span>
+        </button>
+        <button type="button" onclick="filterByBrand('Makita')" class="flex items-center gap-2 px-3.5 py-1 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-teal-500/50 text-slate-300 hover:text-white transition shrink-0">
+          <span class="w-2 h-2 rounded-full bg-teal-500"></span>
+          <span class="font-black text-xs tracking-wider text-teal-400">MAKITA</span>
+          <span class="text-[10px] text-slate-500 font-mono">Japan</span>
+        </button>
+        <button type="button" onclick="filterByBrand('DeWalt')" class="flex items-center gap-2 px-3.5 py-1 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-400/50 text-slate-300 hover:text-white transition shrink-0">
+          <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+          <span class="font-black text-xs tracking-wider text-amber-400">DEWALT</span>
+          <span class="text-[10px] text-slate-500 font-mono">USA</span>
+        </button>
+        <button type="button" onclick="filterByBrand('Bosch')" class="flex items-center gap-2 px-3.5 py-1 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-sky-500/50 text-slate-300 hover:text-white transition shrink-0">
+          <span class="w-2 h-2 rounded-full bg-sky-500"></span>
+          <span class="font-black text-xs tracking-wider text-sky-400">BOSCH PRO</span>
+          <span class="text-[10px] text-slate-500 font-mono">Germany</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Slide Drawer Backdrop -->
+  <div 
+    id="drawerBackdrop" 
+    onclick="toggleCategoriesDrawer()" 
+    class="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 hidden transition-opacity duration-300"
+  ></div>
+
+  <!-- Off-canvas Slide Drawer -->
+  <aside 
+    id="categoriesDrawer" 
+    style="transform: translateX(100%);" 
+    class="fixed top-0 bottom-0 right-0 z-50 w-80 max-w-[85vw] bg-slate-900 border-l border-slate-800 shadow-2xl p-5 flex flex-col justify-between transition-transform duration-300 ease-in-out"
+  >
+    <div>
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+          <h3 class="font-black text-amber-400 text-base" id="i18n-catsDrawerTitle">الفئات والأقسام</h3>
+        </div>
+        <button 
+          type="button"
+          onclick="toggleCategoriesDrawer()" 
+          class="p-2 text-slate-400 hover:text-white rounded-xl hover:bg-slate-800 transition"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <p class="text-xs text-slate-400 mb-3" id="i18n-drawerHint">اختر القسم لعرض السلع الخاصة به:</p>
+      
+      <!-- Drawer Categories Items -->
+      <div id="categoriesDrawerContainer" class="space-y-1.5 overflow-y-auto max-h-[70vh] pr-1"></div>
+    </div>
+
+    <div class="pt-4 border-t border-slate-800 text-center">
+      <button 
+        type="button"
+        onclick="resetAllFilters(); toggleCategoriesDrawer();" 
+        class="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-xs text-amber-400 font-black rounded-xl transition"
+        id="i18n-drawerResetBtn"
+      >
+        إعادة عرض كل السلع
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Store Layout -->
+  <div class="max-w-7xl mx-auto px-4 py-6 flex-1 w-full flex flex-col gap-5">
+    
+    <main class="w-full">
+      
+      <!-- Prominent Search Bar -->
+      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-3 md:p-4 mb-4 shadow-xl">
+        <div class="relative w-full">
+          <input 
+            id="searchInput" 
+            type="text" 
+            placeholder="ابحث..." 
+            oninput="handleSearchInput()"
+            onkeydown="if(event.key === 'Enter') { triggerDirectSearch(); }"
+            class="w-full bg-slate-950 border border-slate-700 focus:border-amber-500 rounded-xl px-4 py-2.5 pl-11 text-xs md:text-sm text-white placeholder-slate-500 outline-none transition shadow-inner" 
+          />
+          <!-- Clickable Search Button Icon -->
+          <button 
+            type="button" 
+            onclick="triggerDirectSearch()" 
+            class="absolute top-2 left-2 p-1.5 rounded-lg text-slate-400 hover:text-amber-400 hover:bg-slate-800 active:scale-90 transition cursor-pointer flex items-center justify-center" 
+            title="بحث"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </button>
+          <!-- Live Suggestions Box -->
+          <div id="searchSuggestions" class="hidden absolute top-full mt-1.5 w-full bg-slate-900 border border-slate-800 rounded-xl shadow-2xl z-50 max-h-72 overflow-y-auto divide-y divide-slate-800/60"></div>
+        </div>
+      </div>
+
+      <!-- Search Filters Bar (Appears ONLY when user searches) -->
+      <div id="searchFilterBox" class="hidden bg-slate-900 border border-amber-500/40 rounded-2xl p-4 mb-6 shadow-xl transition-all duration-300">
+        <div class="flex flex-wrap items-center justify-between gap-4 text-xs font-bold">
+          
+          <!-- Condition -->
+          <div class="flex items-center gap-3">
+            <span class="text-amber-400 font-bold" id="i18n-condLabel">حالة العتاد:</span>
+            <label class="flex items-center gap-1.5 cursor-pointer text-slate-300 hover:text-white">
+              <input type="radio" name="filterCondition" value="all" checked onchange="applyFilters()" class="accent-amber-500">
+              <span id="i18n-condAll">الكل</span>
+            </label>
+            <label class="flex items-center gap-1.5 cursor-pointer text-slate-300 hover:text-white">
+              <input type="radio" name="filterCondition" value="جديد" onchange="applyFilters()" class="accent-amber-500">
+              <span id="i18n-condNew">جديد</span>
+            </label>
+            <label class="flex items-center gap-1.5 cursor-pointer text-slate-300 hover:text-white">
+              <input type="radio" name="filterCondition" value="جديد يشبه المستعمل" onchange="applyFilters()" class="accent-amber-500">
+              <span id="i18n-condLikeNew">جديد يشبه المستعمل</span>
+            </label>
+            <label class="flex items-center gap-1.5 cursor-pointer text-slate-300 hover:text-white">
+              <input type="radio" name="filterCondition" value="مستعمل" onchange="applyFilters()" class="accent-amber-500">
+              <span id="i18n-condUsed">مستعمل</span>
+            </label>
+          </div>
+
+          <!-- Price Inputs -->
+          <div class="flex items-center gap-2">
+            <span class="text-amber-400" id="i18n-priceRangeLabel">السعر:</span>
+            <input id="minPriceInput" type="number" placeholder="الأدنى" oninput="applyFilters()" class="w-20 bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1 text-white outline-none focus:border-amber-500">
+            <span class="text-slate-500">-</span>
+            <input id="maxPriceInput" type="number" placeholder="الأقصى" oninput="applyFilters()" class="w-20 bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1 text-white outline-none focus:border-amber-500">
+          </div>
+
+          <!-- Sort Select -->
+          <div class="flex items-center gap-2">
+            <span class="text-amber-400" id="i18n-sortLabel">الترتيب:</span>
+            <select id="sortSelect" onchange="applyFilters()" class="bg-slate-950 border border-slate-700 rounded-lg px-3 py-1 text-white outline-none focus:border-amber-500 cursor-pointer">
+              <option value="newest" id="i18n-sortNewest">الأحدث إضافة</option>
+              <option value="priceAsc" id="i18n-sortPriceAsc">السعر: من الأقل للأعلى</option>
+              <option value="priceDesc" id="i18n-sortPriceDesc">السعر: من الأعلى للأقل</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Active Filter Chips & Counter -->
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-bold text-slate-400" id="currentCategoryBadge">جميع الأقسام</span>
+          <span class="text-xs text-amber-500 font-mono font-bold" id="productsCountBadge">(0)</span>
+        </div>
+        <button type="button" onclick="resetAllFilters()" class="text-xs text-slate-400 hover:text-amber-400 underline font-bold cursor-pointer" id="i18n-resetFiltersBtn">إعادة ضبط</button>
+      </div>
+
+      <!-- Products Grid -->
+      <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+    </main>
+  </div>
+
+  <!-- Product Details Modal -->
+  <div id="productDetailModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-2xl w-full p-6 relative max-h-[90vh] overflow-y-auto shadow-2xl">
+      <button 
+        type="button"
+        onclick="toggleModal('productDetailModal')" 
+        class="absolute top-4 left-4 w-9 h-9 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition cursor-pointer"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+      <div id="productDetailContent"></div>
+    </div>
+  </div>
+
+  <!-- Shopping Cart Modal -->
+  <div id="cartModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 relative shadow-2xl">
+      <button 
+        type="button"
+        onclick="toggleModal('cartModal')" 
+        class="absolute top-4 left-4 w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition cursor-pointer"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+      <h3 class="text-base font-black text-white mb-4 flex items-center gap-2">
+        <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+        </svg>
+        <span id="i18n-cartTitle">سلة المشتريات والطلبات</span>
+      </h3>
+      <div id="cartItemsList" class="divide-y divide-slate-800 max-h-60 overflow-y-auto mb-4 text-xs font-bold"></div>
+      <div class="border-t border-slate-800 pt-3 mb-4 flex justify-between items-center font-black">
+        <span class="text-xs text-slate-400" id="i18n-cartTotal">المجموع الإجمالي:</span>
+        <span id="cartTotalSum" class="text-amber-400 text-base font-mono">0 دج</span>
+      </div>
+      <button 
+        type="button"
+        onclick="openCheckoutModal()" 
+        class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs rounded-xl transition cursor-pointer"
+        id="i18n-checkoutBtn"
+      >
+        تأكيد الطلبية الآن
+      </button>
+    </div>
+  </div>
+
+  <!-- Checkout Modal -->
+  <div id="checkoutModal" class="fixed inset-0 bg-black/85 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-6 relative shadow-2xl">
+      <button 
+        type="button"
+        onclick="toggleModal('checkoutModal')" 
+        class="absolute top-4 left-4 w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition cursor-pointer"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+      <h3 class="text-base font-black text-white mb-3" id="i18n-orderInfo">معلومات استلام الطلبية</h3>
+      <form onsubmit="handleFinalOrder(event)" class="space-y-3 text-xs font-bold">
+        <div>
+          <label class="block mb-1 text-slate-400" id="i18n-nameLabel">الاسم واللقب:</label>
+          <input required id="buyerName" type="text" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+        </div>
+        <div>
+          <label class="block mb-1 text-slate-400" id="i18n-phoneLabel">رقم الهاتف:</label>
+          <input required id="buyerPhone" type="tel" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+        </div>
+        <div>
+          <label class="block mb-1 text-slate-400" id="i18n-addressLabel">الولاية والعنوان:</label>
+          <input required id="buyerAddress" type="text" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+        </div>
+        <button type="submit" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-xl transition cursor-pointer" id="i18n-confirmOrderBtn">
+          إرسال وتثبيت الحجز
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Admin Dashboard Modal -->
+  <div id="adminModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-3xl w-full p-6 relative max-h-[92vh] overflow-y-auto shadow-2xl">
+      <button 
+        type="button"
+        onclick="toggleModal('adminModal')" 
+        class="absolute top-4 left-4 w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition cursor-pointer"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+      <h3 class="text-base font-black text-amber-500 mb-4 flex items-center gap-2">
+        <span>لوحة تحكم إدارة السلع والمخزون</span>
+      </h3>
+
+      <!-- Password Lock Section -->
+      <div id="adminLock" class="text-center py-8 space-y-3">
+        <p class="text-xs font-bold text-slate-400">أدخل رمز الدخول السري للإدارة (الافتراضي: 1234):</p>
+        <div class="flex justify-center gap-2">
+          <input id="adminPassInput" type="password" class="bg-slate-950 border border-slate-700 rounded-xl px-4 py-2 text-center text-white text-xs outline-none focus:border-amber-500">
+          <button type="button" onclick="unlockAdmin()" class="px-5 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-black rounded-xl transition cursor-pointer">دخول</button>
+        </div>
+      </div>
+
+      <!-- Product Form (Unlocked) -->
+      <div id="adminContent" class="hidden space-y-5">
+        <form onsubmit="saveProduct(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-bold">
+          <input type="hidden" id="editProductId" value="">
+          
+          <div>
+            <label class="block mb-1 text-slate-400">الماركة (Hilti, Milwaukee, Makita...):</label>
+            <input required id="formBrand" type="text" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+          </div>
+          <div>
+            <label class="block mb-1 text-slate-400">اسم الآلة / العتاد:</label>
+            <input required id="formTitle" type="text" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+          </div>
+          <div>
+            <label class="block mb-1 text-slate-400">رقم الطراز (Référence):</label>
+            <input required id="formRef" type="text" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+          </div>
+          <div>
+            <label class="block mb-1 text-slate-400">الفئة:</label>
+            <select id="formCategory" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500 cursor-pointer">
+              <option value="ملابس العمل">ملابس العمل</option>
+              <option value="كهرباء">كهرباء وميلتيمتر</option>
+              <option value="سباكة">سباكة</option>
+              <option value="لحام">لحام</option>
+              <option value="ترفيه">ترفيه (دراجات وتروتينيت...)</option>
+              <option value="مقاولاتية">مقاولاتية وبناء (مناظير وأجهزة مياه وحفر...)</option>
+              <option value="أجهزة إلكترونية">أجهزة إلكترونية (هواتف، مكيفات، PS5...)</option>
+              <option value="محركات كهربائية">محركات كهربائية</option>
+            </select>
+          </div>
+          <div>
+            <label class="block mb-1 text-slate-400">سنة الإنتاج:</label>
+            <input required id="formYear" type="number" value="2024" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+          </div>
+          <div>
+            <label class="block mb-1 text-slate-400">بلد المنشأ / الصنع:</label>
+            <input required id="formCountry" type="text" placeholder="مثال: ألمانيا، اليابان، أمريكا" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+          </div>
+          <div>
+            <label class="block mb-1 text-slate-400">حالة العتاد:</label>
+            <select id="formCondition" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500 cursor-pointer">
+              <option value="جديد">جديد</option>
+              <option value="جديد يشبه المستعمل">جديد يشبه المستعمل</option>
+              <option value="مستعمل">مستعمل</option>
+            </select>
+          </div>
+          <div>
+            <label class="block mb-1 text-slate-400">الكمية المتوفرة بالمستودع:</label>
+            <input required id="formStock" type="number" min="0" value="1" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+          </div>
+          <div>
+            <label class="block mb-1 text-slate-400">السعر الأصلي (دج):</label>
+            <input required id="formPrice" type="number" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+          </div>
+          <div>
+            <label class="block mb-1 text-amber-400">سعر العرض الترويجي (تخفيض / OFFRE):</label>
+            <input id="formOfferPrice" type="number" placeholder="اتركه فارغاً إذا لا يوجد تخفيض" class="w-full bg-slate-950 border border-amber-500/50 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+          </div>
+          <div class="sm:col-span-2">
+            <label class="block mb-1 text-slate-400">رابط الصورة الرئيسية:</label>
+            <input required id="formImage" type="url" placeholder="https://..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+          </div>
+          <div class="sm:col-span-2">
+            <label class="block mb-1 text-slate-400">نبذة ومواصفات تفصيلية:</label>
+            <textarea id="formDesc" rows="3" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500"></textarea>
+          </div>
+
+          <div class="sm:col-span-2 flex justify-end gap-3 pt-3 border-t border-slate-800">
+            <button type="button" onclick="resetAdminForm()" class="px-4 py-2 bg-slate-800 text-slate-300 rounded-xl font-bold cursor-pointer">إلغاء</button>
+            <button type="submit" class="px-5 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black rounded-xl transition cursor-pointer">حفظ ونشر السلعة</button>
+          </div>
+        </form>
+
+        <!-- Current Products Table -->
+        <div class="pt-4 border-t border-slate-800">
+          <h4 class="font-black text-xs text-white mb-2">قائمة السلع بالمستودع:</h4>
+          <div class="overflow-x-auto">
+            <table class="w-full text-right text-xs">
+              <thead class="bg-slate-950 text-slate-400 font-bold">
+                <tr>
+                  <th class="p-2">السلعة</th>
+                  <th class="p-2">السعر</th>
+                  <th class="p-2">المخزون</th>
+                  <th class="p-2 text-center">إجراءات</th>
+                </tr>
+              </thead>
+              <tbody id="adminProductsTable" class="divide-y divide-slate-800"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* Global Translations */
+    const i18nData = {
+      ar: {
+        dir: "rtl",
+        drawerBtn: "الفئات والأقسام",
+        call: "اتصل الآن",
+        catsDrawerTitle: "الفئات والأقسام",
+        drawerHint: "اختر القسم لعرض السلع الخاصة به:",
+        drawerResetBtn: "إعادة عرض كل السلع",
+        searchPlaceholder: "ابحث...",
+        condLabel: "حالة العتاد:",
+        condAll: "الكل",
+        condNew: "جديد",
+        condLikeNew: "جديد يشبه المستعمل",
+        condUsed: "مستعمل",
+        priceRangeLabel: "السعر:",
+        sortLabel: "الترتيب:",
+        sortNewest: "الأحدث إضافة",
+        sortPriceAsc: "السعر: من الأقل للأعلى",
+        sortPriceDesc: "السعر: من الأعلى للأقل",
+        allCategories: "جميع الأقسام",
+        resetFiltersBtn: "إعادة ضبط",
+        inStock: "متوفر بالمستودع",
+        outOfStock: "غير متوفر بالمستودع",
+        offerBadge: "تخفيض / OFFRE",
+        addToCart: "إضافة إلى السلة",
+        buyNow: "شراء فوراً",
+        ref: "المرجع:",
+        year: "سنة الإنتاج:",
+        country: "بلد المنشأ:",
+        condition: "الحالة:",
+        currency: "دج",
+        cartTitle: "سلة المشتريات والطلبات",
+        cartTotal: "المجموع الإجمالي:",
+        checkoutBtn: "تأكيد الطلبية الآن",
+        orderInfo: "معلومات استلام الطلبية",
+        nameLabel: "الاسم واللقب:",
+        phoneLabel: "رقم الهاتف:",
+        addressLabel: "الولاية والعنوان:",
+        confirmOrderBtn: "إرسال وتثبيت الحجز",
+        outOfStockMsg: "عذراً، هذه السلعة ليست متوفرة في المستودع حالياً.",
+        itemAddedMsg: "تمت إضافة السلعة إلى السلة بنجاح!",
+        orderSuccessMsg: "تم تسجيل طلبيتك بنجاح وتحديث كمية المستودع!"
+      },
+      fr: {
+        dir: "ltr",
+        drawerBtn: "Catégories",
+        call: "Appeler",
+        catsDrawerTitle: "Rayons & Catégories",
+        drawerHint: "Sélectionnez un rayon pour filtrer:",
+        drawerResetBtn: "Afficher tous les articles",
+        searchPlaceholder: "Rechercher...",
+        condLabel: "État:",
+        condAll: "Tous",
+        condNew: "Neuf",
+        condLikeNew: "Comme Neuf",
+        condUsed: "Occasion",
+        priceRangeLabel: "Prix:",
+        sortLabel: "Trier:",
+        sortNewest: "Plus récents",
+        sortPriceAsc: "Prix croissant",
+        sortPriceDesc: "Prix décroissant",
+        allCategories: "Tous les rayons",
+        resetFiltersBtn: "Réinitialiser",
+        inStock: "En stock",
+        outOfStock: "Rupture de stock",
+        offerBadge: "PROMO / OFFRE",
+        addToCart: "Ajouter au panier",
+        buyNow: "Acheter",
+        ref: "Réf:",
+        year: "Année:",
+        country: "Origine:",
+        condition: "État:",
+        currency: "DA",
+        cartTitle: "Panier d'achats",
+        cartTotal: "Total:",
+        checkoutBtn: "Valider la commande",
+        orderInfo: "Informations de livraison",
+        nameLabel: "Nom & Prénom:",
+        phoneLabel: "Téléphone:",
+        addressLabel: "Wilaya & Adresse:",
+        confirmOrderBtn: "Confirmer la commande",
+        outOfStockMsg: "Désolé, cet article n'est pas disponible en stock.",
+        itemAddedMsg: "Article ajouté au panier avec succès!",
+        orderSuccessMsg: "Commande confirmée et stock mis à jour!"
+      },
+      en: {
+        dir: "ltr",
+        drawerBtn: "Categories",
+        call: "Call Now",
+        catsDrawerTitle: "Categories & Sectors",
+        drawerHint: "Select a category to filter tools:",
+        drawerResetBtn: "Show all products",
+        searchPlaceholder: "Search...",
+        condLabel: "Condition:",
+        condAll: "All",
+        condNew: "New",
+        condLikeNew: "Like New",
+        condUsed: "Used",
+        priceRangeLabel: "Price:",
+        sortLabel: "Sort by:",
+        sortNewest: "Newest",
+        sortPriceAsc: "Price: Low to High",
+        sortPriceDesc: "Price: High to Low",
+        allCategories: "All Categories",
+        resetFiltersBtn: "Reset Filters",
+        inStock: "In Stock",
+        outOfStock: "Out of Stock",
+        offerBadge: "SPECIAL OFFER",
+        addToCart: "Add to Cart",
+        buyNow: "Buy Now",
+        ref: "Ref:",
+        year: "Year:",
+        country: "Origin:",
+        condition: "Condition:",
+        currency: "DZD",
+        cartTitle: "Shopping Cart",
+        cartTotal: "Total:",
+        checkoutBtn: "Proceed to Checkout",
+        orderInfo: "Shipping Information",
+        nameLabel: "Full Name:",
+        phoneLabel: "Phone Number:",
+        addressLabel: "City & Address:",
+        confirmOrderBtn: "Place Order",
+        outOfStockMsg: "Sorry, this item is currently out of stock.",
+        itemAddedMsg: "Item added to cart successfully!",
+        orderSuccessMsg: "Order placed successfully! Stock updated."
+      }
+    };
+
+    const categoriesList = [
+      { id: "ملابس العمل", name: { ar: "ملابس وأحذية أمان للعمل", fr: "Vêtements & Équipements de travail", en: "Workwear & Safety Gear" } },
+      { id: "كهرباء", name: { ar: "كهرباء وميلتيمتر", fr: "Électricité & Multimètres", en: "Electrical & Multimeters" } },
+      { id: "سباكة", name: { ar: "سباكة وتجهيزات مائية", fr: "Plomberie & Outillage sanitaire", en: "Plumbing Equipment" } },
+      { id: "لحام", name: { ar: "عتاد وماكينات لحام", fr: "Postes & Matériel de soudure", en: "Welding Equipment" } },
+      { id: "ترفيه", name: { ar: "ترفيه (دراجات، تروتينيت، بيسبول...)", fr: "Loisirs (Vélos, Trottinettes, Baseball)", en: "Leisure (Bikes, Scooters, Baseball)" } },
+      { id: "مقاولاتية", name: { ar: "مقاولاتية (مناظير ميلان، مياه، حفر...)", fr: "BTP & Chantiers (Topographie, Forage)", en: "Construction & Surveying" } },
+      { id: "أجهزة إلكترونية", name: { ar: "إلكترونيات (هواتف، مكيفات، PS5...)", fr: "Électronique (Smartphones, Climatiseurs, PS5)", en: "Electronics (Phones, AC, PS5)" } },
+      { id: "محركات كهربائية", name: { ar: "محركات كهربائية ومولدات", fr: "Moteurs Électriques & Groupes", en: "Electric Motors & Generators" } }
+    ];
+
+    const defaultInitialProducts = [
+      {
+        id: 1,
+        brand: "Sony",
+        title: "جهاز ألعاب PlayStation 5 Slim النسخة الرقمية",
+        ref: "CFI-2000",
+        category: "أجهزة إلكترونية",
+        year: 2024,
+        country: "اليابان",
+        condition: "جديد",
+        stock: 2,
+        price: 98000,
+        offerPrice: 89000,
+        img: "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&w=600&q=80",
+        desc: "بلايستيشن 5 سليم جديد كلياً بسعة 1TB SSD وسرعة تحميل فائقة ودعم 4K 120Hz."
+      },
+      {
+        id: 2,
+        brand: "Xiaomi",
+        title: "تروتينيت كهربائية برو سريعة التنقل",
+        ref: "SCOOT-PRO-4",
+        category: "ترفيه",
+        year: 2024,
+        country: "الصين",
+        condition: "جديد يشبه المستعمل",
+        stock: 1,
+        price: 68000,
+        offerPrice: 59000,
+        img: "https://images.unsplash.com/photo-1597733153203-a54d0fbc47de?auto=format&fit=crop&w=600&q=80",
+        desc: "مدى سير يصل إلى 45 كم للشحنة الواحدة، سرعة قصوى 25 كم/ساعة، إطارات مقاومة للثقب."
+      },
+      {
+        id: 3,
+        brand: "Hilti",
+        title: "مطرقة تكسير وهدم احترافية TE 70-ATC/AVR",
+        ref: "TE 70-ATC",
+        category: "مقاولاتية",
+        year: 2024,
+        country: "ألمانيا",
+        condition: "جديد",
+        stock: 1,
+        price: 245000,
+        offerPrice: 225000,
+        img: "https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=600&q=80",
+        desc: "قوة صدم 11.5 جول، نظام حماية من عزم الدوران الفجائي ونظام امتصاص الاهتزازات."
+      },
+      {
+        id: 4,
+        brand: "Milwaukee",
+        title: "شيتيور عالي العزم 1/2 بوصة مع بطارية 5Ah",
+        ref: "M18-FHIWF12",
+        category: "مقاولاتية",
+        year: 2023,
+        country: "الولايات المتحدة",
+        condition: "جديد يشبه المستعمل",
+        stock: 3,
+        price: 78000,
+        offerPrice: null,
+        img: "https://images.unsplash.com/photo-1581147036324-c17ac41dfa6c?auto=format&fit=crop&w=600&q=80",
+        desc: "عزم دوران يصل إلى 1898 نيوتن/متر مع بطاريتين وشاحن سريع في حقيبة مخصصة."
+      },
+      {
+        id: 5,
+        brand: "Fluke",
+        title: "ميلتيمتر رقمي صناعي دقيق True-RMS",
+        ref: "FLUKE-179",
+        category: "كهرباء",
+        year: 2024,
+        country: "الولايات المتحدة",
+        condition: "جديد",
+        stock: 0,
+        price: 36000,
+        offerPrice: null,
+        img: "https://images.unsplash.com/photo-1606778303155-7524948a31e8?auto=format&fit=crop&w=600&q=80",
+        desc: "أعلى دقة قياس للفولتية والتيار والمقاومة مع فحص حراري معتمد."
+      },
+      {
+        id: 6,
+        brand: "Bosch",
+        title: "منظار ليزري لقياس ميلان الطرق والمستويات",
+        ref: "GRL-600",
+        category: "مقاولاتية",
+        year: 2023,
+        country: "ألمانيا",
+        condition: "مستعمل",
+        stock: 1,
+        price: 110000,
+        offerPrice: 95000,
+        img: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80",
+        desc: "جهاز احترافي للمهندسين والمقاولين لتسوية الأرضيات وحساب الميلان بدقة مليمترية."
+      }
+    ];
+
+    /* Application State */
+    let currentLang = "ar";
+    let activeCategory = "all";
+    let activeBrand = "";
+    let products = JSON.parse(localStorage.getItem("zinou_store_products")) || defaultInitialProducts;
+    let cart = JSON.parse(localStorage.getItem("zinou_store_cart")) || [];
+
+    function syncState() {
+      localStorage.setItem("zinou_store_products", JSON.stringify(products));
+      localStorage.setItem("zinou_store_cart", JSON.stringify(cart));
+      updateCartBadge();
+    }
+
+    function updateCartBadge() {
+      const badge = document.getElementById("cartCountBadge");
+      if (badge) badge.innerText = cart.length;
+    }
+
+    /* Modal controller */
+    window.toggleModal = function(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.toggle("hidden");
+    };
+
+    /* Off-canvas categories drawer */
+    window.toggleCategoriesDrawer = function() {
+      const drawer = document.getElementById("categoriesDrawer");
+      const backdrop = document.getElementById("drawerBackdrop");
+      if (!drawer || !backdrop) return;
+
+      const isRTL = currentLang === "ar";
+      const isHidden = backdrop.classList.contains("hidden");
+
+      if (isHidden) {
+        backdrop.classList.remove("hidden");
+        drawer.style.transform = "translateX(0)";
+      } else {
+        backdrop.classList.add("hidden");
+        drawer.style.transform = isRTL ? "translateX(100%)" : "translateX(-100%)";
+      }
+    };
+
+    /* Complete and safe resetAllFilters implementation */
+    window.resetAllFilters = function() {
+      const searchInput = document.getElementById("searchInput");
+      if (searchInput) searchInput.value = "";
+      
+      const minPriceInput = document.getElementById("minPriceInput");
+      if (minPriceInput) minPriceInput.value = "";
+      
+      const maxPriceInput = document.getElementById("maxPriceInput");
+      if (maxPriceInput) maxPriceInput.value = "";
+      
+      const sortSelect = document.getElementById("sortSelect");
+      if (sortSelect) sortSelect.selectedIndex = 0;
+      
+      const allConditionRadio = document.querySelector('input[name="filterCondition"][value="all"]');
+      if (allConditionRadio) allConditionRadio.checked = true;
+      
+      activeCategory = "all";
+      activeBrand = "";
+      
+      const searchFilterBox = document.getElementById("searchFilterBox");
+      if (searchFilterBox) searchFilterBox.classList.add("hidden");
+      
+      const searchSuggestions = document.getElementById("searchSuggestions");
+      if (searchSuggestions) searchSuggestions.classList.add("hidden");
+
+      applyFilters();
+      showToast("تمت إعادة ضبط جميع الفلاتر وعرض كل السلع");
+    };
+
+    /* Handle Search input live suggestions */
+    window.handleSearchInput = function() {
+      const input = document.getElementById("searchInput");
+      const filterBox = document.getElementById("searchFilterBox");
+      const suggestions = document.getElementById("searchSuggestions");
+      if (!input || !filterBox || !suggestions) return;
+
+      const q = input.value.trim().toLowerCase();
+
+      if (q.length > 0) {
+        filterBox.classList.remove("hidden");
+        
+        const matches = products.filter(p => 
+          p.title.toLowerCase().includes(q) || 
+          p.brand.toLowerCase().includes(q) || 
+          p.ref.toLowerCase().includes(q)
+        ).slice(0, 5);
+
+        if (matches.length > 0) {
+          suggestions.classList.remove("hidden");
+          suggestions.innerHTML = matches.map(p => `
+            <div onclick="selectSuggestion('${p.title.replace(/'/g, "\\'")}')" class="p-2.5 flex items-center justify-between hover:bg-slate-800/80 cursor-pointer text-xs transition">
+              <div class="flex items-center gap-2.5">
+                <img src="${p.img}" class="w-8 h-8 rounded-lg object-cover border border-slate-700" />
+                <div>
+                  <div class="font-bold text-white">${p.title}</div>
+                  <div class="text-[10px] text-amber-400 font-mono">${p.brand} • Réf: ${p.ref}</div>
+                </div>
+              </div>
+              <span class="text-xs font-black text-amber-400 font-mono">${(p.offerPrice || p.price).toLocaleString()} ${i18nData[currentLang].currency}</span>
+            </div>
+          `).join("");
+        } else {
+          suggestions.classList.add("hidden");
+        }
+      } else {
+        filterBox.classList.add("hidden");
+        suggestions.classList.add("hidden");
+      }
+
+      applyFilters();
+    };
+
+    window.triggerDirectSearch = function() {
+      const suggestions = document.getElementById("searchSuggestions");
+      if (suggestions) suggestions.classList.add("hidden");
+      applyFilters();
+    };
+
+    window.selectSuggestion = function(title) {
+      const searchInput = document.getElementById("searchInput");
+      if (searchInput) searchInput.value = title;
+      const suggestions = document.getElementById("searchSuggestions");
+      if (suggestions) suggestions.classList.add("hidden");
+      applyFilters();
+    };
+
+    window.filterByBrand = function(brandName) {
+      activeBrand = brandName;
+      const searchInput = document.getElementById("searchInput");
+      if (searchInput) searchInput.value = brandName;
+      const filterBox = document.getElementById("searchFilterBox");
+      if (filterBox) filterBox.classList.remove("hidden");
+      applyFilters();
+    };
+
+    window.applyFilters = function() {
+      const q = (document.getElementById("searchInput")?.value || "").trim().toLowerCase();
+      const condEl = document.querySelector('input[name="filterCondition"]:checked');
+      const condition = condEl ? condEl.value : "all";
+      const minPrice = parseFloat(document.getElementById("minPriceInput")?.value) || 0;
+      const maxPrice = parseFloat(document.getElementById("maxPriceInput")?.value) || Infinity;
+      const sort = document.getElementById("sortSelect")?.value || "newest";
+
+      let filtered = products.filter(p => {
+        const matchesCategory = activeCategory === "all" || p.category === activeCategory;
+        const matchesCondition = condition === "all" || p.condition === condition;
+        const matchesPrice = (p.offerPrice || p.price) >= minPrice && (p.offerPrice || p.price) <= maxPrice;
+        const matchesSearch = !q || p.title.toLowerCase().includes(q) || p.brand.toLowerCase().includes(q) || p.ref.toLowerCase().includes(q);
+        return matchesCategory && matchesCondition && matchesPrice && matchesSearch;
+      });
+
+      if (sort === "priceAsc") filtered.sort((a, b) => (a.offerPrice || a.price) - (b.offerPrice || b.price));
+      if (sort === "priceDesc") filtered.sort((a, b) => (b.offerPrice || b.price) - (a.offerPrice || a.price));
+      if (sort === "newest") filtered.sort((a, b) => b.id - a.id);
+
+      renderProductsGrid(filtered);
+    };
+
+    function renderProductsGrid(items) {
+      const grid = document.getElementById("productsGrid");
+      const countBadge = document.getElementById("productsCountBadge");
+      const catBadge = document.getElementById("currentCategoryBadge");
+      const t = i18nData[currentLang];
+
+      if (countBadge) countBadge.innerText = `(${items.length})`;
+      if (catBadge) {
+        if (activeCategory === "all") {
+          catBadge.innerText = t.allCategories;
+        } else {
+          const found = categoriesList.find(c => c.id === activeCategory);
+          catBadge.innerText = found ? found.name[currentLang] : activeCategory;
+        }
+      }
+
+      if (!grid) return;
+
+      if (items.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full py-16 text-center text-slate-500 font-bold text-sm bg-slate-900/50 rounded-3xl border border-slate-800">
+            لا توجد سلع مطابقة لخيارات البحث أو الفلترة الحالية.
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = items.map(p => {
+        const isAvailable = p.stock > 0;
+        const hasOffer = p.offerPrice && p.offerPrice < p.price;
+        const effectivePrice = hasOffer ? p.offerPrice : p.price;
+
+        return `
+          <div class="bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-3xl overflow-hidden flex flex-col transition duration-300 hover:shadow-2xl">
+            <!-- Product Image -->
+            <div class="relative h-56 bg-slate-950 overflow-hidden cursor-pointer" onclick="openProductDetail(${p.id})">
+              <img src="${p.img}" alt="${p.title}" class="w-full h-full object-cover object-center transition duration-500 hover:scale-105 ${!isAvailable ? 'grayscale opacity-50' : ''}" />
+              
+              <!-- Offer Badge -->
+              ${hasOffer ? `
+                <span class="absolute top-3 right-3 bg-rose-600 text-white text-[10px] font-black px-2.5 py-1 rounded-xl shadow-lg flex items-center gap-1">
+                  <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.316.492-.633 1.1-.96 1.764-.67 1.353-1.442 2.87-2.383 4.218-.946 1.353-2.023 2.518-3.076 3.498a1 1 0 00.67 1.722h.008a7.002 7.002 0 0013.255-3.327c0-2.316-1.127-4.223-2.34-5.698a19.78 19.78 0 00-2.902-2.672zM10 16a4 4 0 100-8 4 4 0 000 8z" clip-rule="evenodd"/></svg>
+                  ${t.offerBadge}
+                </span>
+              ` : ''}
+
+              <!-- Stock Availability Badge -->
+              <span class="absolute top-3 left-3 text-[10px] font-black px-2.5 py-1 rounded-xl ${isAvailable ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40' : 'bg-rose-500/20 text-rose-400 border border-rose-500/40'}">
+                ${isAvailable ? t.inStock : t.outOfStock}
+              </span>
+
+              <!-- Brand Pill -->
+              <span class="absolute bottom-3 right-3 bg-slate-950/90 backdrop-blur-md text-amber-400 text-xs font-black px-2.5 py-0.5 rounded-lg border border-slate-800">
+                ${p.brand}
+              </span>
+            </div>
+
+            <!-- Content Details -->
+            <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+              <div>
+                <div class="flex justify-between items-center text-[11px] text-slate-400 font-mono mb-1">
+                  <span>${t.ref} ${p.ref}</span>
+                  <span class="bg-slate-950 px-2 py-0.5 rounded-md text-slate-300 font-bold border border-slate-800">${p.condition}</span>
+                </div>
+                <h3 onclick="openProductDetail(${p.id})" class="font-bold text-white text-sm hover:text-amber-400 transition cursor-pointer leading-relaxed">${p.title}</h3>
+                <p class="text-xs text-slate-400 mt-1 line-clamp-2">${p.desc || ''}</p>
+              </div>
+
+              <!-- Price -->
+              <div class="pt-3 border-t border-slate-800 flex justify-between items-end">
+                <div>
+                  ${hasOffer ? `<span class="block text-xs text-slate-500 line-through font-mono">${p.price.toLocaleString()} ${t.currency}</span>` : ''}
+                  <span class="text-lg font-black text-amber-400 font-mono">${effectivePrice.toLocaleString()} <span class="text-xs">${t.currency}</span></span>
+                </div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="grid grid-cols-2 gap-2 pt-1">
+                <button 
+                  type="button"
+                  onclick="addToCart(${p.id})" 
+                  class="py-2.5 px-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 transition active:scale-95 cursor-pointer shadow-md"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                  ${t.addToCart}
+                </button>
+                <button 
+                  type="button"
+                  onclick="buyInstant(${p.id})" 
+                  class="py-2.5 px-3 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-xl text-xs flex items-center justify-center gap-1.5 transition active:scale-95 cursor-pointer shadow-md"
+                >
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/></svg>
+                  ${t.buyNow}
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    window.addToCart = function(id) {
+      const p = products.find(x => x.id === id);
+      if (!p || p.stock <= 0) {
+        showToast(i18nData[currentLang].outOfStockMsg, "error");
+        return;
+      }
+      cart.push(p);
+      syncState();
+      showToast(i18nData[currentLang].itemAddedMsg, "success");
+    };
+
+    window.buyInstant = function(id) {
+      const p = products.find(x => x.id === id);
+      if (!p || p.stock <= 0) {
+        showToast(i18nData[currentLang].outOfStockMsg, "error");
+        return;
+      }
+      cart = [p];
+      syncState();
+      openCheckoutModal();
+    };
+
+    window.openCheckoutModal = function() {
+      const cartModal = document.getElementById("cartModal");
+      if (cartModal) cartModal.classList.add("hidden");
+      toggleModal("checkoutModal");
+    };
+
+    window.handleFinalOrder = function(e) {
+      e.preventDefault();
+      const name = document.getElementById("buyerName")?.value || "";
+
+      /* Deduct stock for ordered items */
+      cart.forEach(c => {
+        const item = products.find(p => p.id === c.id);
+        if (item && item.stock > 0) item.stock -= 1;
+      });
+
+      cart = [];
+      syncState();
+      toggleModal("checkoutModal");
+      applyFilters();
+      showToast(`${i18nData[currentLang].orderSuccessMsg} (${name})`, "success");
+    };
+
+    window.openProductDetail = function(id) {
+      const p = products.find(x => x.id === id);
+      if (!p) return;
+      const t = i18nData[currentLang];
+      const isAvailable = p.stock > 0;
+      const hasOffer = p.offerPrice && p.offerPrice < p.price;
+      const effectivePrice = hasOffer ? p.offerPrice : p.price;
+
+      const container = document.getElementById("productDetailContent");
+      if (!container) return;
+
+      container.innerHTML = `
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+          <div class="rounded-2xl overflow-hidden bg-slate-950 border border-slate-800">
+            <img src="${p.img}" alt="${p.title}" class="w-full h-72 object-cover ${!isAvailable ? 'grayscale opacity-50' : ''}" />
+          </div>
+          <div class="space-y-4">
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-1 bg-amber-500 text-slate-950 font-black text-xs rounded-xl">${p.brand}</span>
+              <span class="text-xs font-mono text-slate-400">${t.ref} ${p.ref}</span>
+            </div>
+            <h2 class="text-lg font-black text-white">${p.title}</h2>
+            
+            <div class="grid grid-cols-2 gap-2 text-xs bg-slate-950 p-3 rounded-2xl border border-slate-800">
+              <div><span class="text-slate-400">${t.year}</span> <span class="font-bold text-white">${p.year}</span></div>
+              <div><span class="text-slate-400">${t.country}</span> <span class="font-bold text-white">${p.country}</span></div>
+              <div><span class="text-slate-400">${t.condition}</span> <span class="font-bold text-amber-400">${p.condition}</span></div>
+              <div><span class="text-slate-400">المخزون:</span> <span class="font-bold ${isAvailable ? 'text-emerald-400' : 'text-rose-400'}">${isAvailable ? t.inStock : t.outOfStock}</span></div>
+            </div>
+
+            <p class="text-xs text-slate-300 leading-relaxed">${p.desc || ''}</p>
+
+            <div class="py-2">
+              ${hasOffer ? `<span class="block text-xs text-slate-500 line-through font-mono">${p.price.toLocaleString()} ${t.currency}</span>` : ''}
+              <span class="text-2xl font-black text-amber-400 font-mono">${effectivePrice.toLocaleString()} ${t.currency}</span>
+            </div>
+
+            <div class="flex gap-2 pt-2">
+              <button onclick="addToCart(${p.id}); toggleModal('productDetailModal');" class="flex-1 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 transition cursor-pointer">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                ${t.addToCart}
+              </button>
+              <button onclick="buyInstant(${p.id}); toggleModal('productDetailModal');" class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-xl text-xs flex items-center justify-center gap-2 transition cursor-pointer">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/></svg>
+                ${t.buyNow}
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+
+      toggleModal("productDetailModal");
+    };
+
+    window.openAdminModal = function() {
+      toggleModal("adminModal");
+    };
+
+    window.unlockAdmin = function() {
+      const input = document.getElementById("adminPassInput")?.value;
+      if (input === "1234") {
+        document.getElementById("adminLock")?.classList.add("hidden");
+        document.getElementById("adminContent")?.classList.remove("hidden");
+        renderAdminTable();
+      } else {
+        showToast("رمز الدخول غير صحيح!", "error");
+      }
+    };
+
+    function renderAdminTable() {
+      const tbody = document.getElementById("adminProductsTable");
+      if (!tbody) return;
+
+      tbody.innerHTML = products.map(p => `
+        <tr class="hover:bg-slate-950/60">
+          <td class="p-2 font-bold text-white">${p.brand} - ${p.title}</td>
+          <td class="p-2 font-mono text-amber-400">${p.price.toLocaleString()} دج</td>
+          <td class="p-2 font-bold ${p.stock > 0 ? 'text-emerald-400' : 'text-rose-400'}">${p.stock}</td>
+          <td class="p-2 text-center space-x-1">
+            <button type="button" onclick="editProduct(${p.id})" class="px-2 py-1 bg-amber-500 text-slate-950 font-bold rounded-lg text-xs ml-1 cursor-pointer">تعديل</button>
+            <button type="button" onclick="deleteProduct(${p.id})" class="px-2 py-1 bg-rose-600 text-white font-bold rounded-lg text-xs cursor-pointer">حذف</button>
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    window.saveProduct = function(e) {
+      e.preventDefault();
+      const editId = document.getElementById("editProductId").value;
+      
+      const newProd = {
+        id: editId ? parseInt(editId) : Date.now(),
+        brand: document.getElementById("formBrand").value,
+        title: document.getElementById("formTitle").value,
+        ref: document.getElementById("formRef").value,
+        category: document.getElementById("formCategory").value,
+        year: parseInt(document.getElementById("formYear").value),
+        country: document.getElementById("formCountry").value,
+        condition: document.getElementById("formCondition").value,
+        stock: parseInt(document.getElementById("formStock").value),
+        price: parseFloat(document.getElementById("formPrice").value),
+        offerPrice: document.getElementById("formOfferPrice").value ? parseFloat(document.getElementById("formOfferPrice").value) : null,
+        img: document.getElementById("formImage").value,
+        desc: document.getElementById("formDesc").value
+      };
+
+      if (editId) {
+        const index = products.findIndex(x => x.id === parseInt(editId));
+        if (index !== -1) products[index] = newProd;
+      } else {
+        products.unshift(newProd);
+      }
+
+      syncState();
+      resetAdminForm();
+      renderAdminTable();
+      applyFilters();
+      showToast("تم حفظ ونشر السلعة بنجاح في المتجر!", "success");
+    };
+
+    window.editProduct = function(id) {
+      const p = products.find(x => x.id === id);
+      if (!p) return;
+      document.getElementById("editProductId").value = p.id;
+      document.getElementById("formBrand").value = p.brand;
+      document.getElementById("formTitle").value = p.title;
+      document.getElementById("formRef").value = p.ref;
+      document.getElementById("formCategory").value = p.category;
+      document.getElementById("formYear").value = p.year;
+      document.getElementById("formCountry").value = p.country;
+      document.getElementById("formCondition").value = p.condition;
+      document.getElementById("formStock").value = p.stock;
+      document.getElementById("formPrice").value = p.price;
+      document.getElementById("formOfferPrice").value = p.offerPrice || "";
+      document.getElementById("formImage").value = p.img;
+      document.getElementById("formDesc").value = p.desc || "";
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    window.deleteProduct = function(id) {
+      products = products.filter(x => x.id !== id);
+      syncState();
+      renderAdminTable();
+      applyFilters();
+      showToast("تم حذف السلعة بنجاح", "success");
+    };
+
+    window.resetAdminForm = function() {
+      document.getElementById("editProductId").value = "";
+      document.getElementById("formBrand").value = "";
+      document.getElementById("formTitle").value = "";
+      document.getElementById("formRef").value = "";
+      document.getElementById("formYear").value = "2024";
+      document.getElementById("formCountry").value = "";
+      document.getElementById("formStock").value = "1";
+      document.getElementById("formPrice").value = "";
+      document.getElementById("formOfferPrice").value = "";
+      document.getElementById("formImage").value = "";
+      document.getElementById("formDesc").value = "";
+    };
+
+    window.changeLanguage = function(lang) {
+      currentLang = lang;
+      const t = i18nData[lang];
+      if (!t) return;
+
+      document.documentElement.lang = lang;
+      document.documentElement.dir = t.dir;
+
+      /* Update brands marquee direction */
+      const brandsTrack = document.getElementById("brandsTrack");
+      if (brandsTrack) {
+        if (t.dir === "rtl") {
+          brandsTrack.className = "brands-track-rtl items-center gap-4 cursor-pointer";
+        } else {
+          brandsTrack.className = "brands-track-ltr items-center gap-4 cursor-pointer";
+        }
+      }
+
+      /* Update Categories Drawer placement */
+      const drawer = document.getElementById("categoriesDrawer");
+      if (drawer) {
+        drawer.style.right = t.dir === "rtl" ? "0" : "auto";
+        drawer.style.left = t.dir === "ltr" ? "0" : "auto";
+        drawer.style.transform = t.dir === "rtl" ? "translateX(100%)" : "translateX(-100%)";
+      }
+
+      /* Update i18n text fields */
+      const ids = [
+        "drawerBtn", "call", "catsDrawerTitle", "drawerHint", "drawerResetBtn",
+        "condLabel", "condAll", "condNew", "condLikeNew", "condUsed",
+        "priceRangeLabel", "sortLabel", "sortNewest", "sortPriceAsc", "sortPriceDesc",
+        "resetFiltersBtn", "cartTitle", "cartTotal", "checkoutBtn", "orderInfo",
+        "nameLabel", "phoneLabel", "addressLabel", "confirmOrderBtn"
+      ];
+      ids.forEach(id => {
+        const el = document.getElementById(`i18n-${id}`);
+        if (el && t[id]) el.innerText = t[id];
+      });
+
+      const searchInput = document.getElementById("searchInput");
+      if (searchInput) searchInput.placeholder = t.searchPlaceholder;
+
+      renderCategoriesDrawer();
+      applyFilters();
+    };
+
+    function renderCategoriesDrawer() {
+      const container = document.getElementById("categoriesDrawerContainer");
+      if (!container) return;
+
+      container.innerHTML = `
+        <button 
+          type="button"
+          onclick="selectCategory('all')" 
+          class="w-full text-start px-3.5 py-2.5 rounded-xl text-xs font-bold transition flex items-center justify-between ${activeCategory === 'all' ? 'bg-amber-500 text-slate-950 font-black' : 'bg-slate-950/60 hover:bg-slate-800 text-slate-300'}"
+        >
+          <span>${i18nData[currentLang].allCategories}</span>
+          <span class="text-[10px] opacity-75 font-mono">(${products.length})</span>
+        </button>
+      ` + categoriesList.map(cat => {
+        const count = products.filter(p => p.category === cat.id).length;
+        const isSelected = activeCategory === cat.id;
+        return `
+          <button 
+            type="button"
+            onclick="selectCategory('${cat.id}')" 
+            class="w-full text-start px-3.5 py-2.5 rounded-xl text-xs font-bold transition flex items-center justify-between ${isSelected ? 'bg-amber-500 text-slate-950 font-black' : 'bg-slate-950/60 hover:bg-slate-800 text-slate-300'}"
+          >
+            <span>${cat.name[currentLang]}</span>
+            <span class="text-[10px] opacity-75 font-mono">(${count})</span>
+          </button>
+        `;
+      }).join("");
+    }
+
+    window.selectCategory = function(catId) {
+      activeCategory = catId;
+      toggleCategoriesDrawer();
+      renderCategoriesDrawer();
+      applyFilters();
+    };
+
+    function showToast(message, type = "info") {
+      const container = document.getElementById("toastContainer");
+      if (!container) return;
+
+      const toast = document.createElement("div");
+      toast.className = `px-4 py-2.5 rounded-2xl text-xs font-black shadow-2xl transition transform duration-300 pointer-events-auto border flex items-center gap-2 ${
+        type === "error" ? "bg-rose-900/95 text-rose-200 border-rose-700" :
+        type === "success" ? "bg-emerald-900/95 text-emerald-200 border-emerald-700" :
+        "bg-slate-900/95 text-amber-400 border-amber-500/50"
+      }`;
+      toast.innerText = message;
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.opacity = "0";
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
+
+    /* Initial Load */
+    window.addEventListener("DOMContentLoaded", () => {
+      renderCategoriesDrawer();
+      applyFilters();
+      syncState();
+    });
+  </script>
+</body>
+</html>
