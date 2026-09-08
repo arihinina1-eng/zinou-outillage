@@ -151,13 +151,14 @@
     </div>
   </header>
 
+  <!-- Brand Logos Marquee with fully-filled object-fill images -->
   <section class="relative bg-slate-950/95 border-b border-slate-800/80 py-2.5 overflow-hidden select-none shadow-inner">
     <div class="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-slate-950 to-transparent z-10 pointer-events-none"></div>
     <div class="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-slate-950 to-transparent z-10 pointer-events-none"></div>
 
     <div class="overflow-hidden">
       <div id="brandsTrack" class="brands-track-rtl items-center gap-3 cursor-pointer">
-        <!-- Set 1: All 23 Brands with fully-filled object-fill images -->
+        <!-- Set 1: All 23 Brands -->
         <button type="button" onclick="filterByBrand('Black+Decker')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0">
           <img src="logos_23_marques/BlackplusDecker.png" alt="Black+Decker" class="w-full h-full object-fill" />
         </button>
@@ -308,6 +309,7 @@
     class="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 hidden transition-opacity duration-300"
   ></div>
 
+  <!-- Categories Drawer -->
   <aside 
     id="categoriesDrawer" 
     style="transform: translateX(100%);" 
@@ -330,8 +332,6 @@
         </button>
       </div>
       <p class="text-xs text-slate-400 mb-3" data-i18n="drawerHint">اختر القسم لعرض السلع الخاصة به:</p>
-      
-      <!-- Drawer Categories List -->
       <div id="categoriesDrawerContainer" class="space-y-1.5 overflow-y-auto max-h-[70vh] pr-1"></div>
     </div>
 
@@ -483,6 +483,7 @@
     </main>
   </div>
 
+  <!-- Product Detail Modal -->
   <div id="productDetailModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-2xl w-full p-6 relative max-h-[90vh] overflow-y-auto shadow-2xl">
       <button 
@@ -498,6 +499,7 @@
     </div>
   </div>
 
+  <!-- Cart Modal -->
   <div id="cartModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 relative shadow-2xl">
       <button 
@@ -531,6 +533,7 @@
     </div>
   </div>
 
+  <!-- Checkout Modal -->
   <div id="checkoutModal" class="fixed inset-0 bg-black/85 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-6 relative shadow-2xl">
       <button 
@@ -653,7 +656,7 @@
 
           <!-- Multi-Image Upload Section -->
           <div class="sm:col-span-2">
-            <label class="block mb-1 text-slate-400" data-i18n="formImagesLabel">صور العتاد (رفع عدة صور، واختر الرئيسية للرئيسية):</label>
+            <label class="block mb-1 text-slate-400" data-i18n="formImagesLabel">صور العتاد (رفع عدة صور، واختر الرئيسية):</label>
             <label class="flex flex-col items-center justify-center border-2 border-dashed border-slate-700 hover:border-amber-500 rounded-2xl p-4 cursor-pointer bg-slate-950/60 transition group mb-3">
               <svg class="w-7 h-7 text-slate-400 group-hover:text-amber-400 mb-1 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
@@ -746,6 +749,7 @@
         confirmOrderBtn: "إرسال وتثبيت الحجز",
         outOfStockMsg: "عذراً، هذه السلعة ليست متوفرة في المستودع حالياً.",
         itemAddedMsg: "تمت إضافة السلعة إلى السلة بنجاح!",
+        minOrderError: "عذراً، الحد الأدنى لتأكيد الطلبية هو 10000 دج فما فوق.",
         orderSuccessMsg: "تم تسجيل طلبيتك بنجاح وتحديث كمية المستودع!",
         adminPanelTitle: "لوحة تحكم إدارة السلع والمخزون",
         adminPassHint: "أدخل رمز الدخول السري للإدارة (الافتراضي: 1234):",
@@ -760,7 +764,7 @@
         formStockLabel: "الكمية المتوفرة:",
         formPriceLabel: "السعر الأصلي:",
         formOfferPriceLabel: "سعر التخفيض (OFFRE):",
-        formImagesLabel: "صور العتاد (رفع عدة صور، واختر الرئيسية للرئيسية):",
+        formImagesLabel: "صور العتاد (رفع عدة صور، واختر الرئيسية):",
         uploadMultiplePrompt: "اضغط لاختيار عدة صور دفعة واحدة",
         imageRequiredMsg: "يرجى اختيار صورة واحدة على الأقل للسلعة!",
         formDescLabel: "مواصفات ونبذة تفصيلية:",
@@ -828,6 +832,7 @@
         confirmOrderBtn: "Confirmer la commande",
         outOfStockMsg: "Désolé, cet article n'est pas disponible en stock.",
         itemAddedMsg: "Article ajouté au panier avec succès!",
+        minOrderError: "Désolé, le montant minimum de commande est de 10000 DA.",
         orderSuccessMsg: "Commande confirmée et stock mis à jour!",
         adminPanelTitle: "Panneau de gestion du stock",
         adminPassHint: "Entrez le code d'accès administrateur (Par défaut: 1234):",
@@ -910,6 +915,7 @@
         confirmOrderBtn: "Place Order",
         outOfStockMsg: "Sorry, this item is currently out of stock.",
         itemAddedMsg: "Item added to cart successfully!",
+        minOrderError: "Sorry, the minimum order amount is 10000 DZD.",
         orderSuccessMsg: "Order placed successfully! Stock updated.",
         adminPanelTitle: "Inventory Control Panel",
         adminPassHint: "Enter administrator passcode (Default: 1234):",
@@ -1426,7 +1432,7 @@
                 </span>
               ` : ''}
 
-              <!-- Out of Stock Badge Only -->
+              <!-- Out of Stock Badge Only (Hidden when in stock) -->
               ${!isAvailable ? `
                 <span class="absolute top-1.5 left-1.5 text-[9px] font-black px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-400 border border-rose-500/40 z-10">
                   ${t.outOfStock}
@@ -1559,6 +1565,11 @@
     };
 
     window.openCheckoutModal = function() {
+      let total = cart.reduce((sum, p) => sum + (p.offerPrice || p.price), 0);
+      if (total < 10000) {
+        showToast(i18nData[currentLang].minOrderError, "error");
+        return;
+      }
       const cartModal = document.getElementById("cartModal");
       if (cartModal) cartModal.classList.add("hidden");
       toggleModal("checkoutModal");
@@ -1566,6 +1577,12 @@
 
     window.handleFinalOrder = function(e) {
       e.preventDefault();
+      let total = cart.reduce((sum, p) => sum + (p.offerPrice || p.price), 0);
+      if (total < 10000) {
+        showToast(i18nData[currentLang].minOrderError, "error");
+        return;
+      }
+
       const name = document.getElementById("buyerName")?.value || "";
 
       cart.forEach(c => {
