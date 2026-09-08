@@ -703,873 +703,19 @@
 
   <script>
     const i18nData = {
-      ar: {
-        dir: "rtl",
-        drawerBtn: "الفئات والأقسام",
-        call: "اتصل الآن",
-        catsDrawerTitle: "الفئات والأقسام",
-        drawerHint: "اختر القسم لعرض السلع الخاصة به:",
-        drawerResetBtn: "إعادة عرض كل السلع",
-        searchPlaceholder: "ابحث...",
-        brandFilterLabel: "الماركة:",
-        allBrands: "جميع الماركات",
-        condLabel: "حالة العتاد:",
-        condAll: "الكل",
-        condNew: "جديد",
-        condLikeNew: "جديد يشبه المستعمل",
-        condUsed: "مستعمل",
-        priceRangeLabel: "السعر:",
-        minPricePlaceholder: "الأدنى",
-        maxPricePlaceholder: "الأقصى",
-        sortLabel: "الترتيب:",
-        sortNewest: "الأحدث إضافة",
-        sortPriceAsc: "السعر: من الأقل للأعلى",
-        sortPriceDesc: "السعر: من الأعلى للأقل",
-        allCategories: "جميع الأقسام",
-        resetFiltersBtn: "إعادة ضبط",
-        outOfStock: "غير متوفر بالمستودع",
-        offerBadge: "تخفيض / OFFRE",
-        newBadge: "جديد 🔥",
-        addToCart: "إضافة للسلة",
-        buyNow: "شراء",
-        ref: "المرجع:",
-        year: "سنة الإنتاج:",
-        country: "بلد المنشأ:",
-        condition: "الحالة:",
-        stockLabel: "المخزون المتوفر:",
-        currency: "دج",
-        noProductsFound: "لا توجد سلع مطابقة لخيارات البحث أو الفلترة الحالية.",
-        cartTitle: "سلة المشتريات والطلبات",
-        cartTotal: "المجموع الإجمالي:",
-        checkoutBtn: "تأكيد الطلبية الآن",
-        orderInfo: "معلومات استلام الطلبية",
-        nameLabel: "الاسم واللقب:",
-        phoneLabel: "رقم الهاتف:",
-        addressLabel: "الولاية والعنوان:",
-        confirmOrderBtn: "إرسال وتثبيت الحجز",
-        outOfStockMsg: "عذراً، هذه السلعة ليست متوفرة في المستودع حالياً.",
-        itemAddedMsg: "تمت إضافة السلعة إلى السلة بنجاح!",
-        minOrderError: "عذراً، الحد الأدنى لتأكيد الطلبية هو 10000 دج فما فوق.",
-        orderSuccessMsg: "تم تسجيل طلبيتك بنجاح وتحديث كمية المستودع!",
-        adminPanelTitle: "لوحة تحكم إدارة السلع والمخزون",
-        adminPassHint: "أدخل رمز الدخول السري للإدارة (الافتراضي: 1234):",
-        adminLoginBtn: "دخول",
-        formBrandLabel: "الماركة:",
-        formTitleLabel: "اسم العتاد / الآلة:",
-        formRefLabel: "رقم الطراز (Référence):",
-        formCategoryLabel: "الفئة:",
-        formYearLabel: "سنة الإنتاج:",
-        formCountryLabel: "بلد الصنع / المنشأ:",
-        formConditionLabel: "الحالة:",
-        formStockLabel: "الكمية المتوفرة:",
-        formPriceLabel: "السعر الأصلي:",
-        formOfferPriceLabel: "سعر التخفيض (OFFRE):",
-        formImagesLabel: "صور العتاد (رفع عدة صور، واختر الرئيسية):",
-        uploadMultiplePrompt: "اضغط لاختيار عدة صور دفعة واحدة",
-        imageRequiredMsg: "يرجى اختيار صورة واحدة على الأقل للسلعة!",
-        formDescLabel: "مواصفات ونبذة تفصيلية:",
-        cancelBtn: "إلغاء",
-        saveProductBtn: "حفظ ونشر السلعة",
-        warehouseListTitle: "قائمة السلع بالمستودع:",
-        tableProduct: "السلعة",
-        tablePrice: "السعر",
-        tableStock: "المخزون",
-        tableActions: "إجراءات",
-        editBtn: "تعديل",
-        deleteBtn: "حذف",
-        invalidPassMsg: "رمز الدخول غير صحيح!",
-        productSavedMsg: "تم حفظ السلعة ونشرها بنجاح!",
-        productDeletedMsg: "تم حذف السلعة بنجاح!",
-        filtersResetMsg: "تمت إعادة ضبط جميع الفلاتر وعرض كل السلع!",
-        apkDownloading: "جاري تحميل تطبيق Android الخاص بالموقع...",
-        deleteConfirmMsg: "هل أنت متأكد أنك تريد حذف هذه السلعة نهائياً؟",
-        setMainImg: "جعلها الرئيسية",
-        mainImgLabel: "الصورة الرئيسية"
-      },
-      fr: {
-        dir: "ltr",
-        drawerBtn: "Catégories",
-        call: "Appeler",
-        catsDrawerTitle: "Rayons & Catégories",
-        drawerHint: "Sélectionnez un rayon pour filtrer:",
-        drawerResetBtn: "Afficher tous les articles",
-        searchPlaceholder: "Rechercher...",
-        brandFilterLabel: "Marque:",
-        allBrands: "Toutes les marques",
-        condLabel: "État:",
-        condAll: "Tous",
-        condNew: "Neuf",
-        condLikeNew: "Comme Neuf",
-        condUsed: "Occasion",
-        priceRangeLabel: "Prix:",
-        minPricePlaceholder: "Min",
-        maxPricePlaceholder: "Max",
-        sortLabel: "Trier:",
-        sortNewest: "Plus récents",
-        sortPriceAsc: "Prix croissant",
-        sortPriceDesc: "Prix décroissant",
-        allCategories: "Tous les rayons",
-        resetFiltersBtn: "Réinitialiser",
-        outOfStock: "Rupture de stock",
-        offerBadge: "PROMO / OFFRE",
-        newBadge: "NOUVEAU 🔥",
-        addToCart: "Panier",
-        buyNow: "Acheter",
-        ref: "Réf:",
-        year: "Année:",
-        country: "Origine:",
-        condition: "État:",
-        stockLabel: "Disponibilité:",
-        currency: "DA",
-        noProductsFound: "Aucun article ne correspond à vos critères de recherche ou de filtrage.",
-        cartTitle: "Panier d'achats",
-        cartTotal: "Total:",
-        checkoutBtn: "Valider la commande",
-        orderInfo: "Informations de livraison",
-        nameLabel: "Nom & Prénom:",
-        phoneLabel: "Téléphone:",
-        addressLabel: "Wilaya & Adresse:",
-        confirmOrderBtn: "Confirmer la commande",
-        outOfStockMsg: "Désolé, cet article n'est pas disponible en stock.",
-        itemAddedMsg: "Article ajouté au panier avec succès!",
-        minOrderError: "Désolé, le montant minimum de commande est de 10000 DA.",
-        orderSuccessMsg: "Commande confirmée et stock mis à jour!",
-        adminPanelTitle: "Panneau de gestion du stock",
-        adminPassHint: "Entrez le code d'accès administrateur (Par défaut: 1234):",
-        adminLoginBtn: "Entrer",
-        formBrandLabel: "Marque:",
-        formTitleLabel: "Nom de l'équipement:",
-        formRefLabel: "Référence:",
-        formCategoryLabel: "Catégorie:",
-        formYearLabel: "Année de production:",
-        formCountryLabel: "Pays d'origine:",
-        formConditionLabel: "État:",
-        formStockLabel: "Quantité en stock:",
-        formPriceLabel: "Prix initial:",
-        formOfferPriceLabel: "Prix promo (OFFRE):",
-        formImagesLabel: "Photos de l'équipement (Sélectionnez plusieurs, choisissez la principale):",
-        uploadMultiplePrompt: "Cliquez pour sélectionner plusieurs images",
-        imageRequiredMsg: "Veuillez sélectionner au moins une image!",
-        formDescLabel: "Description détaillée:",
-        cancelBtn: "Annuler",
-        saveProductBtn: "Enregistrer l'article",
-        warehouseListTitle: "Inventaire des articles:",
-        tableProduct: "Article",
-        tablePrice: "Prix",
-        tableStock: "Stock",
-        tableActions: "Actions",
-        editBtn: "Modifier",
-        deleteBtn: "Supprimer",
-        invalidPassMsg: "Code d'accès incorrect!",
-        productSavedMsg: "Article enregistré avec succès!",
-        productDeletedMsg: "Article supprimé avec succès!",
-        filtersResetMsg: "Filtres réinitialisés, tous les articles sont affichés!",
-        apkDownloading: "Téléchargement de l'application Android en cours...",
-        deleteConfirmMsg: "Êtes-vous sûr de vouloir supprimer cet article ?",
-        setMainImg: "Définir principale",
-        mainImgLabel: "Principale"
-      },
-      en: {
-        dir: "ltr",
-        drawerBtn: "Categories",
-        call: "Call Now",
-        catsDrawerTitle: "Categories & Sectors",
-        drawerHint: "Select a category to filter tools:",
-        drawerResetBtn: "Show all products",
-        searchPlaceholder: "Search...",
-        brandFilterLabel: "Brand:",
-        allBrands: "All Brands",
-        condLabel: "Condition:",
-        condAll: "All",
-        condNew: "New",
-        condLikeNew: "Like New",
-        condUsed: "Used",
-        priceRangeLabel: "Price:",
-        minPricePlaceholder: "Min",
-        maxPricePlaceholder: "Max",
-        sortLabel: "Sort by:",
-        sortNewest: "Newest",
-        sortPriceAsc: "Price: Low to High",
-        sortPriceDesc: "Price: High to Low",
-        allCategories: "All Categories",
-        resetFiltersBtn: "Reset Filters",
-        outOfStock: "Out of Stock",
-        offerBadge: "SPECIAL OFFER",
-        newBadge: "NEW 🔥",
-        addToCart: "Add to Cart",
-        buyNow: "Buy",
-        ref: "Ref:",
-        year: "Year:",
-        country: "Origin:",
-        condition: "Condition:",
-        stockLabel: "Available Stock:",
-        currency: "DZD",
-        noProductsFound: "No products match your search or filter criteria.",
-        cartTitle: "Shopping Cart",
-        cartTotal: "Total:",
-        checkoutBtn: "Proceed to Checkout",
-        orderInfo: "Shipping Information",
-        nameLabel: "Full Name:",
-        phoneLabel: "Phone Number:",
-        addressLabel: "City & Address:",
-        confirmOrderBtn: "Place Order",
-        outOfStockMsg: "Sorry, this item is currently out of stock.",
-        itemAddedMsg: "Item added to cart successfully!",
-        minOrderError: "Sorry, the minimum order amount is 10000 DZD.",
-        orderSuccessMsg: "Order placed successfully! Stock updated.",
-        adminPanelTitle: "Inventory Control Panel",
-        adminPassHint: "Enter administrator passcode (Default: 1234):",
-        adminLoginBtn: "Login",
-        formBrandLabel: "Brand:",
-        formTitleLabel: "Tool / Equipment Name:",
-        formRefLabel: "Reference Code:",
-        formCategoryLabel: "Category:",
-        formYearLabel: "Production Year:",
-        formCountryLabel: "Country of Origin:",
-        formConditionLabel: "Condition:",
-        formStockLabel: "Available Quantity:",
-        formPriceLabel: "Original Price:",
-        formOfferPriceLabel: "Promo Price (OFFER):",
-        formImagesLabel: "Equipment Images (Upload multiple, select main image):",
-        uploadMultiplePrompt: "Click to select multiple images",
-        imageRequiredMsg: "Please select at least one image!",
-        formDescLabel: "Detailed Description:",
-        cancelBtn: "Cancel",
-        saveProductBtn: "Save & Publish Tool",
-        warehouseListTitle: "Current Warehouse Inventory:",
-        tableProduct: "Item",
-        tablePrice: "Price",
-        tableStock: "Stock",
-        tableActions: "Actions",
-        editBtn: "Edit",
-        deleteBtn: "Delete",
-        invalidPassMsg: "Incorrect passcode!",
-        productSavedMsg: "Product saved successfully!",
-        productDeletedMsg: "Product removed successfully!",
-        filtersResetMsg: "Filters reset, showing all items!",
-        apkDownloading: "Downloading Android App...",
-        deleteConfirmMsg: "Are you sure you want to delete this product?",
-        setMainImg: "Set as Main",
-        mainImgLabel: "Main Image"
-      }
-    };
-
-    const categoriesList = [
-      { id: "tools", name: { ar: "ادواة", fr: "Outils", en: "Tools" } },
-      { id: "workwear", name: { ar: "ملابس وأحذية أمان للعمل", fr: "Vêtements & Équipements de travail", en: "Workwear & Safety Gear" } },
-      { id: "electricity", name: { ar: "كهرباء", fr: "Électricité", en: "Electrical" } },
-      { id: "plumbing", name: { ar: "سباكة-تكييف-ترصيص", fr: "Plomberie & Climatisation", en: "Plumbing & HVAC" } },
-      { id: "welding", name: { ar: "لحام", fr: "Soudure", en: "Welding" } },
-      { id: "leisure", name: { ar: "ترفيه", fr: "Loisirs", en: "Leisure" } },
-      { id: "construction", name: { ar: "هندسة و مقاولاتية", fr: "Ingénierie & BTP", en: "Construction & Engineering" } },
-      { id: "electronics", name: { ar: "إلكترونيات", fr: "Électronique", en: "Electronics" } },
-      { id: "motors", name: { ar: "محركات كهربائية ومولدات", fr: "Moteurs Électriques & Groupes Électrogènes", en: "Electric Motors & Generators" } },
-      { id: "decor", name: { ar: "بناء و ديكورات", fr: "Construction & Décoration", en: "Construction & Decor" } },
-      { id: "sports", name: { ar: "رياضة", fr: "Sports", en: "Sports" } },
-      { id: "bags", name: { ar: "حقائب و محافض", fr: "Caissier et Sac", en: "Bags & Luggage" } },
-      { id: "chargers", name: { ar: "شواحن و بطاريات", fr: "Chargeurs & Batteries", en: "Chargers & Batteries" } },
-      { id: "auto", name: { ar: "أكسسوارات وقط غيار سيارات", fr: "Accessoires & Pièces Auto", en: "Car Accessories & Parts" } },
-      { id: "garden", name: { ar: "حدائق", fr: "Jardinage", en: "Gardening" } },
-      { id: "pets", name: { ar: "مستلزمات حيوانات", fr: "Accessoires pour Animaux", en: "Pet Supplies" } },
-      { id: "other", name: { ar: "أخرى", fr: "Autres", en: "Other" } }
-    ];
-
-    const defaultInitialProducts = [
-      {
-        id: Date.now() - 1000,
-        brand: "Sony",
-        title: {
-          ar: "جهاز ألعاب PlayStation 5 Slim النسخة الرقمية",
-          fr: "Console de jeux PlayStation 5 Slim Édition Digitale",
-          en: "PlayStation 5 Slim Digital Edition Gaming Console"
-        },
-        ref: "CFI-2000",
-        category: "electronics",
-        year: 2024,
-        createdAt: Date.now() - (2 * 86400000), // 2 days ago (shows NEW badge)
-        country: { ar: "اليابان", fr: "Japon", en: "Japan" },
-        condition: "new",
-        stock: 2,
-        price: 89000,
-        offerPrice: 89000,
-        images: ["https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&w=600&q=80"],
-        mainImageIndex: 0,
-        desc: {
-          ar: "بلايستيشن 5 سليم جديد كلياً بسعة 1TB SSD وسرعة تحميل فائقة ودعم 4K 120Hz.",
-          fr: "PS5 Slim flambant neuve avec SSD de 1To, temps de chargement ultra-rapides et prise en charge 4K 120Hz.",
-          en: "Brand new PS5 Slim with 1TB ultra-high speed SSD and 4K 120Hz gaming support."
-        }
-      },
-      {
-        id: Date.now() - 2000,
-        brand: "Xiaomi",
-        title: {
-          ar: "تروتينيت كهربائية برو سريعة التنقل",
-          fr: "Trottinette Électrique Pro Haute Autonomie",
-          en: "Electric Scooter Pro Fast Commuter"
-        },
-        ref: "SCOOT-PRO-4",
-        category: "leisure",
-        year: 2024,
-        createdAt: Date.now() - (15 * 86400000), // 15 days ago (no NEW badge)
-        country: { ar: "الصين", fr: "Chine", en: "China" },
-        condition: "like_new",
-        stock: 1,
-        price: 59000,
-        offerPrice: 59000,
-        images: ["https://images.unsplash.com/photo-1597733153203-a54d0fbc47de?auto=format&fit=crop&w=600&q=80"],
-        mainImageIndex: 0,
-        desc: {
-          ar: "مدى سير يصل إلى 45 كم للشحنة الواحدة، سرعة قصوى 25 كم/ساعة، إطارات مقاومة للثقب.",
-          fr: "Autonomie jusqu'à 45 km par charge, vitesse max 25 km/h, pneus increvables.",
-          en: "Up to 45km range per charge, max speed 25km/h, puncture-resistant pneumatic tires."
-        }
-      },
-      {
-        id: Date.now() - 3000,
-        brand: "Hilti",
-        title: {
-          ar: "مطرقة هدم وتكسير احترافية TE 70-ATC/AVR",
-          fr: "Perforateur-Burineur Professionnel TE 70-ATC/AVR",
-          en: "Heavy-Duty Combihammer TE 70-ATC/AVR"
-        },
-        ref: "TE 70-ATC",
-        category: "construction",
-        year: 2024,
-        createdAt: Date.now() - (4 * 86400000), // 4 days ago (shows NEW badge)
-        country: { ar: "ألمانيا", fr: "Allemagne", en: "Germany" },
-        condition: "new",
-        stock: 1,
-        price: 225000,
-        offerPrice: 225000,
-        images: ["https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=600&q=80"],
-        mainImageIndex: 0,
-        desc: {
-          ar: "قوة صدم 11.5 جول، نظام حماية من عزم الدوران الفجائي ونظام امتصاص الاهتزازات.",
-          fr: "Énergie d'impact 11.5 J, régulation active du couple (ATC) et réduction active des vibrations (AVR).",
-          en: "11.5 J impact energy with Active Torque Control (ATC) and Active Vibration Reduction (AVR)."
-        }
-      },
-      {
-        id: Date.now() - 4000,
-        brand: "Milwaukee",
-        title: {
-          ar: "شيتيور عالي العزم 1/2 بوصة M18 FUEL",
-          fr: "Boulonneuse à Chocs Forte Puissance 1/2 M18 FUEL",
-          en: "High Torque Impact Wrench 1/2 M18 FUEL"
-        },
-        ref: "M18-FHIWF12",
-        category: "construction",
-        year: 2023,
-        createdAt: Date.now() - (20 * 86400000),
-        country: { ar: "الولايات المتحدة", fr: "États-Unis", en: "USA" },
-        condition: "like_new",
-        stock: 3,
-        price: 78000,
-        offerPrice: null,
-        images: ["https://images.unsplash.com/photo-1581147036324-c17ac41dfa6c?auto=format&fit=crop&w=600&q=80"],
-        mainImageIndex: 0,
-        desc: {
-          ar: "عزم دوران يصل إلى 1898 نيوتن/متر مع بطاريتين وشاحن سريع في حقيبة مخصصة.",
-          fr: "Couple de desserrage exceptionnel de 1898 Nm, livrée avec deux batteries 5Ah et chargeur rapide.",
-          en: "Nut-busting torque up to 1898 Nm, supplied with two 5Ah batteries and rapid charger."
-        }
-      },
-      {
-        id: Date.now() - 5000,
-        brand: "Fluke",
-        title: {
-          ar: "ميلتيمتر رقمي صناعي دقيق True-RMS",
-          fr: "Multimètre Numérique Industriel True-RMS",
-          en: "True-RMS Industrial Digital Multimeter"
-        },
-        ref: "FLUKE-179",
-        category: "electricity",
-        year: 2024,
-        createdAt: Date.now() - (30 * 86400000),
-        country: { ar: "الولايات المتحدة", fr: "États-Unis", en: "USA" },
-        condition: "new",
-        stock: 0,
-        price: 36000,
-        offerPrice: null,
-        images: ["https://images.unsplash.com/photo-1606778303155-7524948a31e8?auto=format&fit=crop&w=600&q=80"],
-        mainImageIndex: 0,
-        desc: {
-          ar: "أعلى دقة قياس للفولتية والتيار والمقاومة مع فحص حراري معتمد.",
-          fr: "Haute précision pour les mesures de tension, courant, résistance et température intégrée.",
-          en: "Industry benchmark for electrical troubleshooting with integrated temperature measurements."
-        }
-      },
-      {
-        id: Date.now() - 6000,
-        brand: "Bosch",
-        title: {
-          ar: "منظار ليزري لتسوية الأرضيات والمستويات",
-          fr: "Laser Rotatif Professionnel Haute Précision",
-          en: "Professional Rotary Laser Level GRL-600"
-        },
-        ref: "GRL-600",
-        category: "construction",
-        year: 2023,
-        createdAt: Date.now() - (45 * 86400000),
-        country: { ar: "ألمانيا", fr: "Allemagne", en: "Germany" },
-        condition: "used",
-        stock: 1,
-        price: 95000,
-        offerPrice: 95000,
-        images: ["https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80"],
-        mainImageIndex: 0,
-        desc: {
-          ar: "جهاز احترافي للمهندسين والمقاولين لتسوية الأرضيات حساب الميلان بدقة مليمترية.",
-          fr: "Appareil robuste pour les chantiers extérieurs, nivellement automatique et pentes précises.",
-          en: "Tough design for harsh job sites, high accuracy leveling and precise slope alignment."
-        }
-      }
-    ];
-
-    const defaultSmartHistory = {
-      brands: ["Hilti", "Milwaukee", "Makita", "DeWalt", "Bosch", "Fluke", "Sony", "Xiaomi", "Festool", "Facom", "Knipex", "Stanley", "Metabo", "Parkside", "REMS", "Ryobi", "Stihl", "Virax"],
-      titles: [
-        { brand: "Hilti", title: "شينيور ثقب وتخريم ببطارية (Perceuse sans fil)" },
-        { brand: "Hilti", title: "فيسوز / مفك براغي لاسلكي (Visseuse à chocs)" },
-        { brand: "Hilti", title: "مطرقة هدم وتكسير احترافية TE 70-ATC/AVR" },
-        { brand: "Milwaukee", title: "شيتيور عالي العزم 1/2 بوصة M18 FUEL" },
-        { brand: "Milwaukee", title: "فيسوز / شينيور ببطارية 18V" },
-        { brand: "Makita", title: "شينيور فيسوز DHP482" },
-        { brand: "Fluke", title: "ميلتيمتر رقمي صناعي True-RMS دقيق" },
-        { brand: "Bosch", title: "منظار ليزري لتسوية الأرضيات والمستويات" }
-      ],
-      refs: ["TE 70-ATC", "M18-FHIWF12", "FLUKE-179", "GRL-600", "DHP482", "DCD996"],
-      countries: ["ألمانيا", "الولايات المتحدة", "اليابان", "الصين", "فرنسا", "إيطاليا", "سويسرا"]
-    };
-
-    let smartHistory = JSON.parse(localStorage.getItem("zinou_smart_history_v3")) || defaultSmartHistory;
-    let products = JSON.parse(localStorage.getItem("zinou_store_products_v4")) || defaultInitialProducts;
-    let cart = JSON.parse(localStorage.getItem("zinou_store_cart_v4")) || [];
-    let isDeveloper = sessionStorage.getItem("zinou_developer_session") === "true";
-    
-    let currentLang = "ar";
-    let activeCategory = "all";
-
-    // Temporary array holding uploaded images during product creation/editing in admin
-    let currentAdminImages = [];
-    let currentAdminMainIndex = 0;
-
-    function syncState() {
-      localStorage.setItem("zinou_store_products_v4", JSON.stringify(products));
-      localStorage.setItem("zinou_store_cart_v4", JSON.stringify(cart));
-      updateCartBadge();
-    }
-
-    function updateCartBadge() {
-      const badge = document.getElementById("cartCountBadge");
-      if (badge) badge.innerText = cart.length;
-    }
-
-    function getLocalized(field, lang = currentLang) {
-      if (!field) return "";
-      if (typeof field === "object") {
-        return field[lang] || field.ar || field.fr || field.en || "";
-      }
-      return field;
-    }
-
-    function getConditionText(condKey, lang = currentLang) {
-      const t = i18nData[lang];
-      if (condKey === "new" || condKey === "جديد") return t.condNew;
-      if (condKey === "like_new" || condKey === "جديد يشبه المستعمل") return t.condLikeNew;
-      if (condKey === "used" || condKey === "مستعمل") return t.condUsed;
-      return condKey;
-    }
-
-    function isItemNew(createdAt) {
-      if (!createdAt) return false;
-      const oneWeekMillis = 7 * 24 * 60 * 60 * 1000;
-      return (Date.now() - createdAt) < oneWeekMillis;
-    }
-
-    window.downloadAndroidApp = function() {
-      showToast(i18nData[currentLang].apkDownloading, "success");
-      const dummyContent = "Zinou Outillage Android App Placeholder";
-      const blob = new Blob([dummyContent], { type: "text/plain" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "ZinouOutillage.apk";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    };
-
-    window.toggleModal = function(id) {
-      const el = document.getElementById(id);
-      if (el) el.classList.toggle("hidden");
-    };
-
-    window.toggleCategoriesDrawer = function() {
-      const drawer = document.getElementById("categoriesDrawer");
-      const backdrop = document.getElementById("drawerBackdrop");
-      if (!drawer || !backdrop) return;
-
-      const isRTL = currentLang === "ar";
-      const isHidden = backdrop.classList.contains("hidden");
-
-      if (isHidden) {
-        backdrop.classList.remove("hidden");
-        drawer.style.transform = "translateX(0)";
-      } else {
-        backdrop.classList.add("hidden");
-        drawer.style.transform = isRTL ? "translateX(100%)" : "translateX(-100%)";
-      }
-    };
-
-    window.resetAllFilters = function() {
-      const searchInput = document.getElementById("searchInput");
-      if (searchInput) searchInput.value = "";
-      
-      const brandSelect = document.getElementById("brandSelect");
-      if (brandSelect) brandSelect.value = "";
-
-      const minPriceInput = document.getElementById("minPriceInput");
-      if (minPriceInput) minPriceInput.value = "";
-      
-      const maxPriceInput = document.getElementById("maxPriceInput");
-      if (maxPriceInput) maxPriceInput.value = "";
-      
-      const sortSelect = document.getElementById("sortSelect");
-      if (sortSelect) sortSelect.value = "newest";
-      
-      const allConditionRadio = document.querySelector('input[name="filterCondition"][value="all"]');
-      if (allConditionRadio) allConditionRadio.checked = true;
-      
-      activeCategory = "all";
-      
-      const searchSuggestions = document.getElementById("searchSuggestions");
-      if (searchSuggestions) searchSuggestions.classList.add("hidden");
-
-      renderCategoriesDrawer();
-      applyFilters();
-      showToast(i18nData[currentLang].filtersResetMsg, "info");
-    };
-
-    window.handleSearchInput = function() {
-      const input = document.getElementById("searchInput");
-      const suggestions = document.getElementById("searchSuggestions");
-      if (!input || !suggestions) return;
-
-      const q = input.value.trim().toLowerCase();
-
-      if (q.length > 0) {
-        const matches = products.filter(p => {
-          const title = getLocalized(p.title).toLowerCase();
-          const brand = p.brand.toLowerCase();
-          const ref = p.ref.toLowerCase();
-          return title.includes(q) || brand.includes(q) || ref.includes(q);
-        }).slice(0, 5);
-
-        if (matches.length > 0) {
-          suggestions.classList.remove("hidden");
-          suggestions.innerHTML = matches.map(p => {
-            const mainImg = p.images && p.images[p.mainImageIndex || 0] ? p.images[p.mainImageIndex || 0] : (p.img || '');
-            return `
-              <div onclick="selectSuggestion('${getLocalized(p.title).replace(/'/g, "\\'")}')" class="p-2.5 flex items-center justify-between hover:bg-slate-800/80 cursor-pointer text-xs transition">
-                <div class="flex items-center gap-2.5">
-                  <img src="${mainImg}" class="w-8 h-8 rounded-lg object-cover border border-slate-700" />
-                  <div>
-                    <div class="font-bold text-white">${getLocalized(p.title)}</div>
-                    <div class="text-[10px] text-amber-400 font-mono">${p.brand} • Réf: ${p.ref}</div>
-                  </div>
-                </div>
-                <span class="text-xs font-black text-amber-400 font-mono">${(p.offerPrice || p.price)} ${i18nData[currentLang].currency}</span>
-              </div>
-            `;
-          }).join("");
-        } else {
-          suggestions.classList.add("hidden");
-        }
-      } else {
-        suggestions.classList.add("hidden");
-      }
-
-      applyFilters();
-    };
-
-    window.triggerDirectSearch = function() {
-      const suggestions = document.getElementById("searchSuggestions");
-      if (suggestions) suggestions.classList.add("hidden");
-      applyFilters();
-    };
-
-    window.selectSuggestion = function(title) {
-      const searchInput = document.getElementById("searchInput");
-      if (searchInput) searchInput.value = title;
-      const suggestions = document.getElementById("searchSuggestions");
-      if (suggestions) suggestions.classList.add("hidden");
-      applyFilters();
-    };
-
-    window.filterByBrand = function(brandName) {
-      const brandSelect = document.getElementById("brandSelect");
-      if (brandSelect) {
-        brandSelect.value = brandName;
-      }
-      applyFilters();
-      window.scrollTo({ top: 300, behavior: 'smooth' });
-    };
-
-    window.applyFilters = function() {
-      const q = (document.getElementById("searchInput")?.value || "").trim().toLowerCase();
-      const selectedBrand = document.getElementById("brandSelect")?.value || "";
-      const condEl = document.querySelector('input[name="filterCondition"]:checked');
-      const conditionVal = condEl ? condEl.value : "all";
-      const minPrice = parseFloat(document.getElementById("minPriceInput")?.value) || 0;
-      const maxPrice = parseFloat(document.getElementById("maxPriceInput")?.value) || Infinity;
-      const sort = document.getElementById("sortSelect")?.value || "newest";
-
-      let filtered = products.filter(p => {
-        const matchesCategory = activeCategory === "all" || p.category === activeCategory;
-        const matchesBrand = !selectedBrand || p.brand.toLowerCase() === selectedBrand.toLowerCase();
-        
-        let matchesCondition = true;
-        if (conditionVal !== "all") {
-          const normCond = (p.condition === "new" || p.condition === "جديد") ? "new" :
-                           (p.condition === "like_new" || p.condition === "جديد يشبه المستعمل") ? "like_new" : "used";
-          matchesCondition = normCond === conditionVal;
-        }
-
-        const effectiveP = p.offerPrice || p.price;
-        const matchesPrice = effectiveP >= minPrice && effectiveP <= maxPrice;
-
-        const title = getLocalized(p.title).toLowerCase();
-        const brand = p.brand.toLowerCase();
-        const ref = p.ref.toLowerCase();
-        const matchesSearch = !q || title.includes(q) || brand.includes(q) || ref.includes(q);
-
-        return matchesCategory && matchesBrand && matchesCondition && matchesPrice && matchesSearch;
-      });
-
-      if (sort === "newest") {
-        filtered.sort((a, b) => (b.createdAt || b.id) - (a.createdAt || a.id));
-      } else if (sort === "priceAsc") {
-        filtered.sort((a, b) => (a.offerPrice || a.price) - (b.offerPrice || b.price));
-      } else if (sort === "priceDesc") {
-        filtered.sort((a, b) => (b.offerPrice || b.price) - (a.offerPrice || a.price));
-      }
-
-      renderProductsGrid(filtered);
-    };
-
-    function renderProductsGrid(items) {
-      const grid = document.getElementById("productsGrid");
-      const countBadge = document.getElementById("productsCountBadge");
-      const catBadge = document.getElementById("currentCategoryBadge");
-      const t = i18nData[currentLang] || i18nData.ar;
-
-      if (countBadge) countBadge.innerText = `(${items.length})`;
-      if (catBadge) {
-        if (activeCategory === "all") {
-          catBadge.innerText = t.allCategories;
-        } else {
-          const found = categoriesList.find(c => c.id === activeCategory);
-          catBadge.innerText = found ? (found.name[currentLang] || found.name.ar) : activeCategory;
-        }
-      }
-
-      if (!grid) return;
-
-      if (items.length === 0) {
-        grid.innerHTML = `
-          <div class="col-span-full py-16 text-center text-slate-400 font-bold text-sm bg-slate-900/50 rounded-3xl border border-slate-800 px-4">
-            ${t.noProductsFound}
-          </div>
-        `;
-        return;
-      }
-
-      grid.innerHTML = items.map(p => {
-        const isAvailable = p.stock > 0;
-        const hasOffer = p.offerPrice && p.offerPrice < p.price;
-        const effectivePrice = hasOffer ? p.offerPrice : p.price;
-        const titleStr = getLocalized(p.title);
-        const showNewBadge = isItemNew(p.createdAt);
-
-        // Get primary main image
-        const imagesList = p.images && p.images.length > 0 ? p.images : [p.img || ''];
-        const mainIdx = p.mainImageIndex !== undefined && p.mainImageIndex < imagesList.length ? p.mainImageIndex : 0;
-        const primaryImg = imagesList[mainIdx];
-
-        return `
-          <div class="bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-2xl overflow-hidden flex flex-col transition duration-300 hover:shadow-2xl h-full relative group">
-            
-            <!-- Developer Quick Action Buttons on Card -->
-            ${isDeveloper ? `
-              <div class="absolute top-2 left-2 z-20 flex gap-1 bg-slate-950/80 backdrop-blur-md p-1 rounded-xl border border-slate-700 shadow-xl">
-                <button type="button" onclick="event.stopPropagation(); editProduct(${p.id}); openAdminModal();" class="p-1 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-lg text-[10px] font-black cursor-pointer" title="تعديل">
-                  ✏️
-                </button>
-                <button type="button" onclick="event.stopPropagation(); confirmDeleteProduct(${p.id});" class="p-1 bg-rose-600 hover:bg-rose-500 text-white rounded-lg text-[10px] font-black cursor-pointer" title="حذف">
-                  🗑️
-                </button>
-              </div>
-            ` : ''}
-
-            <!-- Compact Fixed Image Area -->
-            <div class="relative h-28 sm:h-32 bg-slate-950 overflow-hidden cursor-pointer shrink-0" onclick="openProductDetail(${p.id})">
-              <img src="${primaryImg}" alt="${titleStr}" class="w-full h-full object-cover object-center transition duration-500 hover:scale-105 ${!isAvailable ? 'grayscale opacity-50' : ''}" />
-              
-              <!-- Offer Badge -->
-              ${hasOffer ? `
-                <span class="absolute top-1.5 right-1.5 bg-rose-600 text-white text-[9px] font-black px-1.5 py-0.5 rounded shadow-md z-10">
-                  ${t.offerBadge}
-                </span>
-              ` : ''}
-
-              <!-- 7-Day New Badge -->
-              ${showNewBadge ? `
-                <span class="absolute top-1.5 ${hasOffer ? 'right-16' : 'right-1.5'} bg-amber-500 text-slate-950 text-[9px] font-black px-1.5 py-0.5 rounded shadow-md z-10 animate-pulse">
-                  ${t.newBadge}
-                </span>
-              ` : ''}
-
-              <!-- Out of Stock Badge Only (Hidden when in stock) -->
-              ${!isAvailable ? `
-                <span class="absolute top-1.5 left-1.5 text-[9px] font-black px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-400 border border-rose-500/40 z-10">
-                  ${t.outOfStock}
-                </span>
-              ` : ''}
-
-              <!-- Brand Pill -->
-              <span class="absolute bottom-1.5 right-1.5 bg-slate-950/90 backdrop-blur-md text-amber-400 text-[9px] font-black px-1.5 py-0.5 rounded border border-slate-800">
-                ${p.brand}
-              </span>
-            </div>
-
-            <!-- Compact Content Area With Identical Fixed Heights -->
-            <div class="p-2 sm:p-2.5 flex-1 flex flex-col justify-between">
-              <div>
-                <div class="flex justify-between items-center text-[9px] text-slate-400 font-mono mb-1">
-                  <span class="truncate max-w-[55%]" title="${p.ref}">${t.ref} ${p.ref}</span>
-                  <span class="bg-slate-950 px-1 py-0.5 rounded text-slate-300 font-bold border border-slate-800 text-[8px] shrink-0">${getConditionText(p.condition)}</span>
-                </div>
-                <!-- Title clamped to exactly 2 lines with fixed height -->
-                <h3 onclick="openProductDetail(${p.id})" class="font-bold text-white text-[11px] hover:text-amber-400 transition cursor-pointer leading-snug line-clamp-2 h-7" title="${titleStr}">
-                  ${titleStr}
-                </h3>
-              </div>
-
-              <!-- Price & Actions Fixed at Bottom -->
-              <div class="mt-2 pt-2 border-t border-slate-800/80 flex flex-col gap-1.5">
-                <div class="flex items-baseline justify-between">
-                  <span class="text-xs sm:text-sm font-black text-amber-400 font-mono leading-none">
-                    ${effectivePrice} <span class="text-[9px] font-bold">${t.currency}</span>
-                  </span>
-                  ${hasOffer ? `<span class="text-[9px] text-slate-500 line-through font-mono leading-none">${p.price}</span>` : ''}
-                </div>
-
-                <div class="grid grid-cols-2 gap-1">
-                  <button 
-                    type="button" 
-                    onclick="addToCart(${p.id})" 
-                    class="py-1.5 px-1 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-lg text-[9px] sm:text-[10px] flex items-center justify-center gap-1 transition active:scale-95 cursor-pointer shadow"
-                    title="${t.addToCart}"
-                  >
-                    <svg class="w-3 h-3 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-                    <span class="truncate">${t.addToCart}</span>
-                  </button>
-                  <button 
-                    type="button" 
-                    onclick="buyInstant(${p.id})" 
-                    class="py-1.5 px-1 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-lg text-[9px] sm:text-[10px] flex items-center justify-center gap-1 transition active:scale-95 cursor-pointer shadow"
-                    title="${t.buyNow}"
-                  >
-                    <svg class="w-3 h-3 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/></svg>
-                    <span class="truncate">${t.buyNow}</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        `;
-      }).join("");
-    }
-
-    window.addToCart = function(id) {
-      const p = products.find(x => x.id === id);
-      if (!p || p.stock <= 0) {
-        showToast(i18nData[currentLang].outOfStockMsg, "error");
-        return;
-      }
-      cart.push(p);
-      syncState();
-      renderCartList();
-      showToast(i18nData[currentLang].itemAddedMsg, "success");
-    };
-
-    window.buyInstant = function(id) {
-      const p = products.find(x => x.id === id);
-      if (!p || p.stock <= 0) {
-        showToast(i18nData[currentLang].outOfStockMsg, "error");
-        return;
-      }
-      cart = [p];
-      syncState();
-      renderCartList();
-      openCheckoutModal();
-    };
-
-    function renderCartList() {
-      const list = document.getElementById("cartItemsList");
-      const sumEl = document.getElementById("cartTotalSum");
-      if (!list || !sumEl) return;
-      const t = i18nData[currentLang];
-
-      if (cart.length === 0) {
-        list.innerHTML = `<div class="py-6 text-center text-slate-500">${t.noProductsFound}</div>`;
-        sumEl.innerText = `0 ${t.currency}`;
-        return;
-      }
-
-      let total = 0;
-      list.innerHTML = cart.map((p, idx) => {
-        const price = p.offerPrice || p.price;
-        total += price;
-        const imagesList = p.images && p.images.length > 0 ? p.images : [p.img || ''];
-        const mainIdx = p.mainImageIndex !== undefined && p.mainImageIndex < imagesList.length ? p.mainImageIndex : 0;
-        const primaryImg = imagesList[mainIdx];
-
-        return `
-          <div class="py-2.5 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <img src="${primaryImg}" class="w-9 h-9 rounded-lg object-cover border border-slate-700" />
-              <div>
-                <p class="text-white font-bold">${getLocalized(p.title)}</p>
-                <span class="text-[10px] text-slate-400 font-mono">${p.brand}</span>
-              </div>
-            </div>
-            <div class="flex items-center gap-3">
-              <span class="text-amber-400 font-mono font-black">${price} ${t.currency}</span>
-              <button onclick="removeFromCart(${idx})" class="text-rose-500 hover:text-rose-400 text-xs cursor-pointer" title="Remove">✕</button>
-            </div>
-          </div>
-        `;
-      }).join("");
-
-      sumEl.innerText = `${total} ${t.currency}`;
-    }
-
-    window.removeFromCart = function(index) {
-      cart.splice(index, 1);
-      syncState();
-      renderCartList();
-    };
-
+    // دوال إدارة سلة المشتريات وتأكيد الطلبية مع شرط الحد الأدنى 10000 دج
     window.openCheckoutModal = function() {
+      // 1. حساب المجموع الإجمالي السعر لجميع السلع الموجودة في السلة
       let total = cart.reduce((sum, p) => sum + (p.offerPrice || p.price), 0);
+      
+      // 2. التحقق مما إذا كان المجموع أقل من 10000 دج
       if (total < 10000) {
+        // إذا كان أقل من الحد الأدنى، يتم إظهار رسالة خطأ تنبيهية ومنع الانتقال لنافذة إدخال المعلومات
         showToast(i18nData[currentLang].minOrderError, "error");
         return;
       }
+      
+      // 3. إذا كان المجموع 10000 دج فما فوق، يتم إغلاق نافذة السلة وفتح نافذة إدخال بيانات الزبون (الاسم، الهاتف، العنوان)
       const cartModal = document.getElementById("cartModal");
       if (cartModal) cartModal.classList.add("hidden");
       toggleModal("checkoutModal");
@@ -1577,6 +723,7 @@
 
     window.handleFinalOrder = function(e) {
       e.preventDefault();
+      // إعادة التأكيد على الشرط عند خطوة الإرسال النهائية للأمان التام
       let total = cart.reduce((sum, p) => sum + (p.offerPrice || p.price), 0);
       if (total < 10000) {
         showToast(i18nData[currentLang].minOrderError, "error");
@@ -1585,11 +732,13 @@
 
       const name = document.getElementById("buyerName")?.value || "";
 
+      // خصم الكمية المباعة من مخزون المستودع للسلع المطلوبة
       cart.forEach(c => {
         const item = products.find(p => p.id === c.id);
         if (item && item.stock > 0) item.stock -= 1;
       });
 
+      // تفريغ السلة وتحديث الحالة المحلية وتخزينها
       cart = [];
       syncState();
       toggleModal("checkoutModal");
@@ -1615,9 +764,9 @@
       container.innerHTML = `
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
           <div class="space-y-3">
-            <div class="relative rounded-2xl overflow-hidden bg-slate-950 border border-slate-800">
+            <div class="relative rounded-2xl overflow-hidden bg-slate-950 border border-slate-800 group cursor-zoom-in" onclick="openImageZoom('${primaryImg}')">
               ${isDeveloper ? `
-                <div class="absolute top-3 left-3 z-20 flex gap-2 bg-slate-950/90 backdrop-blur-md p-1.5 rounded-xl border border-slate-700 shadow-xl">
+                <div class="absolute top-3 left-3 z-20 flex gap-2 bg-slate-950/90 backdrop-blur-md p-1.5 rounded-xl border border-slate-700 shadow-xl" onclick="event.stopPropagation();">
                   <button type="button" onclick="editProduct(${p.id}); toggleModal('productDetailModal'); openAdminModal();" class="px-2.5 py-1 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-lg text-xs font-black cursor-pointer">
                     ✏️ تعديل
                   </button>
@@ -1626,14 +775,18 @@
                   </button>
                 </div>
               ` : ''}
-              <img id="detailMainImg" src="${primaryImg}" alt="${getLocalized(p.title)}" class="w-full h-72 object-cover ${!isAvailable ? 'grayscale opacity-50' : ''}" />
+              <img id="detailMainImg" src="${primaryImg}" alt="${getLocalized(p.title)}" class="w-full h-72 object-cover group-hover:scale-110 transition duration-500 ${!isAvailable ? 'grayscale opacity-50' : ''}" />
+              <div class="absolute bottom-2 right-2 bg-slate-900/80 backdrop-blur-md px-2 py-1 rounded-lg text-[10px] text-amber-400 font-bold pointer-events-none flex items-center gap-1">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
+                تكبير الصورة
+              </div>
             </div>
 
             <!-- Thumbnail Carousel if multiple images exist -->
             ${imagesList.length > 1 ? `
               <div class="flex gap-2 overflow-x-auto pb-2">
                 ${imagesList.map((imgSrc, idx) => `
-                  <button type="button" onclick="document.getElementById('detailMainImg').src='${imgSrc}'" class="w-14 h-14 rounded-xl overflow-hidden border-2 ${idx === mainIdx ? 'border-amber-500' : 'border-slate-800'} shrink-0 hover:opacity-15 transition">
+                  <button type="button" onclick="document.getElementById('detailMainImg').src='${imgSrc}'; document.getElementById('detailMainImg').parentElement.setAttribute('onclick', 'openImageZoom(\\\''+imgSrc+'\\\')')" class="w-14 h-14 rounded-xl overflow-hidden border-2 ${idx === mainIdx ? 'border-amber-500' : 'border-slate-800'} shrink-0 hover:opacity-100 transition">
                     <img src="${imgSrc}" class="w-full h-full object-cover">
                   </button>
                 `).join("")}
@@ -1680,36 +833,36 @@
     };
 
     window.openAdminModal = function() {
-      if (isDeveloper) {
-        document.getElementById("adminLock")?.classList.add("hidden");
-        document.getElementById("adminContent")?.classList.remove("hidden");
-        document.getElementById("adminHeaderLogoutBtn")?.classList.remove("hidden");
-        renderAdminCategoryOptions();
-        renderAdminAutocompletes();
-        renderAdminTable();
-      } else {
-        document.getElementById("adminLock")?.classList.remove("hidden");
-        document.getElementById("adminContent")?.classList.add("hidden");
-        document.getElementById("adminHeaderLogoutBtn")?.classList.add("hidden");
+  <!-- Image Zoom Lightbox Modal -->
+  <div id="imageZoomModal" class="fixed inset-0 bg-black/95 backdrop-blur-lg z-[110] hidden flex items-center justify-center p-2 sm:p-6" onclick="closeImageZoom()">
+    <div class="relative max-w-5xl max-h-[90vh] w-full flex items-center justify-center" onclick="event.stopPropagation()">
+      <button 
+        type="button" 
+        onclick="closeImageZoom()" 
+        class="absolute -top-12 right-0 w-10 h-10 rounded-xl bg-slate-800 hover:bg-slate-700 text-white flex items-center justify-center transition cursor-pointer shadow-xl z-10"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+      <img id="zoomedImageElement" src="" alt="Zoomed Product Image" class="max-w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl border border-slate-800 select-none">
+    </div>
+  </div>
+
+  <script>
+    window.openImageZoom = function(imgSrc) {
+      const zoomModal = document.getElementById("imageZoomModal");
+      const zoomedImg = document.getElementById("zoomedImageElement");
+      if (zoomModal && zoomedImg) {
+        zoomedImg.src = imgSrc;
+        zoomModal.classList.remove("hidden");
       }
-      toggleModal("adminModal");
     };
 
-    window.unlockAdmin = function() {
-      const input = document.getElementById("adminPassInput")?.value;
-      if (input === "1234") {
-        isDeveloper = true;
-        sessionStorage.setItem("zinou_developer_session", "true");
-        document.getElementById("adminLock")?.classList.add("hidden");
-        document.getElementById("adminContent")?.classList.remove("hidden");
-        document.getElementById("adminHeaderLogoutBtn")?.classList.remove("hidden");
-        renderAdminCategoryOptions();
-        renderAdminAutocompletes();
-        renderAdminTable();
-        applyFilters();
-        showToast("مرحباً بك أيها المطور! تم تفعيل وضع التعديل والحذف.", "success");
-      } else {
-        showToast(i18nData[currentLang].invalidPassMsg, "error");
+    window.closeImageZoom = function() {
+      const zoomModal = document.getElementById("imageZoomModal");
+      if (zoomModal) {
+        zoomModal.classList.add("hidden");
       }
     };
 
