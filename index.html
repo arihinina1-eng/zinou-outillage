@@ -18,7 +18,6 @@
       font-family: 'Cairo', system-ui, -apple-system, sans-serif;
     }
     
-    /* Custom Modern Scrollbars */
     ::-webkit-scrollbar {
       width: 6px;
       height: 6px;
@@ -34,7 +33,6 @@
       background: #f59e0b;
     }
 
-    /* Seamless Infinite Marquee */
     @keyframes brandsRTL {
       0% { transform: translateX(0); }
       100% { transform: translateX(50%); }
@@ -71,7 +69,7 @@
       <div class="flex items-center gap-3">
         <!-- Categories Drawer Trigger -->
         <button 
-          type="button"
+          type="button" 
           onclick="toggleCategoriesDrawer()" 
           class="px-3.5 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-xl text-xs font-black flex items-center gap-2 transition active:scale-95 shadow-md shadow-amber-500/10 cursor-pointer"
         >
@@ -117,7 +115,7 @@
 
         <!-- Admin Control Button -->
         <button 
-          type="button"
+          type="button" 
           onclick="openAdminModal()" 
           class="p-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-amber-400 rounded-xl border border-slate-700 text-xs font-bold transition cursor-pointer" 
           title="Admin"
@@ -129,7 +127,7 @@
 
         <!-- Cart Button with Counter -->
         <button 
-          type="button"
+          type="button" 
           onclick="toggleModal('cartModal')" 
           class="relative p-2.5 bg-slate-800 hover:bg-slate-700 text-white rounded-xl border border-slate-700 transition cursor-pointer"
         >
@@ -228,7 +226,7 @@
           <h3 class="font-black text-amber-400 text-base" data-i18n="catsDrawerTitle">الفئات والأقسام</h3>
         </div>
         <button 
-          type="button"
+          type="button" 
           onclick="toggleCategoriesDrawer()" 
           class="p-2 text-slate-400 hover:text-white rounded-xl hover:bg-slate-800 transition"
         >
@@ -245,9 +243,9 @@
 
     <div class="pt-4 border-t border-slate-800 text-center">
       <button 
-        type="button"
+        type="button" 
         onclick="resetAllFilters(); toggleCategoriesDrawer();" 
-        class="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-xs text-amber-400 font-black rounded-xl transition cursor-pointer"
+        class="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-xs text-amber-400 font-black rounded-xl transition cursor-pointer" 
         data-i18n="drawerResetBtn"
       >
         إعادة عرض كل السلع
@@ -256,91 +254,89 @@
   </aside>
 
   <!-- Main Store Layout -->
-  <div class="max-w-7xl mx-auto px-4 py-6 flex-1 w-full flex flex-col gap-5">
+  <div class="max-w-7xl mx-auto px-3 sm:px-4 py-4 sm:py-6 flex-1 w-full flex flex-col gap-4">
     
     <main class="w-full">
       
       <!-- Prominent Search Bar -->
-      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-3 md:p-4 mb-4 shadow-xl">
+      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-2.5 md:p-3.5 mb-3 shadow-xl">
         <div class="relative w-full">
           <input 
             id="searchInput" 
             type="text" 
-            data-i18n-placeholder="searchPlaceholder"
+            data-i18n-placeholder="searchPlaceholder" 
             placeholder="ابحث..." 
-            oninput="handleSearchInput()"
-            onkeydown="if(event.key === 'Enter') { triggerDirectSearch(); }"
-            class="w-full bg-slate-950 border border-slate-700 focus:border-amber-500 rounded-xl px-4 py-2.5 pl-11 text-xs md:text-sm text-white placeholder-slate-500 outline-none transition shadow-inner" 
+            oninput="handleSearchInput()" 
+            onkeydown="if(event.key === 'Enter') { triggerDirectSearch(); }" 
+            class="w-full bg-slate-950 border border-slate-700 focus:border-amber-500 rounded-xl px-3.5 py-2 text-xs md:text-sm text-white placeholder-slate-500 outline-none transition shadow-inner pl-10" 
           />
-          <!-- Clickable Search Button -->
           <button 
             type="button" 
             onclick="triggerDirectSearch()" 
-            class="absolute top-2 left-2 p-1.5 rounded-lg text-slate-400 hover:text-amber-400 hover:bg-slate-800 active:scale-90 transition cursor-pointer flex items-center justify-center" 
+            class="absolute top-1.5 left-1.5 p-1.5 rounded-lg text-slate-400 hover:text-amber-400 hover:bg-slate-800 active:scale-90 transition cursor-pointer flex items-center justify-center" 
             title="Search"
           >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
             </svg>
           </button>
-          <!-- Suggestions Dropdown -->
           <div id="searchSuggestions" class="hidden absolute top-full mt-1.5 w-full bg-slate-900 border border-slate-800 rounded-xl shadow-2xl z-50 max-h-72 overflow-y-auto divide-y divide-slate-800/60"></div>
         </div>
       </div>
 
       <!-- Search Filters Bar (Appears ONLY when user searches) -->
-      <div id="searchFilterBox" class="hidden bg-slate-900 border border-amber-500/40 rounded-2xl p-4 mb-6 shadow-xl transition-all duration-300">
-        <div class="flex flex-wrap items-center justify-between gap-4 text-xs font-bold">
+      <div id="searchFilterBox" class="hidden bg-slate-900 border border-amber-500/40 rounded-2xl p-3.5 mb-4 shadow-xl transition-all duration-300">
+        <div class="flex flex-wrap items-center justify-between gap-3 text-xs font-bold">
           
           <!-- Condition Options -->
-          <div class="flex items-center gap-3">
+          <div class="flex items-center gap-2 sm:gap-3">
             <span class="text-amber-400 font-bold" data-i18n="condLabel">حالة العتاد:</span>
-            <label class="flex items-center gap-1.5 cursor-pointer text-slate-300 hover:text-white">
+            <label class="flex items-center gap-1 cursor-pointer text-slate-300 hover:text-white">
               <input type="radio" name="filterCondition" value="all" checked onchange="applyFilters()" class="accent-amber-500">
               <span data-i18n="condAll">الكل</span>
             </label>
-            <label class="flex items-center gap-1.5 cursor-pointer text-slate-300 hover:text-white">
+            <label class="flex items-center gap-1 cursor-pointer text-slate-300 hover:text-white">
               <input type="radio" name="filterCondition" value="new" onchange="applyFilters()" class="accent-amber-500">
               <span data-i18n="condNew">جديد</span>
             </label>
-            <label class="flex items-center gap-1.5 cursor-pointer text-slate-300 hover:text-white">
+            <label class="flex items-center gap-1 cursor-pointer text-slate-300 hover:text-white">
               <input type="radio" name="filterCondition" value="like_new" onchange="applyFilters()" class="accent-amber-500">
               <span data-i18n="condLikeNew">جديد يشبه المستعمل</span>
             </label>
-            <label class="flex items-center gap-1.5 cursor-pointer text-slate-300 hover:text-white">
+            <label class="flex items-center gap-1 cursor-pointer text-slate-300 hover:text-white">
               <input type="radio" name="filterCondition" value="used" onchange="applyFilters()" class="accent-amber-500">
               <span data-i18n="condUsed">مستعمل</span>
             </label>
           </div>
 
           <!-- Price Range Inputs -->
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-1.5">
             <span class="text-amber-400" data-i18n="priceRangeLabel">السعر:</span>
             <input 
               id="minPriceInput" 
               type="text" 
               inputmode="numeric" 
-              data-i18n-placeholder="minPricePlaceholder"
+              data-i18n-placeholder="minPricePlaceholder" 
               placeholder="الأدنى" 
               oninput="applyFilters()" 
-              class="w-20 bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1 text-white outline-none focus:border-amber-500 text-center"
+              class="w-16 bg-slate-950 border border-slate-700 rounded-lg px-2 py-1 text-white outline-none focus:border-amber-500 text-center text-xs" 
             />
             <span class="text-slate-500">-</span>
             <input 
               id="maxPriceInput" 
               type="text" 
               inputmode="numeric" 
-              data-i18n-placeholder="maxPricePlaceholder"
+              data-i18n-placeholder="maxPricePlaceholder" 
               placeholder="الأقصى" 
               oninput="applyFilters()" 
-              class="w-20 bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1 text-white outline-none focus:border-amber-500 text-center"
+              class="w-16 bg-slate-950 border border-slate-700 rounded-lg px-2 py-1 text-white outline-none focus:border-amber-500 text-center text-xs" 
             />
           </div>
 
           <!-- Sort Dropdown -->
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-1.5">
             <span class="text-amber-400" data-i18n="sortLabel">الترتيب:</span>
-            <select id="sortSelect" onchange="applyFilters()" class="bg-slate-950 border border-slate-700 rounded-lg px-3 py-1 text-white outline-none focus:border-amber-500 cursor-pointer">
+            <select id="sortSelect" onchange="applyFilters()" class="bg-slate-950 border border-slate-700 rounded-lg px-2 py-1 text-white outline-none focus:border-amber-500 cursor-pointer text-xs">
               <option value="newest" data-i18n="sortNewest">الأحدث إضافة</option>
               <option value="priceAsc" data-i18n="sortPriceAsc">السعر: من الأقل للأعلى</option>
               <option value="priceDesc" data-i18n="sortPriceDesc">السعر: من الأعلى للأقل</option>
@@ -350,7 +346,7 @@
       </div>
 
       <!-- Active Filter Badge & Counter -->
-      <div class="flex items-center justify-between mb-4">
+      <div class="flex items-center justify-between mb-3 px-1">
         <div class="flex items-center gap-2">
           <span class="text-xs font-bold text-slate-400" id="currentCategoryBadge">جميع الأقسام</span>
           <span class="text-xs text-amber-500 font-mono font-bold" id="productsCountBadge">(0)</span>
@@ -360,8 +356,8 @@
         </button>
       </div>
 
-      <!-- Products Grid -->
-      <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+      <!-- Compact Uniform Products Grid -->
+      <div id="productsGrid" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 sm:gap-4"></div>
     </main>
   </div>
 
@@ -369,7 +365,7 @@
   <div id="productDetailModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-2xl w-full p-6 relative max-h-[90vh] overflow-y-auto shadow-2xl">
       <button 
-        type="button"
+        type="button" 
         onclick="toggleModal('productDetailModal')" 
         class="absolute top-4 left-4 w-9 h-9 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition cursor-pointer"
       >
@@ -385,7 +381,7 @@
   <div id="cartModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 relative shadow-2xl">
       <button 
-        type="button"
+        type="button" 
         onclick="toggleModal('cartModal')" 
         class="absolute top-4 left-4 w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition cursor-pointer"
       >
@@ -405,9 +401,9 @@
         <span id="cartTotalSum" class="text-amber-400 text-base font-mono">0 دج</span>
       </div>
       <button 
-        type="button"
+        type="button" 
         onclick="openCheckoutModal()" 
-        class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs rounded-xl transition cursor-pointer"
+        class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs rounded-xl transition cursor-pointer" 
         data-i18n="checkoutBtn"
       >
         تأكيد الطلبية الآن
@@ -419,7 +415,7 @@
   <div id="checkoutModal" class="fixed inset-0 bg-black/85 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-6 relative shadow-2xl">
       <button 
-        type="button"
+        type="button" 
         onclick="toggleModal('checkoutModal')" 
         class="absolute top-4 left-4 w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition cursor-pointer"
       >
@@ -452,7 +448,7 @@
   <div id="adminModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
     <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-3xl w-full p-6 relative max-h-[92vh] overflow-y-auto shadow-2xl">
       <button 
-        type="button"
+        type="button" 
         onclick="toggleModal('adminModal')" 
         class="absolute top-4 left-4 w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition cursor-pointer"
       >
@@ -480,15 +476,18 @@
           
           <div>
             <label class="block mb-1 text-slate-400" data-i18n="formBrandLabel">الماركة:</label>
-            <input required id="formBrand" type="text" placeholder="Hilti, Bosch, Milwaukee..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+            <input required id="formBrand" list="brandSuggestionsList" type="text" oninput="updateTitleSuggestions()" placeholder="Hilti, Bosch, Milwaukee..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+            <datalist id="brandSuggestionsList"></datalist>
           </div>
           <div>
             <label class="block mb-1 text-slate-400" data-i18n="formTitleLabel">اسم العتاد / الآلة:</label>
-            <input required id="formTitle" type="text" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+            <input required id="formTitle" list="titleSuggestionsList" type="text" placeholder="شينيور، فيسوز، مطرقة هدم..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+            <datalist id="titleSuggestionsList"></datalist>
           </div>
           <div>
             <label class="block mb-1 text-slate-400" data-i18n="formRefLabel">رقم الطراز (Référence):</label>
-            <input required id="formRef" type="text" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+            <input required id="formRef" list="refSuggestionsList" type="text" placeholder="TE 70, M18, DCD996..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+            <datalist id="refSuggestionsList"></datalist>
           </div>
           <div>
             <label class="block mb-1 text-slate-400" data-i18n="formCategoryLabel">الفئة:</label>
@@ -500,7 +499,8 @@
           </div>
           <div>
             <label class="block mb-1 text-slate-400" data-i18n="formCountryLabel">بلد الصنع / المنشأ:</label>
-            <input required id="formCountry" type="text" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+            <input required id="formCountry" list="countrySuggestionsList" type="text" placeholder="ألمانيا، أمريكا، اليابان..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+            <datalist id="countrySuggestionsList"></datalist>
           </div>
           <div>
             <label class="block mb-1 text-slate-400" data-i18n="formConditionLabel">الحالة:</label>
@@ -605,8 +605,8 @@
         inStock: "متوفر بالمستودع",
         outOfStock: "غير متوفر بالمستودع",
         offerBadge: "تخفيض / OFFRE",
-        addToCart: "إضافة إلى السلة",
-        buyNow: "شراء فوراً",
+        addToCart: "إضافة للسلة",
+        buyNow: "شراء",
         ref: "المرجع:",
         year: "سنة الإنتاج:",
         country: "بلد المنشأ:",
@@ -681,7 +681,7 @@
         inStock: "En stock",
         outOfStock: "Rupture de stock",
         offerBadge: "PROMO / OFFRE",
-        addToCart: "Ajouter au panier",
+        addToCart: "Panier",
         buyNow: "Acheter",
         ref: "Réf:",
         year: "Année:",
@@ -758,7 +758,7 @@
         outOfStock: "Out of Stock",
         offerBadge: "SPECIAL OFFER",
         addToCart: "Add to Cart",
-        buyNow: "Buy Now",
+        buyNow: "Buy",
         ref: "Ref:",
         year: "Year:",
         country: "Origin:",
@@ -963,6 +963,82 @@
         }
       }
     ];
+
+    /* --- Permanent Smart Autocomplete Memory Store --- */
+    const defaultSmartHistory = {
+      brands: ["Hilti", "Milwaukee", "Makita", "DeWalt", "Bosch", "Fluke", "Sony", "Xiaomi", "Festool", "Facom", "Knipex", "Stanley", "Metabo"],
+      titles: [
+        { brand: "Hilti", title: "شينيور ثقب وتخريم ببطارية (Perceuse sans fil)" },
+        { brand: "Hilti", title: "فيسوز / مفك براغي لاسلكي (Visseuse à chocs)" },
+        { brand: "Hilti", title: "مطرقة هدم وتكسير احترافية TE 70-ATC/AVR" },
+        { brand: "Milwaukee", title: "شيتيور عالي العزم 1/2 بوصة M18 FUEL" },
+        { brand: "Milwaukee", title: "فيسوز / شينيور ببطارية 18V" },
+        { brand: "Makita", title: "شينيور فيسوز DHP482" },
+        { brand: "Fluke", title: "ميلتيمتر رقمي صناعي True-RMS دقيق" },
+        { brand: "Bosch", title: "منظار ليزري لتسوية الأرضيات والمستويات" }
+      ],
+      refs: ["TE 70-ATC", "M18-FHIWF12", "FLUKE-179", "GRL-600", "DHP482", "DCD996"],
+      countries: ["ألمانيا", "الولايات المتحدة", "اليابان", "الصين", "فرنسا", "إيطاليا", "سويسرا"]
+    };
+
+    let smartHistory = JSON.parse(localStorage.getItem("zinou_smart_history_v1")) || defaultSmartHistory;
+
+    function saveSmartHistory(brand, title, ref, country) {
+      const bTrim = (brand || "").trim();
+      const tTrim = (title || "").trim();
+      const rTrim = (ref || "").trim();
+      const cTrim = (country || "").trim();
+
+      if (bTrim && !smartHistory.brands.some(b => b.toLowerCase() === bTrim.toLowerCase())) {
+        smartHistory.brands.unshift(bTrim);
+      }
+      if (tTrim && !smartHistory.titles.some(x => x.title.toLowerCase() === tTrim.toLowerCase() && (!bTrim || x.brand.toLowerCase() === bTrim.toLowerCase()))) {
+        smartHistory.titles.unshift({ brand: bTrim, title: tTrim });
+      }
+      if (rTrim && !smartHistory.refs.some(r => r.toLowerCase() === rTrim.toLowerCase())) {
+        smartHistory.refs.unshift(rTrim);
+      }
+      if (cTrim && !smartHistory.countries.some(c => c.toLowerCase() === cTrim.toLowerCase())) {
+        smartHistory.countries.unshift(cTrim);
+      }
+
+      localStorage.setItem("zinou_smart_history_v1", JSON.stringify(smartHistory));
+      renderAdminAutocompletes();
+    }
+
+    function renderAdminAutocompletes() {
+      const brandList = document.getElementById("brandSuggestionsList");
+      const refList = document.getElementById("refSuggestionsList");
+      const countryList = document.getElementById("countrySuggestionsList");
+
+      if (brandList) {
+        brandList.innerHTML = smartHistory.brands.map(b => `<option value="${b}"></option>`).join("");
+      }
+      if (refList) {
+        refList.innerHTML = smartHistory.refs.map(r => `<option value="${r}"></option>`).join("");
+      }
+      if (countryList) {
+        countryList.innerHTML = smartHistory.countries.map(c => `<option value="${c}"></option>`).join("");
+      }
+      updateTitleSuggestions();
+    }
+
+    window.updateTitleSuggestions = function() {
+      const titleList = document.getElementById("titleSuggestionsList");
+      if (!titleList) return;
+      const currentBrand = (document.getElementById("formBrand")?.value || "").trim().toLowerCase();
+
+      let matchedTitles = [];
+      if (currentBrand) {
+        matchedTitles = smartHistory.titles.filter(x => x.brand.toLowerCase() === currentBrand).map(x => x.title);
+      }
+      
+      smartHistory.titles.forEach(x => {
+        if (!matchedTitles.includes(x.title)) matchedTitles.push(x.title);
+      });
+
+      titleList.innerHTML = matchedTitles.map(t => `<option value="${t}"></option>`).join("");
+    };
 
     let currentLang = "ar";
     let activeCategory = "all";
@@ -1193,67 +1269,71 @@
         const descStr = getLocalized(p.desc);
 
         return `
-          <div class="bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-3xl overflow-hidden flex flex-col transition duration-300 hover:shadow-2xl">
-            <!-- Image Area -->
-            <div class="relative h-56 bg-slate-950 overflow-hidden cursor-pointer" onclick="openProductDetail(${p.id})">
+          <div class="bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-2xl overflow-hidden flex flex-col transition duration-300 hover:shadow-2xl h-full">
+            <!-- Fixed Image Height Area -->
+            <div class="relative h-36 sm:h-40 bg-slate-950 overflow-hidden cursor-pointer shrink-0" onclick="openProductDetail(${p.id})">
               <img src="${p.img}" alt="${titleStr}" class="w-full h-full object-cover object-center transition duration-500 hover:scale-105 ${!isAvailable ? 'grayscale opacity-50' : ''}" />
               
               <!-- Offer Badge -->
               ${hasOffer ? `
-                <span class="absolute top-3 right-3 bg-rose-600 text-white text-[10px] font-black px-2.5 py-1 rounded-xl shadow-lg flex items-center gap-1">
-                  <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.316.492-.633 1.1-.96 1.764-.67 1.353-1.442 2.87-2.383 4.218-.946 1.353-2.023 2.518-3.076 3.498a1 1 0 00.67 1.722h.008a7.002 7.002 0 0013.255-3.327c0-2.316-1.127-4.223-2.34-5.698a19.78 19.78 0 00-2.902-2.672zM10 16a4 4 0 100-8 4 4 0 000 8z" clip-rule="evenodd"/></svg>
+                <span class="absolute top-2 right-2 bg-rose-600 text-white text-[9px] font-black px-2 py-0.5 rounded-lg shadow-lg flex items-center gap-1">
                   ${t.offerBadge}
                 </span>
               ` : ''}
 
               <!-- Stock Availability Badge -->
-              <span class="absolute top-3 left-3 text-[10px] font-black px-2.5 py-1 rounded-xl ${isAvailable ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40' : 'bg-rose-500/20 text-rose-400 border border-rose-500/40'}">
+              <span class="absolute top-2 left-2 text-[9px] font-black px-2 py-0.5 rounded-lg ${isAvailable ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40' : 'bg-rose-500/20 text-rose-400 border border-rose-500/40'}">
                 ${isAvailable ? t.inStock : t.outOfStock}
               </span>
 
               <!-- Brand Pill -->
-              <span class="absolute bottom-3 right-3 bg-slate-950/90 backdrop-blur-md text-amber-400 text-xs font-black px-2.5 py-0.5 rounded-lg border border-slate-800">
+              <span class="absolute bottom-2 right-2 bg-slate-950/90 backdrop-blur-md text-amber-400 text-[10px] font-black px-2 py-0.5 rounded-md border border-slate-800">
                 ${p.brand}
               </span>
             </div>
 
-            <!-- Content Details -->
-            <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+            <!-- Content Area With Identical Fixed Heights -->
+            <div class="p-3 sm:p-3.5 flex-1 flex flex-col justify-between">
               <div>
-                <div class="flex justify-between items-center text-[11px] text-slate-400 font-mono mb-1">
-                  <span>${t.ref} ${p.ref}</span>
-                  <span class="bg-slate-950 px-2 py-0.5 rounded-md text-slate-300 font-bold border border-slate-800">${getConditionText(p.condition)}</span>
+                <div class="flex justify-between items-center text-[10px] text-slate-400 font-mono mb-1">
+                  <span class="truncate max-w-[55%]" title="${p.ref}">${t.ref} ${p.ref}</span>
+                  <span class="bg-slate-950 px-1.5 py-0.5 rounded text-slate-300 font-bold border border-slate-800 text-[9px] shrink-0">${getConditionText(p.condition)}</span>
                 </div>
-                <h3 onclick="openProductDetail(${p.id})" class="font-bold text-white text-sm hover:text-amber-400 transition cursor-pointer leading-relaxed">${titleStr}</h3>
-                <p class="text-xs text-slate-400 mt-1 line-clamp-2">${descStr}</p>
+                <!-- Title clamped to exactly 2 lines with fixed height for 100% uniformity -->
+                <h3 onclick="openProductDetail(${p.id})" class="font-bold text-white text-xs hover:text-amber-400 transition cursor-pointer leading-snug line-clamp-2 h-8" title="${titleStr}">
+                  ${titleStr}
+                </h3>
               </div>
 
-              <!-- Price Row -->
-              <div class="pt-3 border-t border-slate-800 flex justify-between items-end">
-                <div>
-                  ${hasOffer ? `<span class="block text-xs text-slate-500 line-through font-mono">${p.price.toLocaleString()} ${t.currency}</span>` : ''}
-                  <span class="text-lg font-black text-amber-400 font-mono">${effectivePrice.toLocaleString()} <span class="text-xs">${t.currency}</span></span>
+              <!-- Price & Actions Fixed at Bottom -->
+              <div class="mt-3 pt-2.5 border-t border-slate-800/80 flex flex-col gap-2">
+                <div class="flex items-baseline justify-between">
+                  <span class="text-sm sm:text-base font-black text-amber-400 font-mono leading-none">
+                    ${effectivePrice.toLocaleString()} <span class="text-[10px] font-bold">${t.currency}</span>
+                  </span>
+                  ${hasOffer ? `<span class="text-[10px] text-slate-500 line-through font-mono leading-none">${p.price.toLocaleString()}</span>` : ''}
                 </div>
-              </div>
 
-              <!-- Actions -->
-              <div class="grid grid-cols-2 gap-2 pt-1">
-                <button 
-                  type="button"
-                  onclick="addToCart(${p.id})" 
-                  class="py-2.5 px-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 transition active:scale-95 cursor-pointer shadow-md"
-                >
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-                  <span>${t.addToCart}</span>
-                </button>
-                <button 
-                  type="button"
-                  onclick="buyInstant(${p.id})" 
-                  class="py-2.5 px-3 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-xl text-xs flex items-center justify-center gap-1.5 transition active:scale-95 cursor-pointer shadow-md"
-                >
-                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/></svg>
-                  <span>${t.buyNow}</span>
-                </button>
+                <div class="grid grid-cols-2 gap-1.5">
+                  <button 
+                    type="button" 
+                    onclick="addToCart(${p.id})" 
+                    class="py-2 px-1.5 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-lg text-[10px] sm:text-xs flex items-center justify-center gap-1 transition active:scale-95 cursor-pointer shadow"
+                    title="${t.addToCart}"
+                  >
+                    <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                    <span class="truncate">${t.addToCart}</span>
+                  </button>
+                  <button 
+                    type="button" 
+                    onclick="buyInstant(${p.id})" 
+                    class="py-2 px-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-lg text-[10px] sm:text-xs flex items-center justify-center gap-1 transition active:scale-95 cursor-pointer shadow"
+                    title="${t.buyNow}"
+                  >
+                    <svg class="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/></svg>
+                    <span class="truncate">${t.buyNow}</span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -1413,6 +1493,7 @@
         document.getElementById("adminLock")?.classList.add("hidden");
         document.getElementById("adminContent")?.classList.remove("hidden");
         renderAdminCategoryOptions();
+        renderAdminAutocompletes();
         renderAdminTable();
       } else {
         showToast(i18nData[currentLang].invalidPassMsg, "error");
@@ -1454,7 +1535,6 @@
       reader.onload = function(e) {
         const img = new Image();
         img.onload = function() {
-          // Compress & scale to prevent exceeding browser storage limit
           const maxDim = 800;
           let width = img.width;
           let height = img.height;
@@ -1512,14 +1592,19 @@
         return;
       }
       
+      const brandVal = document.getElementById("formBrand").value;
+      const titleVal = document.getElementById("formTitle").value;
+      const refVal = document.getElementById("formRef").value;
+      const countryVal = document.getElementById("formCountry").value;
+
       const newProd = {
         id: editId ? parseInt(editId) : Date.now(),
-        brand: document.getElementById("formBrand").value,
-        title: document.getElementById("formTitle").value,
-        ref: document.getElementById("formRef").value,
+        brand: brandVal,
+        title: titleVal,
+        ref: refVal,
         category: document.getElementById("formCategory").value,
         year: parseInt(document.getElementById("formYear").value),
-        country: document.getElementById("formCountry").value,
+        country: countryVal,
         condition: document.getElementById("formCondition").value,
         stock: parseInt(document.getElementById("formStock").value),
         price: parseFloat(document.getElementById("formPrice").value),
@@ -1534,6 +1619,8 @@
       } else {
         products.unshift(newProd);
       }
+
+      saveSmartHistory(brandVal, titleVal, refVal, countryVal);
 
       syncState();
       resetAdminForm();
@@ -1557,7 +1644,6 @@
       document.getElementById("formPrice").value = p.price;
       document.getElementById("formOfferPrice").value = p.offerPrice || "";
       
-      // Load existing image into preview
       document.getElementById("formImageBase64").value = p.img;
       const previewImg = document.getElementById("imagePreview");
       const previewWrapper = document.getElementById("imagePreviewWrapper");
@@ -1567,6 +1653,7 @@
       }
 
       document.getElementById("formDesc").value = getLocalized(p.desc);
+      updateTitleSuggestions();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
@@ -1590,6 +1677,7 @@
       document.getElementById("formOfferPrice").value = "";
       clearUploadedImage();
       document.getElementById("formDesc").value = "";
+      updateTitleSuggestions();
     };
 
     function renderCategoriesDrawer() {
@@ -1640,19 +1728,16 @@
       document.documentElement.lang = lang;
       document.documentElement.dir = t.dir;
 
-      /* Sync selector value if changed programmatically */
       const langSelect = document.getElementById("langSelect");
       if (langSelect && langSelect.value !== lang) {
         langSelect.value = lang;
       }
 
-      /* Update brands marquee direction */
       const brandsTrack = document.getElementById("brandsTrack");
       if (brandsTrack) {
         brandsTrack.className = (t.dir === "rtl" ? "brands-track-rtl" : "brands-track-ltr") + " items-center gap-4 cursor-pointer";
       }
 
-      /* Update Categories Drawer placement */
       const drawer = document.getElementById("categoriesDrawer");
       if (drawer) {
         drawer.style.right = t.dir === "rtl" ? "0" : "auto";
@@ -1660,19 +1745,16 @@
         drawer.style.transform = t.dir === "rtl" ? "translateX(100%)" : "translateX(-100%)";
       }
 
-      /* Update all elements tagged with data-i18n */
       document.querySelectorAll("[data-i18n]").forEach(el => {
         const key = el.getAttribute("data-i18n");
         if (t[key]) el.textContent = t[key];
       });
 
-      /* Update all inputs tagged with data-i18n-placeholder */
       document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
         const key = el.getAttribute("data-i18n-placeholder");
         if (t[key]) el.placeholder = t[key];
       });
 
-      /* Explicitly guarantee price and search placeholders */
       const minPriceInput = document.getElementById("minPriceInput");
       if (minPriceInput) minPriceInput.placeholder = t.minPricePlaceholder;
 
