@@ -455,7 +455,6 @@
         </div>
       </div>
 
-      <!-- Active Filter Badge & Counter -->
       <div class="flex items-center justify-between mb-2.5 px-1">
         <div class="flex items-center gap-2">
           <span class="text-xs font-bold text-slate-400" id="currentCategoryBadge">جميع الأقسام</span>
@@ -466,7 +465,6 @@
         </button>
       </div>
 
-      <!-- Compact Uniform Products Grid -->
       <div id="productsGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2.5 sm:gap-3"></div>
     </main>
   </div>
@@ -708,7 +706,6 @@
         sortPriceDesc: "السعر: من الأعلى للأقل",
         allCategories: "جميع الأقسام",
         resetFiltersBtn: "إعادة ضبط",
-        inStock: "متوفر بالمستودع",
         outOfStock: "غير متوفر بالمستودع",
         offerBadge: "تخفيض / OFFRE",
         newBadge: "جديد 🔥",
@@ -787,7 +784,6 @@
         sortPriceDesc: "Prix décroissant",
         allCategories: "Tous les rayons",
         resetFiltersBtn: "Réinitialiser",
-        inStock: "En stock",
         outOfStock: "Rupture de stock",
         offerBadge: "PROMO / OFFRE",
         newBadge: "NOUVEAU 🔥",
@@ -866,7 +862,6 @@
         sortPriceDesc: "Price: High to Low",
         allCategories: "All Categories",
         resetFiltersBtn: "Reset Filters",
-        inStock: "In Stock",
         outOfStock: "Out of Stock",
         offerBadge: "SPECIAL OFFER",
         newBadge: "NEW 🔥",
@@ -1355,10 +1350,12 @@
                 </span>
               ` : ''}
 
-              <!-- Stock Availability Badge -->
-              <span class="absolute top-1.5 left-1.5 text-[9px] font-black px-1.5 py-0.5 rounded ${isAvailable ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40' : 'bg-rose-500/20 text-rose-400 border border-rose-500/40'}">
-                ${isAvailable ? t.inStock : t.outOfStock}
-              </span>
+              <!-- Stock Availability Badge (Hidden when in stock, visible only when out of stock) -->
+              ${!isAvailable ? `
+                <span class="absolute top-1.5 left-1.5 text-[9px] font-black px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-400 border border-rose-500/40">
+                  ${t.outOfStock}
+                </span>
+              ` : ''}
 
               <!-- Brand Pill -->
               <span class="absolute bottom-1.5 right-1.5 bg-slate-950/90 backdrop-blur-md text-amber-400 text-[9px] font-black px-1.5 py-0.5 rounded border border-slate-800">
@@ -1530,7 +1527,7 @@
               <div><span class="text-slate-400">${t.year}</span> <span class="font-bold text-white">${p.year}</span></div>
               <div><span class="text-slate-400">${t.country}</span> <span class="font-bold text-white">${getLocalized(p.country)}</span></div>
               <div><span class="text-slate-400">${t.condition}</span> <span class="font-bold text-amber-400">${getConditionText(p.condition)}</span></div>
-              <div><span class="text-slate-400">${t.stockLabel}</span> <span class="font-bold ${isAvailable ? 'text-emerald-400' : 'text-rose-400'}">${isAvailable ? t.inStock : t.outOfStock}</span></div>
+              <div><span class="text-slate-400">${t.stockLabel}</span> <span class="font-bold ${isAvailable ? 'text-emerald-400' : 'text-rose-400'}">${isAvailable ? '' : t.outOfStock}</span></div>
             </div>
 
             <p class="text-xs text-slate-300 leading-relaxed">${getLocalized(p.desc)}</p>
