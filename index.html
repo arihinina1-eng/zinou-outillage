@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Zinou Outillage | Matériel Industriel & Équipements Professionnels</title>
   
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   
   <!-- Google Cairo Font -->
@@ -135,71 +134,73 @@
     </div>
   </header>
 
-  <section class="relative bg-slate-950/95 border-b border-slate-800/80 py-2.5 overflow-hidden select-none shadow-inner">
-    <div class="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-slate-950 to-transparent z-10 pointer-events-none"></div>
-    <div class="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-slate-950 to-transparent z-10 pointer-events-none"></div>
+  <section class="relative bg-slate-950/95 border-b border-slate-800/80 py-3.5 overflow-hidden select-none shadow-inner">
+    <div class="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-slate-950 to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-slate-950 to-transparent z-10 pointer-events-none"></div>
 
     <div class="overflow-hidden">
-      <div id="brandsTrack" class="brands-track-rtl items-center gap-3 cursor-pointer">
-        <!-- Set 1 -->
-        <button type="button" onclick="filterByBrand('Black+Decker')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/BlackplusDecker.png" alt="Black+Decker" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Bosch')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Bosch.png" alt="Bosch" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('DeWalt')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/DeWalt.png" alt="DeWalt" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Facom')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Facom.png" alt="Facom" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Festo')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Festo.png" alt="Festo" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Fluke')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Fluke.png" alt="Fluke" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('HiKOKI')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/HiKOKI.png" alt="HiKOKI" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Hilti')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Hilti.png" alt="Hilti" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Jokari')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Jokari.png" alt="Jokari" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Karcher')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Karcher.png" alt="Karcher" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Knipex')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Knipex.png" alt="Knipex" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Makita')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Makita.png" alt="Makita" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Metabo')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Metabo.png" alt="Metabo" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Milwaukee')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Milwaukee.png" alt="Milwaukee" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Parkside')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Parkside.png" alt="Parkside" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('REMS')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/REMS.png" alt="REMS" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Ryobi')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Ryobi.png" alt="Ryobi" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Stanley')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Stanley.png" alt="Stanley" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Stihl')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Stihl.png" alt="Stihl" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Virax')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Virax.png" alt="Virax" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Wera')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Wera.png" alt="Wera" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Wiha')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Wiha.png" alt="Wiha" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Wurth')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Wurth.png" alt="Wurth" class="h-6 w-auto object-contain" /></button>
+      <div id="brandsTrack" class="brands-track-rtl items-center gap-5 cursor-pointer">
+        <!-- Set 1 (Enlarged Logos: h-10 to h-12) -->
+        <button type="button" onclick="filterByBrand('Black+Decker')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/BlackplusDecker.png" alt="Black+Decker" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Bosch')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Bosch.png" alt="Bosch" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('DeWalt')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/DeWalt.png" alt="DeWalt" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Facom')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Facom.png" alt="Facom" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Festo')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Festo.png" alt="Festo" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Fluke')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Fluke.png" alt="Fluke" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('HiKOKI')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/HiKOKI.png" alt="HiKOKI" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Hilti')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Hilti.png" alt="Hilti" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Jokari')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Jokari.png" alt="Jokari" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Karcher')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Karcher.png" alt="Karcher" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Knipex')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Knipex.png" alt="Knipex" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Makita')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Makita.png" alt="Makita" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Metabo')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Metabo.png" alt="Metabo" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Milwaukee')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Milwaukee.png" alt="Milwaukee" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Parkside')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Parkside.png" alt="Parkside" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('REMS')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/REMS.png" alt="REMS" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Ryobi')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Ryobi.png" alt="Ryobi" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Stanley')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Stanley.png" alt="Stanley" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Stihl')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Stihl.png" alt="Stihl" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Virax')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Virax.png" alt="Virax" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Wera')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Wera.png" alt="Wera" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Wiha')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Wiha.png" alt="Wiha" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Wurth')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Wurth.png" alt="Wurth" class="h-9 w-auto object-contain" /></button>
 
         <!-- Set 2 Loop for Infinite Marquee -->
-        <button type="button" onclick="filterByBrand('Black+Decker')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/BlackplusDecker.png" alt="Black+Decker" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Bosch')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Bosch.png" alt="Bosch" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('DeWalt')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/DeWalt.png" alt="DeWalt" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Facom')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Facom.png" alt="Facom" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Festo')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Festo.png" alt="Festo" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Fluke')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Fluke.png" alt="Fluke" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('HiKOKI')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/HiKOKI.png" alt="HiKOKI" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Hilti')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Hilti.png" alt="Hilti" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Jokari')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Jokari.png" alt="Jokari" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Karcher')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Karcher.png" alt="Karcher" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Knipex')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Knipex.png" alt="Knipex" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Makita')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Makita.png" alt="Makita" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Metabo')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Metabo.png" alt="Metabo" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Milwaukee')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Milwaukee.png" alt="Milwaukee" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Parkside')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Parkside.png" alt="Parkside" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('REMS')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/REMS.png" alt="REMS" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Ryobi')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Ryobi.png" alt="Ryobi" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Stanley')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Stanley.png" alt="Stanley" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Stihl')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Stihl.png" alt="Stihl" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Virax')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Virax.png" alt="Virax" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Wera')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Wera.png" alt="Wera" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Wiha')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Wiha.png" alt="Wiha" class="h-6 w-auto object-contain" /></button>
-        <button type="button" onclick="filterByBrand('Wurth')" class="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Wurth.png" alt="Wurth" class="h-6 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Black+Decker')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/BlackplusDecker.png" alt="Black+Decker" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Bosch')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Bosch.png" alt="Bosch" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('DeWalt')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/DeWalt.png" alt="DeWalt" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Facom')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Facom.png" alt="Facom" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Festo')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Festo.png" alt="Festo" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Fluke')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Fluke.png" alt="Fluke" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('HiKOKI')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/HiKOKI.png" alt="HiKOKI" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Hilti')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Hilti.png" alt="Hilti" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Jokari')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Jokari.png" alt="Jokari" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Karcher')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Karcher.png" alt="Karcher" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Knipex')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Knipex.png" alt="Knipex" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Makita')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Makita.png" alt="Makita" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Metabo')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Metabo.png" alt="Metabo" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Milwaukee')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Milwaukee.png" alt="Milwaukee" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Parkside')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Parkside.png" alt="Parkside" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('REMS')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/REMS.png" alt="REMS" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Ryobi')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Ryobi.png" alt="Ryobi" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Stanley')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Stanley.png" alt="Stanley" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Stihl')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Stihl.png" alt="Stihl" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Virax')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Virax.png" alt="Virax" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Wera')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Wera.png" alt="Wera" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Wiha')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Wiha.png" alt="Wiha" class="h-9 w-auto object-contain" /></button>
+        <button type="button" onclick="filterByBrand('Wurth')" class="h-12 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition flex items-center justify-center shrink-0 shadow"><img src="logos_23_marques/Wurth.png" alt="Wurth" class="h-9 w-auto object-contain" /></button>
       </div>
     </div>
   </section>
 
+  <!-- Categories Slide Drawer Backdrop -->
   <div 
     id="drawerBackdrop" 
     onclick="toggleCategoriesDrawer()" 
     class="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 hidden transition-opacity duration-300"
   ></div>
 
+  <!-- Off-canvas Slide Drawer -->
   <aside 
     id="categoriesDrawer" 
     style="transform: translateX(100%);" 
@@ -223,6 +224,7 @@
       </div>
       <p class="text-xs text-slate-400 mb-3" data-i18n="drawerHint">اختر القسم لعرض السلع الخاصة به:</p>
       
+      <!-- Drawer Categories List -->
       <div id="categoriesDrawerContainer" class="space-y-1.5 overflow-y-auto max-h-[70vh] pr-1"></div>
     </div>
 
@@ -238,9 +240,12 @@
     </div>
   </aside>
 
+  <!-- Main Store Layout -->
   <div class="max-w-7xl mx-auto px-2.5 sm:px-4 py-3 sm:py-5 flex-1 w-full flex flex-col gap-3">
+    
     <main class="w-full">
-      <!-- Search Bar -->
+      
+      <!-- Prominent Search Bar -->
       <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-2.5 mb-3 shadow-xl">
         <div class="relative w-full">
           <input 
@@ -266,9 +271,11 @@
         </div>
       </div>
 
-      <!-- Search Filters Bar -->
+      <!-- Search Filters Bar (Appears ONLY when user searches) -->
       <div id="searchFilterBox" class="hidden bg-slate-900 border border-amber-500/40 rounded-2xl p-3 mb-4 shadow-xl transition-all duration-300">
         <div class="flex flex-wrap items-center justify-between gap-3 text-xs font-bold">
+          
+          <!-- Condition Options -->
           <div class="flex items-center gap-2 sm:gap-3">
             <span class="text-amber-400 font-bold" data-i18n="condLabel">حالة العتاد:</span>
             <label class="flex items-center gap-1 cursor-pointer text-slate-300 hover:text-white">
@@ -289,6 +296,7 @@
             </label>
           </div>
 
+          <!-- Price Range Inputs -->
           <div class="flex items-center gap-1.5">
             <span class="text-amber-400" data-i18n="priceRangeLabel">السعر:</span>
             <input 
@@ -312,6 +320,7 @@
             />
           </div>
 
+          <!-- Sort Dropdown -->
           <div class="flex items-center gap-1.5">
             <span class="text-amber-400" data-i18n="sortLabel">الترتيب:</span>
             <select id="sortSelect" onchange="applyFilters()" class="bg-slate-950 border border-slate-700 rounded-lg px-2 py-1 text-white outline-none focus:border-amber-500 cursor-pointer text-xs">
@@ -339,6 +348,7 @@
     </main>
   </div>
 
+  <!-- Product Details Modal -->
   <div id="productDetailModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-2xl w-full p-6 relative max-h-[90vh] overflow-y-auto shadow-2xl">
       <button 
@@ -354,6 +364,7 @@
     </div>
   </div>
 
+  <!-- Shopping Cart Modal -->
   <div id="cartModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 relative shadow-2xl">
       <button 
@@ -387,6 +398,7 @@
     </div>
   </div>
 
+  <!-- Checkout Modal -->
   <div id="checkoutModal" class="fixed inset-0 bg-black/85 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-6 relative shadow-2xl">
       <button 
@@ -419,6 +431,7 @@
     </div>
   </div>
 
+  <!-- Admin Modal -->
   <div id="adminModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
     <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-3xl w-full p-6 relative max-h-[92vh] overflow-y-auto shadow-2xl">
       <button 
@@ -434,6 +447,7 @@
         <span data-i18n="adminPanelTitle">لوحة تحكم إدارة السلع والمخزون</span>
       </h3>
 
+      <!-- Password Lock Section -->
       <div id="adminLock" class="text-center py-8 space-y-3">
         <p class="text-xs font-bold text-slate-400" data-i18n="adminPassHint">أدخل رمز الدخول السري للإدارة (الافتراضي: 1234):</p>
         <div class="flex justify-center gap-2">
@@ -442,6 +456,7 @@
         </div>
       </div>
 
+      <!-- Product Form -->
       <div id="adminContent" class="hidden space-y-5">
         <form onsubmit="saveProduct(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-bold">
           <input type="hidden" id="editProductId" value="">
@@ -506,6 +521,7 @@
                 <input id="formImageFile" type="file" accept="image/*" class="hidden" onchange="handleDeviceImageUpload(event)">
               </label>
               
+              <!-- Image Preview Container -->
               <div id="imagePreviewWrapper" class="relative w-24 h-24 rounded-2xl overflow-hidden bg-slate-950 border border-slate-700 shrink-0 hidden">
                 <img id="imagePreview" src="" class="w-full h-full object-cover">
                 <button type="button" onclick="clearUploadedImage()" class="absolute top-1 right-1 bg-rose-600/90 text-white rounded-full p-1 hover:bg-rose-500 cursor-pointer shadow-md" title="حذف">
@@ -513,6 +529,7 @@
                 </button>
               </div>
             </div>
+            <!-- Hidden input to hold the processed image base64 -->
             <input type="hidden" id="formImageBase64" value="">
           </div>
           <div class="sm:col-span-2">
@@ -526,6 +543,7 @@
           </div>
         </form>
 
+        <!-- Current Products Table -->
         <div class="pt-4 border-t border-slate-800">
           <h4 class="font-black text-xs text-white mb-2" data-i18n="warehouseListTitle">قائمة السلع بالمستودع:</h4>
           <div class="overflow-x-auto">
@@ -547,6 +565,7 @@
   </div>
 
   <script>
+    /* Complete Multilingual Dictionary (ar, fr, en) */
     const i18nData = {
       ar: {
         dir: "rtl",
@@ -778,6 +797,7 @@
       }
     };
 
+    /* Fully Multilingual Categories */
     const categoriesList = [
       { id: "workwear", name: { ar: "ملابس وأحذية أمان للعمل", fr: "Vêtements & Équipements de travail", en: "Workwear & Safety Gear" } },
       { id: "electricity", name: { ar: "كهرباء وميلتيمتر", fr: "Électricité & Multimètres", en: "Electrical & Multimeters" } },
@@ -789,6 +809,7 @@
       { id: "motors", name: { ar: "محركات كهربائية ومولدات", fr: "Moteurs Électriques & Groupes", en: "Electric Motors & Generators" } }
     ];
 
+    /* Fully Multilingual Initial Products */
     const defaultInitialProducts = [
       {
         id: 1,
@@ -930,6 +951,7 @@
       }
     ];
 
+    /* --- Permanent Smart Autocomplete Memory Store --- */
     const defaultSmartHistory = {
       brands: ["Hilti", "Milwaukee", "Makita", "DeWalt", "Bosch", "Fluke", "Sony", "Xiaomi", "Festool", "Facom", "Knipex", "Stanley", "Metabo", "Parkside", "REMS", "Ryobi", "Stihl", "Virax"],
       titles: [
@@ -1022,6 +1044,7 @@
       if (badge) badge.innerText = cart.length;
     }
 
+    /* Helper to get localized string from object or fallback string */
     function getLocalized(field, lang = currentLang) {
       if (!field) return "";
       if (typeof field === "object") {
@@ -1030,6 +1053,7 @@
       return field;
     }
 
+    /* Normalize condition text */
     function getConditionText(condKey, lang = currentLang) {
       const t = i18nData[lang];
       if (condKey === "new" || condKey === "جديد") return t.condNew;
@@ -1038,11 +1062,13 @@
       return condKey;
     }
 
+    /* Modal controller */
     window.toggleModal = function(id) {
       const el = document.getElementById(id);
       if (el) el.classList.toggle("hidden");
     };
 
+    /* Off-canvas categories drawer */
     window.toggleCategoriesDrawer = function() {
       const drawer = document.getElementById("categoriesDrawer");
       const backdrop = document.getElementById("drawerBackdrop");
@@ -1060,6 +1086,7 @@
       }
     };
 
+    /* Comprehensive Reset */
     window.resetAllFilters = function() {
       const searchInput = document.getElementById("searchInput");
       if (searchInput) searchInput.value = "";
@@ -1090,6 +1117,7 @@
       showToast(i18nData[currentLang].filtersResetMsg, "info");
     };
 
+    /* Search input listener */
     window.handleSearchInput = function() {
       const input = document.getElementById("searchInput");
       const filterBox = document.getElementById("searchFilterBox");
@@ -1156,6 +1184,7 @@
       applyFilters();
     };
 
+    /* Filter Engine */
     window.applyFilters = function() {
       const q = (document.getElementById("searchInput")?.value || "").trim().toLowerCase();
       const condEl = document.querySelector('input[name="filterCondition"]:checked');
@@ -1224,38 +1253,46 @@
         const hasOffer = p.offerPrice && p.offerPrice < p.price;
         const effectivePrice = hasOffer ? p.offerPrice : p.price;
         const titleStr = getLocalized(p.title);
+        const descStr = getLocalized(p.desc);
 
         return `
           <div class="bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-2xl overflow-hidden flex flex-col transition duration-300 hover:shadow-2xl h-full">
+            <!-- Compact Fixed Image Area -->
             <div class="relative h-28 sm:h-32 bg-slate-950 overflow-hidden cursor-pointer shrink-0" onclick="openProductDetail(${p.id})">
               <img src="${p.img}" alt="${titleStr}" class="w-full h-full object-cover object-center transition duration-500 hover:scale-105 ${!isAvailable ? 'grayscale opacity-50' : ''}" />
               
+              <!-- Offer Badge -->
               ${hasOffer ? `
                 <span class="absolute top-1.5 right-1.5 bg-rose-600 text-white text-[9px] font-black px-1.5 py-0.5 rounded shadow-md">
                   ${t.offerBadge}
                 </span>
               ` : ''}
 
+              <!-- Stock Availability Badge -->
               <span class="absolute top-1.5 left-1.5 text-[9px] font-black px-1.5 py-0.5 rounded ${isAvailable ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40' : 'bg-rose-500/20 text-rose-400 border border-rose-500/40'}">
                 ${isAvailable ? t.inStock : t.outOfStock}
               </span>
 
+              <!-- Brand Pill -->
               <span class="absolute bottom-1.5 right-1.5 bg-slate-950/90 backdrop-blur-md text-amber-400 text-[9px] font-black px-1.5 py-0.5 rounded border border-slate-800">
                 ${p.brand}
               </span>
             </div>
 
+            <!-- Compact Content Area With Identical Fixed Heights -->
             <div class="p-2 sm:p-2.5 flex-1 flex flex-col justify-between">
               <div>
                 <div class="flex justify-between items-center text-[9px] text-slate-400 font-mono mb-1">
                   <span class="truncate max-w-[55%]" title="${p.ref}">${t.ref} ${p.ref}</span>
                   <span class="bg-slate-950 px-1 py-0.5 rounded text-slate-300 font-bold border border-slate-800 text-[8px] shrink-0">${getConditionText(p.condition)}</span>
                 </div>
+                <!-- Title clamped to exactly 2 lines with fixed height for 100% uniformity -->
                 <h3 onclick="openProductDetail(${p.id})" class="font-bold text-white text-[11px] hover:text-amber-400 transition cursor-pointer leading-snug line-clamp-2 h-7" title="${titleStr}">
                   ${titleStr}
                 </h3>
               </div>
 
+              <!-- Price & Actions Fixed at Bottom -->
               <div class="mt-2 pt-2 border-t border-slate-800/80 flex flex-col gap-1.5">
                 <div class="flex items-baseline justify-between">
                   <span class="text-xs sm:text-sm font-black text-amber-400 font-mono leading-none">
@@ -1476,6 +1513,7 @@
       `).join("");
     }
 
+    /* Process and Compress Uploaded Image from User Device */
     window.handleDeviceImageUpload = function(event) {
       const file = event.target.files && event.target.files[0];
       if (!file) return;
@@ -1668,6 +1706,7 @@
       toggleCategoriesDrawer();
     };
 
+    /* Comprehensive Language Change Engine */
     window.changeLanguage = function(lang) {
       currentLang = lang;
       const t = i18nData[lang];
@@ -1683,7 +1722,7 @@
 
       const brandsTrack = document.getElementById("brandsTrack");
       if (brandsTrack) {
-        brandsTrack.className = (t.dir === "rtl" ? "brands-track-rtl" : "brands-track-ltr") + " items-center gap-4 cursor-pointer";
+        brandsTrack.className = (t.dir === "rtl" ? "brands-track-rtl" : "brands-track-ltr") + " items-center gap-5 cursor-pointer";
       }
 
       const drawer = document.getElementById("categoriesDrawer");
@@ -1737,6 +1776,7 @@
       }, 3000);
     }
 
+    /* Initial Execution: Strictly Arabic by default upon entry */
     window.addEventListener("DOMContentLoaded", () => {
       changeLanguage("ar");
       renderCategoriesDrawer();
