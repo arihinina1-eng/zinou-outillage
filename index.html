@@ -87,8 +87,21 @@
         </div>
       </div>
 
-      <!-- Actions: Language, Direct Call, Admin, Cart -->
+      <!-- Actions: Android App, Language, Direct Call, Admin, Cart -->
       <div class="flex items-center gap-2">
+        <!-- Android App Download Button -->
+        <button 
+          type="button" 
+          onclick="downloadAndroidApp()" 
+          class="px-3 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-black flex items-center gap-1.5 transition active:scale-95 shadow-md shadow-emerald-600/10 cursor-pointer"
+          title="Download Android App"
+        >
+          <svg class="w-4 h-4 text-white shrink-0" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.65 16.35C16.2 17.8 14.2 18.7 12 18.7s-4.2-.9-5.65-2.35C4.9 14.9 4 12.9 4 10.7V6c0-.55.45-1 1-1s1 .45 1 1v4.7c0 1.7.68 3.25 1.78 4.35C8.88 16.15 10.4 16.7 12 16.7s3.12-.55 4.22-1.65C17.32 13.95 18 12.4 18 10.7V6c0-.55.45-1 1-1s1 .45 1 1v4.7c0 2.2-.9 4.2-2.35 5.65zM6 12H5c-.55 0-1 .45-1 1v3c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-3c0-.55-.45-1-1-1zm13 0h-1c-.55 0-1 .45-1 1v3c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-3c0-.55-.45-1-1-1zm-4-8H9c-.55 0-1 .45-1 1s.45 1 1 1h6c.55 0 1-.45 1-1s-.45-1-1-1zM9.5 8C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8z"/>
+          </svg>
+          <span class="font-black tracking-wider">ANDROID</span>
+        </button>
+
         <!-- Language Switcher -->
         <select 
           id="langSelect" 
@@ -758,7 +771,8 @@
         invalidPassMsg: "رمز الدخول غير صحيح!",
         productSavedMsg: "تم حفظ السلعة ونشرها بنجاح!",
         productDeletedMsg: "تم حذف السلعة بنجاح!",
-        filtersResetMsg: "تمت إعادة ضبط جميع الفلاتر وعرض كل السلع!"
+        filtersResetMsg: "تمت إعادة ضبط جميع الفلاتر وعرض كل السلع!",
+        apkDownloading: "جاري تحميل تطبيق Android الخاص بالموقع..."
       },
       fr: {
         dir: "ltr",
@@ -836,7 +850,8 @@
         invalidPassMsg: "Code d'accès incorrect!",
         productSavedMsg: "Article enregistré avec succès!",
         productDeletedMsg: "Article supprimé avec succès!",
-        filtersResetMsg: "Filtres réinitialisés, tous les articles sont affichés!"
+        filtersResetMsg: "Filtres réinitialisés, tous les articles sont affichés!",
+        apkDownloading: "Téléchargement de l'application Android en cours..."
       },
       en: {
         dir: "ltr",
@@ -914,20 +929,21 @@
         invalidPassMsg: "Incorrect passcode!",
         productSavedMsg: "Product saved successfully!",
         productDeletedMsg: "Product removed successfully!",
-        filtersResetMsg: "Filters reset, showing all items!"
+        filtersResetMsg: "Filters reset, showing all items!",
+        apkDownloading: "Downloading Android App..."
       }
     };
 
     const categoriesList = [
-      { id: "tools", name: { ar: "أدوات", fr: "Outils", en: "Tools" } },
+      { id: "tools", name: { ar: "ادواة", fr: "Outils", en: "Tools" } },
       { id: "workwear", name: { ar: "ملابس وأحذية أمان للعمل", fr: "Vêtements & Équipements de travail", en: "Workwear & Safety Gear" } },
-      { id: "electricity", name: { ar: "كهرباء", fr: "Électricité", en: "Electrical" } },
-      { id: "plumbing", name: { ar: "سباكة", fr: "Plomberie", en: "Plumbing" } },
-      { id: "welding", name: { ar: "لحام", fr: "Soudure", en: "Welding" } },
-      { id: "leisure", name: { ar: "ترفيه", fr: "Loisirs", en: "Leisure" } },
-      { id: "construction", name: { ar: "هندسة و مقاولاتية", fr: "Ingénierie & BTP", en: "Construction & Engineering" } },
-      { id: "electronics", name: { ar: "إلكترونيات", fr: "Électronique", en: "Electronics" } },
-      { id: "motors", name: { ar: "محركات كهربائية ومولدات", fr: "Moteurs Électriques & Groupes", en: "Electric Motors & Generators" } },
+      { id: "electricity", name: { ar: "كهرباء وميلتيمتر = كهرباء", fr: "Électricité", en: "Electrical" } },
+      { id: "plumbing", name: { ar: "سباكة وتجهيزات مائية = سباكة-تكييف-ترصيص", fr: "Plomberie & Climatisation", en: "Plumbing & HVAC" } },
+      { id: "welding", name: { ar: "عتاد وماكينات لحام = لحام", fr: "Soudure", en: "Welding" } },
+      { id: "leisure", name: { ar: "ترفيه (دراجات، تروتينيت...)= ترفيه", fr: "Loisirs (Vélos, Trottinettes...)", en: "Leisure (Bikes, Scooters...)" } },
+      { id: "construction", name: { ar: "مقاولاتية (مناظير، مياه، حفر...)= هندسة و مقاولاتية", fr: "Ingénierie & BTP", en: "Construction & Engineering" } },
+      { id: "electronics", name: { ar: "إلكترونيات (هواتف، مكيفات، PS5...)= إلكترونيات", fr: "Électronique (Téléphones, PS5...)", en: "Electronics (Phones, PS5...)" } },
+      { id: "motors", name: { ar: "محركات كهربائية ومولدات", fr: "Moteurs Électriques & Groupes Électrogènes", en: "Electric Motors & Generators" } },
       { id: "decor", name: { ar: "بناء و ديكورات", fr: "Construction & Décoration", en: "Construction & Decor" } },
       { id: "sports", name: { ar: "رياضة", fr: "Sports", en: "Sports" } },
       { id: "bags", name: { ar: "حقائب و محافض", fr: "Caissier et Sac", en: "Bags & Luggage" } },
@@ -1141,6 +1157,20 @@
       return (Date.now() - createdAt) < oneWeekMillis;
     }
 
+    window.downloadAndroidApp = function() {
+      showToast(i18nData[currentLang].apkDownloading, "success");
+      const dummyContent = "Zinou Outillage Android App Placeholder";
+      const blob = new Blob([dummyContent], { type: "text/plain" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "ZinouOutillage.apk";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    };
+
     window.toggleModal = function(id) {
       const el = document.getElementById(id);
       if (el) el.classList.toggle("hidden");
@@ -1350,7 +1380,7 @@
                 </span>
               ` : ''}
 
-              <!-- Stock Availability Badge (Hidden when in stock, visible only when out of stock) -->
+              <!-- Out of Stock Badge Only -->
               ${!isAvailable ? `
                 <span class="absolute top-1.5 left-1.5 text-[9px] font-black px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-400 border border-rose-500/40">
                   ${t.outOfStock}
