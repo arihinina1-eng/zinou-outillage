@@ -898,6 +898,11 @@
       countries: ["ألمانيا", "الولايات المتحدة", "اليابان", "سويسرا", "إيطاليا", "فرنسا"]
     }));
 
+    // High quality standalone SVG data URIs for robust fallback demos
+    const svgHilti = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600'><rect width='600' height='600' fill='%230f172a'/><g transform='translate(100,150)'><path d='M30 120 L250 120 L280 180 L320 180 L300 120 L350 120 L380 160 L360 220 L100 220 Z' fill='%23dc2626'/><rect x='60' y='140' width='160' height='50' rx='8' fill='%23ffffff'/><circle cx='100' cy='165' r='18' fill='%231e293b'/><path d='M280 180 L350 280 L320 300 L260 200 Z' fill='%2394a3b8'/><rect x='110' y='220' width='40' height='100' rx='10' fill='%23334155'/></g><text x='300' y='460' fill='%23facc15' font-family='Arial, sans-serif' font-weight='bold' font-size='36' text-anchor='middle'>HILTI TE 70</text></svg>";
+    const svgBosch = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600'><rect width='600' height='600' fill='%230f172a'/><g transform='translate(100,150)'><path d='M40 100 L260 100 L280 160 L340 160 L310 100 L380 100 L400 140 L370 200 L80 200 Z' fill='%231e293b'/><rect x='100' y='120' width='120' height='50' rx='6' fill='%23ef4444'/><circle cx='140' cy='145' r='15' fill='%23ffffff'/><path d='M280 160 L340 260 L310 280 L250 180 Z' fill='%23e2e8f0'/><rect x='120' y='200' width='35' height='90' rx='8' fill='%23020617'/></g><text x='300' y='460' fill='%23facc15' font-family='Arial, sans-serif' font-weight='bold' font-size='36' text-anchor='middle'>BOSCH GBH 2-28</text></svg>";
+    const svgDewalt = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600'><rect width='600' height='600' fill='%230f172a'/><g transform='translate(100,150)'><path d='M50 110 L270 110 L290 170 L350 170 L330 110 L390 110 L410 150 L380 210 L90 210 Z' fill='%23eab308'/><rect x='90' y='130' width='140' height='50' rx='6' fill='%23111827'/><circle cx='130' cy='155' r='16' fill='%23eab308'/><path d='M290 170 L360 270 L330 290 L270 190 Z' fill='%231f2937'/><rect x='130' y='210' width='35' height='90' rx='8' fill='%23111827'/></g><text x='300' y='460' fill='%23facc15' font-family='Arial, sans-serif' font-weight='bold' font-size='36' text-anchor='middle'>DEWALT DCD996</text></svg>";
+
     let products = JSON.parse(localStorage.getItem("zinou_products_v3") || JSON.stringify([
       {
         id: 1710000001000,
@@ -912,7 +917,7 @@
         stock: 5,
         price: 185000,
         offerPrice: 169000,
-        images: ["https://placehold.co/600x600/0f172a/facc15?text=Hilti+TE70"],
+        images: [svgHilti],
         mainImageIndex: 0,
         desc: "أقوى مطرقة هدم للاستخدامات الشاقة في ورش البناء والمقاولات، نظام تقليل الاهتزازات AVR."
       },
@@ -929,7 +934,7 @@
         stock: 8,
         price: 68000,
         offerPrice: null,
-        images: ["https://placehold.co/600x600/0f172a/facc15?text=Bosch+GBH"],
+        images: [svgBosch],
         mainImageIndex: 0,
         desc: "مثقاب مطرقي SDS-plus بقدرة عالية وسرعة فائقة للثقب في الخرسانة والحديد."
       },
@@ -946,7 +951,7 @@
         stock: 3,
         price: 75000,
         offerPrice: 69500,
-        images: ["https://placehold.co/600x600/0f172a/facc15?text=DeWalt+DCD996"],
+        images: [svgDewalt],
         mainImageIndex: 0,
         desc: "مفك عزم ودريل صناعي مع بطاريتين ليثيوم وشاحن سريع."
       }
