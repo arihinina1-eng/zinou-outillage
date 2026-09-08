@@ -5,13 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Zinou Outillage | Matériel Industriel & Équipements Professionnels</title>
   
-  <!-- Favicon Yellow Letter Z -->
+  <!-- Favicon: Yellow Letter Z -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230f172a'/><text x='50' y='72' fill='%23facc15' font-family='Impact, Arial Black, sans-serif' font-weight='900' font-size='70' text-anchor='middle'>Z</text></svg>" />
 
-  <!-- Tailwind CSS CDN -->
+  <!-- Tailwind CSS & Google Fonts -->
   <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Google Cairo Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -61,7 +59,6 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-amber-500 selection:text-slate-950">
 
-  <!-- Toast Container -->
   <div id="toastContainer" class="fixed bottom-5 right-5 z-[100] flex flex-col gap-2 pointer-events-none"></div>
 
   <header class="bg-slate-900/95 backdrop-blur-md border-b border-slate-800 sticky top-0 z-40 shadow-2xl">
@@ -93,7 +90,7 @@
         <button 
           type="button" 
           onclick="downloadAndroidApp()" 
-          class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-black flex items-center gap-1.5 transition active:scale-95 shadow-lg shadow-emerald-600/20 cursor-pointer border border-emerald-500/50"
+          class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-black flex items-center gap-1.5 transition active:scale-95 shadow-lg shadow-emerald-600/20 cursor-pointer border border-emerald-500/50"
           title="Download Android APK"
         >
           <svg class="w-4 h-4 text-white shrink-0" viewBox="0 0 24 24" fill="currentColor">
@@ -116,7 +113,7 @@
         <!-- Direct Phone Call Button -->
         <a 
           href="tel:0555000000" 
-          class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 font-bold rounded-xl text-xs flex items-center gap-1.5 transition active:scale-95"
+          class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 font-bold rounded-xl text-xs flex items-center gap-1.5 transition active:scale-95"
         >
           <svg class="w-3.5 h-3.5 text-amber-500" fill="currentColor" viewBox="0 0 24 24">
             <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
@@ -157,7 +154,7 @@
 
     <div class="overflow-hidden">
       <div id="brandsTrack" class="brands-track-rtl items-center gap-3 cursor-pointer">
-        <!-- 23 Brands -->
+        <!-- 23 Brands with object-fill to completely fill container -->
         <button type="button" onclick="filterByBrand('Black+Decker')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/BlackplusDecker.png" alt="Black+Decker" class="w-full h-full object-fill" /></button>
         <button type="button" onclick="filterByBrand('Bosch')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Bosch.png" alt="Bosch" class="w-full h-full object-fill" /></button>
         <button type="button" onclick="filterByBrand('DeWalt')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/DeWalt.png" alt="DeWalt" class="w-full h-full object-fill" /></button>
@@ -894,9 +891,9 @@
     }));
 
     // Robust standalone SVG product illustrations as reliable fallbacks
-    const svgHilti = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600'><rect width='600' height='600' fill='%230f172a'/><g transform='translate(100,150)'><path d='M30 120 L250 120 L280 180 L320 180 L300 120 L350 120 L380 160 L360 220 L100 220 Z' fill='%23dc2626'/><rect x='60' y='140' width='160' height='50' rx='8' fill='%23ffffff'/><circle cx='100' cy='165' r='18' fill='%231e293b'/><path d='M280 180 L350 280 L320 300 L260 200 Z' fill='%2394a3b8'/><rect x='110' y='220' width='40' height='100' rx='10' fill='%23334155'/></g><text x='300' y='460' fill='%23facc15' font-family='Arial, sans-serif' font-weight='bold' font-size='36' text-anchor='middle'>HILTI TE 70</text></svg>";
-    const svgBosch = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600'><rect width='600' height='600' fill='%230f172a'/><g transform='translate(100,150)'><path d='M40 100 L260 100 L280 160 L340 160 L310 100 L380 100 L400 140 L370 200 L80 200 Z' fill='%231e293b'/><rect x='100' y='120' width='120' height='50' rx='6' fill='%23ef4444'/><circle cx='140' cy='145' r='15' fill='%23ffffff'/><path d='M280 160 L340 260 L310 280 L250 180 Z' fill='%23e2e8f0'/><rect x='120' y='200' width='35' height='90' rx='8' fill='%23020617'/></g><text x='300' y='460' fill='%23facc15' font-family='Arial, sans-serif' font-weight='bold' font-size='36' text-anchor='middle'>BOSCH GBH 2-28</text></svg>";
-    const svgDewalt = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600'><rect width='600' height='600' fill='%230f172a'/><g transform='translate(100,150)'><path d='M50 110 L270 110 L290 170 L350 170 L330 110 L390 110 L410 150 L380 210 L90 210 Z' fill='%23eab308'/><rect x='90' y='130' width='140' height='50' rx='6' fill='%23111827'/><circle cx='130' cy='155' r='16' fill='%23eab308'/><path d='M290 170 L360 270 L330 290 L270 190 Z' fill='%231f2937'/><rect x='130' y='210' width='35' height='90' rx='8' fill='%23111827'/></g><text x='300' y='460' fill='%23facc15' font-family='Arial, sans-serif' font-weight='bold' font-size='36' text-anchor='middle'>DEWALT DCD996</text></svg>";
+    const svgHilti = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600'><rect width='600' height='600' fill='%230f172a'/><g transform='translate(100,150)'><path d='M30 120 L250 120 L280 180 L320 180 L300 120 L350 120 L380 160 L360 220 L100 220 Z' fill='%23dc2626'/><rect x='60' y='140' width='160' height='50' rx='8' fill='%23ffffff'/><circle cx='100' cy='165' r='18' fill='%231e293b'/><path d='M280 180 L350 280 L320 300 L260 200 Z' fill='%2394a3b8'/><rect x='110' y='220' width='40' height='100' rx='10' fill='%23334155'/></g><text x='300' y='460' fill='%23facc15' font-family='Arial, sans-serif' font-weight='bold' font-size='36' text-anchor='middle'>HILTI TE70</text></svg>";
+    const svgBosch = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600'><rect width='600' height='600' fill='%230f172a'/><g transform='translate(100,150)'><path d='M40 100 L260 100 L280 160 L340 160 L310 100 L380 100 L400 140 L370 200 L80 200 Z' fill='%231e293b'/><rect x='100' y='120' width='120' height='50' rx='6' fill='%23ef4444'/><circle cx='140' cy='145' r='15' fill='%23ffffff'/><path d='M280 160 L340 260 L310 280 L250 180 Z' fill='%23e2e8f0'/><rect x='120' y='200' width='35' height='90' rx='8' fill='%23020617'/></g><text x='300' y='460' fill='%23facc15' font-family='Arial, sans-serif' font-weight='bold' font-size='36' text-anchor='middle'>Bosch GBH</text></svg>";
+    const svgDewalt = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600'><rect width='600' height='600' fill='%230f172a'/><g transform='translate(100,150)'><path d='M50 110 L270 110 L290 170 L350 170 L330 110 L390 110 L410 150 L380 210 L90 210 Z' fill='%23eab308'/><rect x='90' y='130' width='140' height='50' rx='6' fill='%23111827'/><circle cx='130' cy='155' r='16' fill='%23eab308'/><path d='M290 170 L360 270 L330 290 L270 190 Z' fill='%231f2937'/><rect x='130' y='210' width='35' height='90' rx='8' fill='%23111827'/></g><text x='300' y='460' fill='%23facc15' font-family='Arial, sans-serif' font-weight='bold' font-size='36' text-anchor='middle'>DeWalt DCD996</text></svg>";
 
     let products = JSON.parse(localStorage.getItem("zinou_products_v3") || JSON.stringify([
       {
