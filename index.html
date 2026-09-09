@@ -84,7 +84,7 @@
         </div>
       </div>
 
-      <!-- Actions: Android App, Language, Dynamic Contact/Inbox Button, Admin, Cart -->
+      <!-- Actions: Android App, Language, Dynamic Contact/Inbox Button, Admin Account, Cart -->
       <div class="flex items-center gap-2">
         <!-- Android App Download Button -->
         <button 
@@ -110,7 +110,7 @@
           <option value="en">🇬🇧 English</option>
         </select>
 
-        <!-- Dynamic Customer Contact vs Admin Inbox Button -->
+        <!-- Dynamic Customer Contact vs Dedicated Admin Inbox Button -->
         <div id="dynamicHeaderContactContainer"></div>
 
         <!-- Admin Account / Control Button -->
@@ -325,20 +325,6 @@
             />
           </div>
 
-          <!-- Sort Dropdown & Quick Add Product Button -->
-          <div class="flex items-center gap-2">
-            <div class="flex items-center gap-1.5">
-              <span class="text-amber-400" data-i18n="sortLabel">الترتيب:</span>
-              <select id="sortSelect" onchange="applyFilters()" class="bg-slate-950 border border-slate-700 rounded-lg px-2 py-1 text-white outline-none focus:border-amber-500 cursor-pointer text-xs">
-                <option value="newest" data-i18n="sortNewest">الأحدث إضافة</option>
-                <option value="priceAsc" data-i18n="sortPriceAsc">السعر: من الأقل للأعلى</option>
-                <option value="priceDesc" data-i18n="sortPriceDesc">السعر: من الأعلى للأقل</option>
-              </select>
-            </div>
-
-            <!-- Quick Add (+) Button for Admin -->
-            <button 
-              type="button" 
           <!-- Sort Dropdown -->
           <div class="flex items-center gap-1.5">
             <span class="text-amber-400" data-i18n="sortLabel">الترتيب:</span>
@@ -367,17 +353,7 @@
     </main>
   </div>
 
-  <!-- Floating Add Product Button (FAB) -->
-  <button 
-    type="button" 
-    onclick="openQuickAddProductModal()" 
-    class="fixed bottom-6 left-6 z-40 w-14 h-14 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-full shadow-2xl flex items-center justify-center transition active:scale-95 cursor-pointer border-2 border-slate-900 group"
-    title="إضافة سلعة جديدة"
-  >
-    <svg class="w-7 h-7 font-black group-hover:rotate-90 transition duration-300" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path>
-    </svg>
-  </button>
+  <div id="floatingAddContainer"></div>
 
   <div id="productDetailModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-2xl w-full p-6 relative max-h-[90vh] overflow-y-auto shadow-2xl">
@@ -536,9 +512,9 @@
     </div>
   </div>
 
-  <!-- Inbox Modal (Messages & Products Management) -->
+  <!-- Dedicated Admin Inbox Modal (Messages Only) -->
   <div id="inboxModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-4xl w-full p-6 relative max-h-[92vh] overflow-y-auto shadow-2xl">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-3xl w-full p-6 relative max-h-[92vh] overflow-y-auto shadow-2xl">
       <button 
         type="button" 
         onclick="toggleModal('inboxModal')" 
@@ -549,134 +525,118 @@
         </svg>
       </button>
 
-      <h3 class="text-base font-black text-amber-500 mb-4">
-        <span>لوحة تحكم إدارة السلع والمخزون والرسائل</span>
+      <h3 class="text-base font-black text-amber-500 mb-4 flex items-center gap-2">
+        <span>📥 صندوق رسائل واسترشادات الزبائن</span>
       </h3>
 
-      <div class="space-y-6">
-        <!-- Tabs for Products vs Inbox Messages -->
-        <div class="flex gap-2 border-b border-slate-800 pb-3">
-          <button type="button" onclick="switchAdminTab('products')" id="adminTabProductsBtn" class="px-4 py-2 bg-amber-500 text-slate-950 rounded-xl font-black text-xs transition cursor-pointer">إدارة السلع والمخزون</button>
-          <button type="button" onclick="switchAdminTab('inbox')" id="adminTabInboxBtn" class="relative px-4 py-2 bg-slate-800 text-slate-300 hover:text-white rounded-xl font-bold text-xs transition cursor-pointer">
-            صندوق رسائل الزبائن <span id="inboxTabBadge" class="hidden bg-rose-600 text-white text-[10px] font-black px-1.5 py-0.2 rounded-full ml-1">0</span>
+      <div class="space-y-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <input type="checkbox" id="selectAllMessagesCheckbox" onchange="toggleSelectAllMessages(this)" class="accent-amber-500">
+            <span class="text-xs font-bold text-slate-300">تحديد الكل</span>
+          </div>
+          <button type="button" onclick="deleteSelectedMessages()" class="px-3 py-1.5 bg-rose-600 hover:bg-rose-500 text-white rounded-xl text-xs font-black transition cursor-pointer">
+            🗑️ حذف المحدد
           </button>
         </div>
 
-        <!-- Tab 1: Products Management -->
-        <div id="adminSectionProducts" class="space-y-5">
-          <form onsubmit="saveProduct(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-bold">
-            <input type="hidden" id="editProductId" value="">
-            
-            <div>
-              <label class="block mb-1 text-slate-400" data-i18n="formBrandLabel">الماركة:</label>
-              <input required id="formBrand" list="brandSuggestionsList" type="text" oninput="updateTitleSuggestions()" placeholder="Hilti, Bosch, Milwaukee..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
-              <datalist id="brandSuggestionsList"></datalist>
-            </div>
-            <div>
-              <label class="block mb-1 text-slate-400" data-i18n="formTitleLabel">اسم العتاد / الآلة:</label>
-              <input required id="formTitle" list="titleSuggestionsList" type="text" placeholder="شينيور، فيسوز، مطرقة هدم..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
-              <datalist id="titleSuggestionsList"></datalist>
-            </div>
-            <div>
-              <label class="block mb-1 text-slate-400" data-i18n="formRefLabel">رقم الطراز (Référence):</label>
-              <input required id="formRef" list="refSuggestionsList" type="text" placeholder="TE 70, M18, DCD996..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
-              <datalist id="refSuggestionsList"></datalist>
-            </div>
-            <div>
-              <label class="block mb-1 text-slate-400" data-i18n="formCategoryLabel">الفئة:</label>
-              <select id="formCategory" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500 cursor-pointer"></select>
-            </div>
-            <div>
-              <label class="block mb-1 text-slate-400" data-i18n="formYearLabel">سنة الإنتاج:</label>
-              <input required id="formYear" type="number" value="2024" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
-            </div>
-            <div>
-              <label class="block mb-1 text-slate-400" data-i18n="formCountryLabel">بلد الصنع / المنشأ:</label>
-              <input required id="formCountry" list="countrySuggestionsList" type="text" placeholder="ألمانيا، أمريكا، اليابان..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
-              <datalist id="countrySuggestionsList"></datalist>
-            </div>
-            <div>
-              <label class="block mb-1 text-slate-400" data-i18n="formConditionLabel">الحالة:</label>
-              <select id="formCondition" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500 cursor-pointer">
-                <option value="new" data-i18n="condNew">جديد</option>
-                <option value="like_new" data-i18n="condLikeNew">جديد يشبه المستعمل</option>
-                <option value="used" data-i18n="condUsed">مستعمل</option>
-              </select>
-            </div>
-            <div>
-              <label class="block mb-1 text-slate-400" data-i18n="formStockLabel">الكمية المتوفرة:</label>
-              <input required id="formStock" type="number" min="0" value="1" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
-            </div>
-            <div>
-              <label class="block mb-1 text-slate-400" data-i18n="formPriceLabel">السعر الأصلي:</label>
-              <input required id="formPrice" type="number" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
-            </div>
-            <div>
-              <label class="block mb-1 text-amber-400" data-i18n="formOfferPriceLabel">سعر التخفيض (OFFRE):</label>
-              <input id="formOfferPrice" type="number" class="w-full bg-slate-950 border border-amber-500/50 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
-            </div>
-
-            <!-- Multi-Image Upload Section -->
-            <div class="sm:col-span-2">
-              <label class="block mb-1 text-slate-400" data-i18n="formImagesLabel">صور العتاد (رفع عدة صور، واختر الرئيسية):</label>
-              <label class="flex flex-col items-center justify-center border-2 border-dashed border-slate-700 hover:border-amber-500 rounded-2xl p-4 cursor-pointer bg-slate-950/60 transition group mb-3">
-                <svg class="w-7 h-7 text-slate-400 group-hover:text-amber-400 mb-1 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                </svg>
-                <span class="text-xs font-bold text-slate-300 group-hover:text-amber-400" data-i18n="uploadMultiplePrompt">اضغط لاختيار عدة صور دفعة واحدة</span>
-                <input id="formImagesInput" type="file" accept="image/*" multiple class="hidden" onchange="handleMultipleImagesUpload(event)">
-              </label>
-
-              <!-- Dynamic Image Gallery Preview with Main Image Selector -->
-              <div id="adminImagesPreviewGrid" class="grid grid-cols-2 sm:grid-cols-4 gap-3"></div>
-            </div>
-
-            <div class="sm:col-span-2">
-              <label class="block mb-1 text-slate-400" data-i18n="formDescLabel">مواصفات ونبذة تفصيلية:</label>
-              <textarea id="formDesc" rows="3" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500"></textarea>
-            </div>
-
-            <div class="sm:col-span-2 flex justify-end gap-3 pt-3 border-t border-slate-800">
-              <button type="button" onclick="resetAdminForm()" class="px-4 py-2 bg-slate-800 text-slate-300 rounded-xl font-bold cursor-pointer" data-i18n="cancelBtn">إلغاء</button>
-              <button type="submit" class="px-5 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black rounded-xl transition cursor-pointer" data-i18n="saveProductBtn">حفظ ونشر السلعة</button>
-            </div>
-          </form>
-
-          <!-- Current Products Table -->
-          <div class="pt-4 border-t border-slate-800">
-            <h4 class="font-black text-xs text-white mb-2" data-i18n="warehouseListTitle">قائمة السلع بالمستودع:</h4>
-            <div class="overflow-x-auto">
-              <table class="w-full text-start text-xs">
-                <thead class="bg-slate-950 text-slate-400 font-bold">
-                  <tr>
-                    <th class="p-2" data-i18n="tableProduct">السلعة</th>
-                    <th class="p-2" data-i18n="tablePrice">السعر</th>
-                    <th class="p-2" data-i18n="tableStock">المخزون</th>
-                    <th class="p-2 text-center" data-i18n="tableActions">إجراءات</th>
-                  </tr>
-                </thead>
-                <tbody id="adminProductsTable" class="divide-y divide-slate-800"></tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-
-        <!-- Tab 2: Customer Messages Inbox -->
-        <div id="adminSectionInbox" class="hidden space-y-4">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <input type="checkbox" id="selectAllMessagesCheckbox" onchange="toggleSelectAllMessages(this)" class="accent-amber-500">
-              <span class="text-xs font-bold text-slate-300">تحديد الكل</span>
-            </div>
-            <button type="button" onclick="deleteSelectedMessages()" class="px-3 py-1.5 bg-rose-600 hover:bg-rose-500 text-white rounded-xl text-xs font-black transition cursor-pointer">
-              🗑️ حذف المحدد
-            </button>
-          </div>
-
-          <div id="adminMessagesList" class="space-y-3 max-h-[60vh] overflow-y-auto"></div>
-        </div>
-
+        <div id="adminMessagesList" class="space-y-3 max-h-[65vh] overflow-y-auto"></div>
       </div>
+    </div>
+  </div>
+
+  <!-- Add / Edit Product Modal (Opened via Floating Button or Edit) -->
+  <div id="productFormModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-2xl w-full p-6 relative max-h-[92vh] overflow-y-auto shadow-2xl">
+      <button 
+        type="button" 
+        onclick="toggleModal('productFormModal')" 
+        class="absolute top-4 left-4 w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition cursor-pointer"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+
+      <h3 class="text-base font-black text-amber-500 mb-4">إدارة ونشر السلعة بالمستودع</h3>
+
+      <form onsubmit="saveProduct(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-bold">
+        <input type="hidden" id="editProductId" value="">
+        
+        <div>
+          <label class="block mb-1 text-slate-400" data-i18n="formBrandLabel">الماركة:</label>
+          <input required id="formBrand" list="brandSuggestionsList" type="text" oninput="updateTitleSuggestions()" placeholder="Hilti, Bosch, Milwaukee..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+          <datalist id="brandSuggestionsList"></datalist>
+        </div>
+        <div>
+          <label class="block mb-1 text-slate-400" data-i18n="formTitleLabel">اسم العتاد / الآلة:</label>
+          <input required id="formTitle" list="titleSuggestionsList" type="text" placeholder="شينيور، فيسوز، مطرقة هدم..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+          <datalist id="titleSuggestionsList"></datalist>
+        </div>
+        <div>
+          <label class="block mb-1 text-slate-400" data-i18n="formRefLabel">رقم الطراز (Référence):</label>
+          <input required id="formRef" list="refSuggestionsList" type="text" placeholder="TE 70, M18, DCD996..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+          <datalist id="refSuggestionsList"></datalist>
+        </div>
+        <div>
+          <label class="block mb-1 text-slate-400" data-i18n="formCategoryLabel">الفئة:</label>
+          <select id="formCategory" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500 cursor-pointer"></select>
+        </div>
+        <div>
+          <label class="block mb-1 text-slate-400" data-i18n="formYearLabel">سنة الإنتاج:</label>
+          <input required id="formYear" type="number" value="2024" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+        </div>
+        <div>
+          <label class="block mb-1 text-slate-400" data-i18n="formCountryLabel">بلد الصنع / المنشأ:</label>
+          <input required id="formCountry" list="countrySuggestionsList" type="text" placeholder="ألمانيا، أمريكا، اليابان..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+          <datalist id="countrySuggestionsList"></datalist>
+        </div>
+        <div>
+          <label class="block mb-1 text-slate-400" data-i18n="formConditionLabel">الحالة:</label>
+          <select id="formCondition" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500 cursor-pointer">
+            <option value="new" data-i18n="condNew">جديد</option>
+            <option value="like_new" data-i18n="condLikeNew">جديد يشبه المستعمل</option>
+            <option value="used" data-i18n="condUsed">مستعمل</option>
+          </select>
+        </div>
+        <div>
+          <label class="block mb-1 text-slate-400" data-i18n="formStockLabel">الكمية المتوفرة:</label>
+          <input required id="formStock" type="number" min="0" value="1" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+        </div>
+        <div>
+          <label class="block mb-1 text-slate-400" data-i18n="formPriceLabel">السعر الأصلي:</label>
+          <input required id="formPrice" type="number" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+        </div>
+        <div>
+          <label class="block mb-1 text-amber-400" data-i18n="formOfferPriceLabel">سعر التخفيض (OFFRE):</label>
+          <input id="formOfferPrice" type="number" class="w-full bg-slate-950 border border-amber-500/50 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+        </div>
+
+        <!-- Multi-Image Upload Section -->
+        <div class="sm:col-span-2">
+          <label class="block mb-1 text-slate-400" data-i18n="formImagesLabel">صور العتاد (رفع عدة صور، واختر الرئيسية):</label>
+          <label class="flex flex-col items-center justify-center border-2 border-dashed border-slate-700 hover:border-amber-500 rounded-2xl p-4 cursor-pointer bg-slate-950/60 transition group mb-3">
+            <svg class="w-7 h-7 text-slate-400 group-hover:text-amber-400 mb-1 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            <span class="text-xs font-bold text-slate-300 group-hover:text-amber-400" data-i18n="uploadMultiplePrompt">اضغط لاختيار عدة صور دفعة واحدة</span>
+            <input id="formImagesInput" type="file" accept="image/*" multiple class="hidden" onchange="handleMultipleImagesUpload(event)">
+          </label>
+
+          <!-- Dynamic Image Gallery Preview with Main Image Selector -->
+          <div id="adminImagesPreviewGrid" class="grid grid-cols-2 sm:grid-cols-4 gap-3"></div>
+        </div>
+
+        <div class="sm:col-span-2">
+          <label class="block mb-1 text-slate-400" data-i18n="formDescLabel">مواصفات ونبذة تفصيلية:</label>
+          <textarea id="formDesc" rows="3" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500"></textarea>
+        </div>
+
+        <div class="sm:col-span-2 flex justify-end gap-3 pt-3 border-t border-slate-800">
+          <button type="button" onclick="toggleModal('productFormModal')" class="px-4 py-2 bg-slate-800 text-slate-300 rounded-xl font-bold cursor-pointer" data-i18n="cancelBtn">إلغاء</button>
+          <button type="submit" class="px-5 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black rounded-xl transition cursor-pointer" data-i18n="saveProductBtn">حفظ ونشر السلعة</button>
+        </div>
+      </form>
     </div>
   </div>
 
@@ -719,6 +679,7 @@
     </div>
   </div>
 
+  <!-- Image Zoom Modal -->
   <div id="imageZoomModal" class="fixed inset-0 bg-black/95 backdrop-blur-lg z-[110] hidden flex items-center justify-center p-2 sm:p-6" onclick="closeImageZoom()">
     <div class="relative max-w-5xl max-h-[90vh] w-full flex items-center justify-center" onclick="event.stopPropagation()">
       <button 
@@ -1135,12 +1096,13 @@
 
     function renderDynamicHeaderContact() {
       const container = document.getElementById("dynamicHeaderContactContainer");
+      const fabContainer = document.getElementById("floatingAddContainer");
       if (!container) return;
       const t = i18nData[currentLang];
       const unreadCount = customerMessages.filter(m => !m.read).length;
 
       if (isDeveloper) {
-        // Admin is logged in: show dedicated Inbox (الرسائل) button with badge
+        // Admin is logged in: show dedicated Inbox button strictly for inbox
         container.innerHTML = `
           <button 
             type="button" 
@@ -1154,8 +1116,23 @@
             ${unreadCount > 0 ? `<span class="absolute -top-1.5 -right-1.5 bg-rose-600 text-white text-[10px] font-black px-1.5 py-0.2 rounded-full ring-2 ring-slate-900 min-w-4 text-center">${unreadCount}</span>` : ''}
           </button>
         `;
+
+        if (fabContainer) {
+          fabContainer.innerHTML = `
+            <button 
+              type="button" 
+              onclick="openQuickAddProductModal()" 
+              class="fixed bottom-6 left-6 z-40 w-14 h-14 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-full shadow-2xl flex items-center justify-center transition active:scale-95 cursor-pointer border-2 border-slate-900 group"
+              title="إضافة سلعة جديدة"
+            >
+              <svg class="w-7 h-7 font-black group-hover:rotate-90 transition duration-300" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path>
+              </svg>
+            </button>
+          `;
+        }
       } else {
-        // Regular customer: button is "Contact Us" (راسلنا)
+        // Regular customer: button is "Contact Us" (راسلنا), and no floating add button
         container.innerHTML = `
           <button 
             type="button" 
@@ -1168,14 +1145,15 @@
             <span class="hidden sm:inline" data-i18n="contactUsBtn">${t.contactUsBtn}</span>
           </button>
         `;
+
+        if (fabContainer) {
+          fabContainer.innerHTML = "";
+        }
       }
     }
 
     window.openInboxModal = function() {
       toggleModal("inboxModal");
-      renderAdminCategoryOptions();
-      renderAdminTable();
-      renderAdminAutocompletes();
       renderAdminMessages();
     };
 
@@ -1186,22 +1164,11 @@
         return;
       }
       resetAdminForm();
-      switchAdminTab('products');
-      openInboxModal();
+      toggleModal("productFormModal");
     };
 
     function updateAdminUnreadBadge() {
       const unreadCount = customerMessages.filter(m => !m.read).length;
-      const inboxTabBadge = document.getElementById("inboxTabBadge");
-
-      if (inboxTabBadge) {
-        if (unreadCount > 0) {
-          inboxTabBadge.textContent = unreadCount;
-          inboxTabBadge.classList.remove("hidden");
-        } else {
-          inboxTabBadge.classList.add("hidden");
-        }
-      }
       renderDynamicHeaderContact();
     }
 
@@ -1276,29 +1243,8 @@
     window.saveNewPassword = function() {
       const inp = document.getElementById("newPasswordInput");
       if (!inp || !inp.value.trim()) return;
-      // In a real app we would update password, here we notify success
       toggleModal("changePasswordModal");
       showToast("تم تغيير كلمة المرور السريّة بنجاح!", "success");
-    };
-
-    window.switchAdminTab = function(tabName) {
-      const productsSec = document.getElementById("adminSectionProducts");
-      const inboxSec = document.getElementById("adminSectionInbox");
-      const prodBtn = document.getElementById("adminTabProductsBtn");
-      const inboxBtn = document.getElementById("adminTabInboxBtn");
-
-      if (tabName === 'products') {
-        productsSec.classList.remove("hidden");
-        inboxSec.classList.add("hidden");
-        prodBtn.className = "px-4 py-2 bg-amber-500 text-slate-950 rounded-xl font-black text-xs transition cursor-pointer";
-        inboxBtn.className = "relative px-4 py-2 bg-slate-800 text-slate-300 hover:text-white rounded-xl font-bold text-xs transition cursor-pointer";
-      } else {
-        productsSec.classList.add("hidden");
-        inboxSec.classList.remove("hidden");
-        prodBtn.className = "relative px-4 py-2 bg-slate-800 text-slate-300 hover:text-white rounded-xl font-bold text-xs transition cursor-pointer";
-        inboxBtn.className = "px-4 py-2 bg-amber-500 text-slate-950 rounded-xl font-black text-xs transition cursor-pointer";
-        markAllMessagesRead();
-      }
     };
 
     window.handleCustomerMessageSubmit = function(e) {
@@ -1377,12 +1323,14 @@
           </div>
         `;
       }).join("");
+
+      markAllMessagesRead();
     }
 
     window.markAllMessagesRead = function() {
       customerMessages.forEach(m => m.read = true);
       syncState();
-      renderAdminMessages();
+      updateAdminUnreadBadge();
     };
 
     window.toggleSelectAllMessages = function(masterCheckbox) {
@@ -1530,7 +1478,7 @@
                 
                 ${isDeveloper ? `
                   <div class="absolute bottom-2 left-2 z-25 flex gap-1 bg-slate-950/90 backdrop-blur-md p-1 rounded-xl border border-slate-700 shadow" onclick="event.stopPropagation()">
-                    <button type="button" onclick="editProduct(${p.id}); openInboxModal();" class="p-1 bg-amber-500 text-slate-950 rounded-lg text-[10px] font-black cursor-pointer" title="تعديل">✏️</button>
+                    <button type="button" onclick="editProduct(${p.id});" class="p-1 bg-amber-500 text-slate-950 rounded-lg text-[10px] font-black cursor-pointer" title="تعديل">✏️</button>
                     <button type="button" onclick="confirmDeleteProduct(${p.id})" class="p-1 bg-rose-600 text-white rounded-lg text-[10px] font-black cursor-pointer" title="حذف">🗑️</button>
                   </div>
                 ` : ''}
@@ -1692,7 +1640,7 @@
             <div class="relative rounded-2xl overflow-hidden bg-slate-950 border border-slate-800 group cursor-zoom-in" onclick="openImageZoom('${primaryImg}')">
               ${isDeveloper ? `
                 <div class="absolute top-3 left-3 z-20 flex gap-2 bg-slate-950/90 backdrop-blur-md p-1.5 rounded-xl border border-slate-700 shadow-xl" onclick="event.stopPropagation();">
-                  <button type="button" onclick="editProduct(${p.id}); toggleModal('productDetailModal'); openInboxModal();" class="px-2.5 py-1 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-lg text-xs font-black cursor-pointer">✏️ تعديل</button>
+                  <button type="button" onclick="editProduct(${p.id}); toggleModal('productDetailModal');" class="px-2.5 py-1 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-lg text-xs font-black cursor-pointer">✏️ تعديل</button>
                   <button type="button" onclick="confirmDeleteProduct(${p.id}); toggleModal('productDetailModal');" class="px-2.5 py-1 bg-rose-600 hover:bg-rose-500 text-white rounded-lg text-xs font-black cursor-pointer">🗑️ حذف</button>
                 </div>
               ` : ''}
@@ -1776,24 +1724,6 @@
       if (!sel) return;
       sel.innerHTML = categoriesList.map(c => `
         <option value="${c.id}">${c.name[currentLang] || c.name.ar}</option>
-      `).join("");
-    }
-
-    function renderAdminTable() {
-      const tbody = document.getElementById("adminProductsTable");
-      if (!tbody) return;
-      const t = i18nData[currentLang];
-
-      tbody.innerHTML = products.map(p => `
-        <tr class="hover:bg-slate-950/60">
-          <td class="p-2 font-bold text-white">${p.brand} - ${window.getLocalized(p.title)}</td>
-          <td class="p-2 font-mono text-amber-400">${p.price} ${t.currency}</td>
-          <td class="p-2 font-bold ${p.stock > 0 ? 'text-emerald-400' : 'text-rose-400'}">${p.stock}</td>
-          <td class="p-2 text-center space-x-1">
-            <button type="button" onclick="editProduct(${p.id});" class="px-2 py-1 bg-amber-500 text-slate-950 font-bold rounded-lg text-xs mx-1 cursor-pointer">${t.editBtn}</button>
-            <button type="button" onclick="confirmDeleteProduct(${p.id})" class="px-2 py-1 bg-rose-600 text-white font-bold rounded-lg text-xs mx-1 cursor-pointer">${t.deleteBtn}</button>
-          </td>
-        </tr>
       `).join("");
     }
 
@@ -1922,8 +1852,7 @@
 
       saveSmartHistory(brandVal, titleVal, refVal, countryVal);
       syncState();
-      resetAdminForm();
-      renderAdminTable();
+      toggleModal("productFormModal");
       applyFilters();
       showToast(i18nData[currentLang].productSavedMsg, "success");
     };
@@ -1948,8 +1877,9 @@
       renderAdminImagesPreview();
 
       document.getElementById("formDesc").value = window.getLocalized(p.desc);
+      renderAdminCategoryOptions();
       updateTitleSuggestions();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      toggleModal("productFormModal");
     };
 
     window.confirmDeleteProduct = function(id) {
@@ -1962,7 +1892,6 @@
     window.deleteProduct = function(id) {
       products = products.filter(x => x.id !== id);
       syncState();
-      renderAdminTable();
       applyFilters();
       showToast(i18nData[currentLang].productDeletedMsg, "success");
     };
@@ -1981,6 +1910,7 @@
       currentAdminMainIndex = 0;
       renderAdminImagesPreview();
       document.getElementById("formDesc").value = "";
+      renderAdminCategoryOptions();
       updateTitleSuggestions();
     };
 
@@ -2195,6 +2125,8 @@
       }
       changeLanguage("ar");
       renderCategoriesDrawer();
+      renderAdminCategoryOptions();
+      renderAdminAutocompletes();
       applyFilters();
       syncState();
       renderCartList();
