@@ -652,27 +652,27 @@
           <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
         </svg>
       </button>
-      <h3 class="text-base font-black text-white mb-2">راسل إدارة Zinou Outillage</h3>
-      <p class="text-xs text-slate-400 mb-4">أدخل معلوماتك (الاسم واللقب، والولاية، ورقم الهاتف) ثم رسالتك.</p>
+      <h3 class="text-base font-black text-white mb-2" data-i18n="clientModalTitle">راسل إدارة zinou outillage</h3>
+      <p class="text-xs text-slate-400 mb-4" data-i18n="clientModalSub">أدخل معلوماتك (الاسم واللقب، والولاية، ورقم الهاتف) ثم رسالتك.</p>
       
       <form onsubmit="handleCustomerMessageSubmit(event)" class="space-y-3 text-xs font-bold">
         <div>
-          <label class="block mb-1 text-slate-400">الاسم واللقب:</label>
-          <input required id="clientMsgName" type="text" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500" placeholder="مثال: محمد بن علي">
+          <label class="block mb-1 text-slate-400" data-i18n="clientNameLabel">الاسم واللقب:</label>
+          <input required id="clientMsgName" type="text" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500" data-i18n-placeholder="clientNamePh" placeholder="مثال: محمد بن علي">
         </div>
         <div>
-          <label class="block mb-1 text-slate-400">الولاية:</label>
-          <input required id="clientMsgWilaya" type="text" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500" placeholder="مثال: الجزائر، البليدة، وهران...">
+          <label class="block mb-1 text-slate-400" data-i18n="clientWilayaLabel">الولاية:</label>
+          <input required id="clientMsgWilaya" type="text" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500" data-i18n-placeholder="clientWilayaPh" placeholder="مثال: الجزائر، البليدة، وهران...">
         </div>
         <div>
-          <label class="block mb-1 text-slate-400">رقم الهاتف (05 / 06 / 07 + 8 أرقام):</label>
+          <label class="block mb-1 text-slate-400" data-i18n="clientPhoneLabel">رقم الهاتف (05 / 06 / 07 + 8 أرقام):</label>
           <input required id="clientMsgPhone" type="tel" placeholder="05XXXXXXXX" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
         </div>
         <div>
-          <label class="block mb-1 text-slate-400">نص الرسالة أو الاستفسار:</label>
-          <textarea required id="clientMsgTextarea" rows="3" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500 mt-1" placeholder="اكتب تفاصيل طلبك أو استفسارك هنا..."></textarea>
+          <label class="block mb-1 text-slate-400" data-i18n="clientTextLabel">نص الرسالة أو الاستفسار:</label>
+          <textarea required id="clientMsgTextarea" rows="3" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500 mt-1" data-i18n-placeholder="clientTextPh" placeholder="اكتب تفاصيل طلبك أو استفسارك هنا..."></textarea>
         </div>
-        <button type="submit" class="w-full py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black rounded-xl transition cursor-pointer">
+        <button type="submit" class="w-full py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black rounded-xl transition cursor-pointer" data-i18n="clientSubmitBtn">
           إرسال الرسالة الآن
         </button>
       </form>
@@ -773,7 +773,17 @@
         orderSuccessMsg: "تم تسجيل طلبيتك بنجاح! سنتصل بك قريباً لتأكيد التوصيل.",
         minOrderError: "عذراً، الحد الأدنى لتأكيد الطلبية هو 10000 دج فما فوق.",
         phoneErrorMsg: "رقم الهاتف غير صحيح! يجب أن يبدأ بـ 05، 06 أو 07 ويتكون من 10 أرقام بالضبط (مثال: 0550123456).",
-        newBadge: "جديد"
+        newBadge: "جديد",
+        clientModalTitle: "راسل إدارة zinou outillage",
+        clientModalSub: "أدخل معلوماتك (الاسم واللقب، والولاية، ورقم الهاتف) ثم رسالتك.",
+        clientNameLabel: "الاسم واللقب:",
+        clientNamePh: "مثال: محمد بن علي",
+        clientWilayaLabel: "الولاية:",
+        clientWilayaPh: "مثال: الجزائر، البليدة، وهران...",
+        clientPhoneLabel: "رقم الهاتف (05 / 06 / 07 + 8 أرقام):",
+        clientTextLabel: "نص الرسالة أو الاستفسار:",
+        clientTextPh: "اكتب تفاصيل طلبك أو استفسارك هنا...",
+        clientSubmitBtn: "إرسال الرسالة الآن"
       },
       fr: {
         dir: "ltr",
@@ -851,7 +861,17 @@
         orderSuccessMsg: "Commande enregistrée avec succès !",
         minOrderError: "Désolé, le montant minimum de commande est de 10000 DZD.",
         phoneErrorMsg: "Numéro de téléphone invalide ! Doit commencer par 05, 06 ou 07 (10 chiffres).",
-        newBadge: "NOUVEAU"
+        newBadge: "NOUVEAU",
+        clientModalTitle: "Contacter l'administration zinou outillage",
+        clientModalSub: "Entrez vos informations (Nom, Wilaya, Téléphone) puis votre message.",
+        clientNameLabel: "Nom et Prénom:",
+        clientNamePh: "Ex: Mohamed Benali",
+        clientWilayaLabel: "Wilaya:",
+        clientWilayaPh: "Ex: Alger, Blida, Oran...",
+        clientPhoneLabel: "Téléphone (05 / 06 / 07 + 8 chiffres):",
+        clientTextLabel: "Message ou question:",
+        clientTextPh: "Écrivez les détails de votre demande ici...",
+        clientSubmitBtn: "Envoyer le message"
       },
       en: {
         dir: "ltr",
@@ -929,7 +949,17 @@
         orderSuccessMsg: "Order placed successfully! We will contact you soon.",
         minOrderError: "Sorry, the minimum order amount is 10000 DZD.",
         phoneErrorMsg: "Invalid phone number! Must start with 05, 06, or 07 followed by 8 digits.",
-        newBadge: "NEW"
+        newBadge: "NEW",
+        clientModalTitle: "Contact zinou outillage management",
+        clientModalSub: "Enter your information (Name, Wilaya, Phone) and your message.",
+        clientNameLabel: "Full Name:",
+        clientNamePh: "Ex: John Doe",
+        clientWilayaLabel: "Wilaya / City:",
+        clientWilayaPh: "Ex: Algiers, Oran...",
+        clientPhoneLabel: "Phone Number (05 / 06 / 07 + 8 digits):",
+        clientTextLabel: "Message or inquiry:",
+        clientTextPh: "Write your message details here...",
+        clientSubmitBtn: "Send Message Now"
       }
     };
 
