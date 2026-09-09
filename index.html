@@ -122,7 +122,7 @@
     <div class="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-slate-950 to-transparent z-10 pointer-events-none"></div>
     <div class="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-slate-950 to-transparent z-10 pointer-events-none"></div>
 
-    <div id="brandsScrollContainer" class="overflow-x-auto scrollbar-none cursor-grab active:cursor-grabbing select-none flex">
+    <div id="brandsScrollContainer" class="overflow-x-hidden scrollbar-none cursor-grab active:cursor-grabbing select-none flex">
       <div id="brandsTrack" class="flex w-max items-center gap-3 cursor-pointer">
         <!-- Will be populated dynamically for seamless infinite loop -->
       </div>
@@ -1134,7 +1134,7 @@
         </button>
       `).join("");
 
-      // Render 6 sets for true seamless infinite cylinder loop in any language direction
+      // Render multiple sets for seamless infinite loop
       track.innerHTML = buildItemsHTML() + buildItemsHTML() + buildItemsHTML() + buildItemsHTML() + buildItemsHTML() + buildItemsHTML();
     }
 
@@ -2212,72 +2212,73 @@
       renderDynamicHeaderContact();
       updateAdminUnreadBadge();
 
-      // Robust infinite cylinder auto-scroll and manual drag-to-scroll for all languages (RTL/LTR)
+      // Robust infinite cylinder auto-scroll and manual drag-to-scroll using transform for all languages (RTL/LTR)
       const slider = document.getElementById("brandsScrollContainer");
       const track = document.getElementById("brandsTrack");
       let isDown = false;
       let startX;
       let scrollLeft;
-      let autoScrollSpeed = 0.8;
+      let currentX = 0;
+      let autoSpeed = 0.6;
+      let animationFrameId;
 
       if (slider && track) {
-        // Center initial scroll position so infinite scrolling works in both directions smoothly
-        setTimeout(() => {
-          const singleSetWidth = track.scrollWidth / 6;
-          slider.scrollLeft = singleSetWidth * 3;
-        }, 100);
+        const getSingleSetWidth = () => track.scrollWidth / 6;
 
-        // Continuous smooth auto-scroll loop
-        setInterval(() => {
+        function animateMarquee() {
           if (!isDown && !slider.matches(':hover')) {
-            const singleSetWidth = track.scrollWidth / 6;
-            slider.scrollLeft += autoScrollSpeed;
-            
-            // Seamless cylinder reset
-            if (slider.scrollLeft >= singleSetWidth * 4) {
-              slider.scrollLeft -= singleSetWidth * 2;
-            } else if (slider.scrollLeft <= singleSetWidth) {
-              slider.scrollLeft += singleSetWidth * 2;
+            currentX -= autoSpeed;
+            const singleWidth = getSingleSetWidth();
+            if (Math.abs(currentX) >= singleWidth * 3) {
+              currentX += singleWidth;
             }
+            track.style.transform = `translateX(${currentX}px)`;
           }
-        }, 20);
+          animationFrameId = requestAnimationFrame(animateMarquee);
+        }
+
+        animationFrameId = requestAnimationFrame(animateMarquee);
 
         // Manual drag & touch scrolling
         slider.addEventListener("mousedown", (e) => {
           isDown = true;
           slider.classList.add("active");
-          startX = e.pageX - slider.offsetLeft;
-          scrollLeft = slider.scrollLeft;
+          startX = e.pageX;
+          scrollLeft = currentX;
         });
-        slider.addEventListener("mouseleave", () => {
-          isDown = false;
-          slider.classList.remove("active");
-        });
-        slider.addEventListener("mouseup", () => {
-          isDown = false;
-          slider.classList.remove("active");
-        });
-        slider.addEventListener("mousemove", (e) => {
+        window.addEventListener("mouseup", () => {
           if (!isDown) return;
-          e.preventDefault();
-          const x = e.pageX - slider.offsetLeft;
-          const walk = (x - startX) * 2;
-          slider.scrollLeft = scrollLeft - walk;
+          isDown = false;
+          slider.classList.remove("active");
+        });
+        window.addEventListener("mousemove", (e) => {
+          if (!isDown) return;
+          const x = e.pageX;
+          const walk = (x - startX);
+          currentX = scrollLeft + walk;
+          const singleWidth = getSingleSetWidth();
+          if (currentX > 0) currentX -= singleWidth;
+          if (Math.abs(currentX) >= singleWidth * 4) currentX += singleWidth;
+          track.style.transform = `translateX(${currentX}px)`;
         });
 
         slider.addEventListener("touchstart", (e) => {
           isDown = true;
-          startX = e.touches[0].pageX - slider.offsetLeft;
-          scrollLeft = slider.scrollLeft;
+          startX = e.touches[0].pageX;
+          scrollLeft = currentX;
         });
-        slider.addEventListener("touchend", () => {
+        window.addEventListener("touchend", () => {
           isDown = false;
         });
-        slider.addEventListener("touchmove", (e) => {
+        window.addEventListener("touchmove", (e) => {
           if (!isDown) return;
-          const x = e.touches[0].pageX - slider.offsetLeft;
-          const walk = (x - startX) * 2;
-          slider.scrollLeft = scrollLeft - walk;
+          const x = e.touches[0].pageX;
+          const walk = (x - startX);
+          currentX = scrollLeft + walk;
+          const singleWidth = getSingleSetWidth();
+          if (currentX > 0) currentX -= singleWidth;
+          if (Math.abs(currentX) >= singleWidth * 4) currentX += singleWidth;
+          track.style.transform = `translateX(${currentX}px)`;
         });
       }
     });
