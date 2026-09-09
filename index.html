@@ -34,25 +34,16 @@
       background: #f59e0b;
     }
 
-    @keyframes brandsRTL {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(50%); }
-    }
-    @keyframes brandsLTR {
+    @keyframes infiniteBrands {
       0% { transform: translateX(0); }
       100% { transform: translateX(-50%); }
     }
-    .brands-track-rtl {
+    .brands-track-infinite {
       display: flex;
       width: max-content;
-      animation: brandsRTL 35s linear infinite;
+      animation: infiniteBrands 30s linear infinite;
     }
-    .brands-track-ltr {
-      display: flex;
-      width: max-content;
-      animation: brandsLTR 35s linear infinite;
-    }
-    .brands-track-rtl:hover, .brands-track-ltr:hover {
+    .brands-track-infinite:hover {
       animation-play-state: paused;
     }
   </style>
@@ -145,30 +136,8 @@
     <div class="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-slate-950 to-transparent z-10 pointer-events-none"></div>
 
     <div id="brandsScrollContainer" class="overflow-x-auto scrollbar-none cursor-grab active:cursor-grabbing select-none">
-      <div id="brandsTrack" class="brands-track-rtl items-center gap-3 cursor-pointer">
-        <button type="button" onclick="filterByBrand('Black+Decker')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/BlackplusDecker.png" alt="Black+Decker" class="w-full h-full object-fill pointer-events-none" /></button>
-        <button type="button" onclick="filterByBrand('Bosch')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Bosch.png" alt="Bosch" class="w-full h-full object-fill pointer-events-none" /></button>
-        <button type="button" onclick="filterByBrand('DeWalt')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/DeWalt.png" alt="DeWalt" class="w-full h-full object-fill pointer-events-none" /></button>
-        <button type="button" onclick="filterByBrand('Facom')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Facom.png" alt="Facom" class="w-full h-full object-fill pointer-events-none" /></button>
-        <button type="button" onclick="filterByBrand('Festo')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Festo.png" alt="Festo" class="w-full h-full object-fill pointer-events-none" /></button>
-        <button type="button" onclick="filterByBrand('Fluke')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Fluke.png" alt="Fluke" class="w-full h-full object-fill pointer-events-none" /></button>
-        <button type="button" onclick="filterByBrand('HiKOKI')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/HiKOKI.png" alt="HiKOKI" class="w-full h-full object-fill pointer-events-none" /></button>
-        <button type="button" onclick="filterByBrand('Hilti')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Hilti.png" alt="Hilti" class="w-full h-full object-fill pointer-events-none" /></button>
-        <button type="button" onclick="filterByBrand('Jokari')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Jokari.png" alt="Jokari" class="w-full h-full object-fill pointer-events-none" /></button>
-        <button type="button" onclick="filterByBrand('Karcher')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Karcher.png" alt="Karcher" class="w-full h-full object-fill pointer-events-none" /></button>
-        <button type="button" onclick="filterByBrand('Knipex')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Knipex.png" alt="Knipex" class="w-full h-full object-fill pointer-events-none" /></button>
-        <button type="button" onclick="filterByBrand('Makita')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Makita.png" alt="Makita" class="w-full h-full object-fill pointer-events-none" /></button>
-        <button type="button" onclick="filterByBrand('Metabo')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Metabo.png" alt="Metabo" class="w-full h-full object-fill pointer-events-none" /></button>
-        <button type="button" onclick="filterByBrand('Milwaukee')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Milwaukee.png" alt="Milwaukee" class="w-full h-full object-fill pointer-events-none" /></button>
-        <button type="button" onclick="filterByBrand('Parkside')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Parkside.png" alt="Parkside" class="w-full h-full object-fill pointer-events-none" /></button>
-        <button type="button" onclick="filterByBrand('REMS')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/REMS.png" alt="REMS" class="w-full h-full object-fill pointer-events-none" /></button>
-        <button type="button" onclick="filterByBrand('Ryobi')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Ryobi.png" alt="Ryobi" class="w-full h-full object-fill pointer-events-none" /></button>
-        <button type="button" onclick="filterByBrand('Stanley')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Stanley.png" alt="Stanley" class="w-full h-full object-fill pointer-events-none" /></button>
-        <button type="button" onclick="filterByBrand('Stihl')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Stihl.png" alt="Stihl" class="w-full h-full object-fill pointer-events-none" /></button>
-        <button type="button" onclick="filterByBrand('Virax')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Virax.png" alt="Virax" class="w-full h-full object-fill pointer-events-none" /></button>
-        <button type="button" onclick="filterByBrand('Wera')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Wera.png" alt="Wera" class="w-full h-full object-fill pointer-events-none" /></button>
-        <button type="button" onclick="filterByBrand('Wiha')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Wiha.png" alt="Wiha" class="w-full h-full object-fill pointer-events-none" /></button>
-        <button type="button" onclick="filterByBrand('Wurth')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Wurth.png" alt="Wurth" class="w-full h-full object-fill pointer-events-none" /></button>
+      <div id="brandsTrack" class="brands-track-infinite items-center gap-3 cursor-pointer">
+        <!-- Will be populated dynamically twice for seamless infinite loop -->
       </div>
     </div>
   </section>
@@ -353,6 +322,7 @@
     </main>
   </div>
 
+  <!-- Floating Action Button for Admin Product Addition -->
   <div id="floatingAddContainer"></div>
 
   <div id="productDetailModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
@@ -696,6 +666,32 @@
   </div>
 
   <script>
+    const brandsData = [
+      { name: "Black+Decker", src: "logos_23_marques/BlackplusDecker.png" },
+      { name: "Bosch", src: "logos_23_marques/Bosch.png" },
+      { name: "DeWalt", src: "logos_23_marques/DeWalt.png" },
+      { name: "Facom", src: "logos_23_marques/Facom.png" },
+      { name: "Festo", src: "logos_23_marques/Festo.png" },
+      { name: "Fluke", src: "logos_23_marques/Fluke.png" },
+      { name: "HiKOKI", src: "logos_23_marques/HiKOKI.png" },
+      { name: "Hilti", src: "logos_23_marques/Hilti.png" },
+      { name: "Jokari", src: "logos_23_marques/Jokari.png" },
+      { name: "Karcher", src: "logos_23_marques/Karcher.png" },
+      { name: "Knipex", src: "logos_23_marques/Knipex.png" },
+      { name: "Makita", src: "logos_23_marques/Makita.png" },
+      { name: "Metabo", src: "logos_23_marques/Metabo.png" },
+      { name: "Milwaukee", src: "logos_23_marques/Milwaukee.png" },
+      { name: "Parkside", src: "logos_23_marques/Parkside.png" },
+      { name: "REMS", src: "logos_23_marques/REMS.png" },
+      { name: "Ryobi", src: "logos_23_marques/Ryobi.png" },
+      { name: "Stanley", src: "logos_23_marques/Stanley.png" },
+      { name: "Stihl", src: "logos_23_marques/Stihl.png" },
+      { name: "Virax", src: "logos_23_marques/Virax.png" },
+      { name: "Wera", src: "logos_23_marques/Wera.png" },
+      { name: "Wiha", src: "logos_23_marques/Wiha.png" },
+      { name: "Wurth", src: "logos_23_marques/Wurth.png" }
+    ];
+
     const i18nData = {
       ar: {
         dir: "rtl",
@@ -756,13 +752,6 @@
         formDescLabel: "مواصفات ونبذة تفصيلية:",
         cancelBtn: "إلغاء",
         saveProductBtn: "حفظ ونشر السلعة",
-        warehouseListTitle: "قائمة السلع بالمستودع:",
-        tableProduct: "السلعة",
-        tablePrice: "السعر",
-        tableStock: "المخزون",
-        tableActions: "إجراءات",
-        editBtn: "تعديل",
-        deleteBtn: "حذف",
         catsDrawerTitle: "الفئات والأقسام",
         drawerHint: "اختر القسم لعرض السلع الخاصة به:",
         drawerResetBtn: "إعادة عرض كل السلع",
@@ -844,13 +833,6 @@
         formDescLabel: "Description détaillée:",
         cancelBtn: "Annuler",
         saveProductBtn: "Enregistrer et publier",
-        warehouseListTitle: "Inventaire du dépôt:",
-        tableProduct: "Produit",
-        tablePrice: "Prix",
-        tableStock: "Stock",
-        tableActions: "Actions",
-        editBtn: "Modifier",
-        deleteBtn: "Supprimer",
         catsDrawerTitle: "Catégories",
         drawerHint: "Sélectionnez une catégorie:",
         drawerResetBtn: "Afficher tous les articles",
@@ -932,13 +914,6 @@
         formDescLabel: "Detailed Description:",
         cancelBtn: "Cancel",
         saveProductBtn: "Save & Publish",
-        warehouseListTitle: "Warehouse Inventory:",
-        tableProduct: "Product",
-        tablePrice: "Price",
-        tableStock: "Stock",
-        tableActions: "Actions",
-        editBtn: "Edit",
-        deleteBtn: "Delete",
         catsDrawerTitle: "Categories",
         drawerHint: "Select category:",
         drawerResetBtn: "Show All Items",
@@ -1122,6 +1097,20 @@
         badge.textContent = "0";
         badge.classList.add("hidden");
       }
+    }
+
+    function renderBrandsTicker() {
+      const track = document.getElementById("brandsTrack");
+      if (!track) return;
+      
+      const buildItemsHTML = () => brandsData.map(b => `
+        <button type="button" onclick="filterByBrand('${b.name}')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0 cursor-pointer">
+          <img src="${b.src}" alt="${b.name}" class="w-full h-full object-fill pointer-events-none" />
+        </button>
+      `).join("");
+
+      // Duplicate twice for seamless infinite loop effect
+      track.innerHTML = buildItemsHTML() + buildItemsHTML();
     }
 
     function renderDynamicHeaderContact() {
@@ -2002,11 +1991,6 @@
       const langSelect = document.getElementById("langSelect");
       if (langSelect && langSelect.value !== lang) langSelect.value = lang;
 
-      const brandsTrack = document.getElementById("brandsTrack");
-      if (brandsTrack) {
-        brandsTrack.className = (t.dir === "rtl" ? "brands-track-rtl" : "brands-track-ltr") + " items-center gap-3 cursor-pointer";
-      }
-
       const drawer = document.getElementById("categoriesDrawer");
       if (drawer) {
         drawer.style.right = t.dir === "rtl" ? "0" : "auto";
@@ -2162,6 +2146,7 @@
         if (passInput) passInput.value = "1234";
       }
       changeLanguage("ar");
+      renderBrandsTicker();
       renderCategoriesDrawer();
       renderAdminCategoryOptions();
       renderAdminAutocompletes();
