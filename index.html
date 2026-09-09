@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zinou Outillage | Matériel Industriel & Équipements Professionnels</title>
+  <title>zinou outillage</title>
   
   <!-- Favicon: Yellow Letter Z -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230f172a'/><text x='50' y='72' fill='%23facc15' font-family='Impact, Arial Black, sans-serif' font-weight='900' font-size='70' text-anchor='middle'>Z</text></svg>" />
@@ -84,7 +84,7 @@
         </div>
       </div>
 
-      <!-- Actions: Android App, Language, Dynamic Contact/Inbox Button, Admin Account, Cart -->
+      <!-- Actions: Android App, Language, Dynamic Header Buttons, Admin Account, Cart -->
       <div class="flex items-center gap-2">
         <!-- Android App Download Button -->
         <button 
@@ -110,10 +110,10 @@
           <option value="en">🇬🇧 English</option>
         </select>
 
-        <!-- Dynamic Customer Contact vs Dedicated Admin Inbox Button -->
+        <!-- Dynamic Header Contact / Inbox Button -->
         <div id="dynamicHeaderContactContainer"></div>
 
-        <!-- Admin Account / Control Button -->
+        <!-- Admin Account Control Button -->
         <button 
           type="button" 
           onclick="openAdminModal()" 
@@ -348,8 +348,8 @@
         </button>
       </div>
 
-      <!-- Products Grid -->
-      <div id="productsGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2.5 sm:gap-3"></div>
+      <!-- Products Grid (4 Columns standard layout) -->
+      <div id="productsGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-2.5 sm:gap-3"></div>
     </main>
   </div>
 
@@ -437,7 +437,7 @@
     </div>
   </div>
 
-  <!-- Admin Account Modal (Activated via Lock Button) -->
+  <!-- Admin Account Modal -->
   <div id="adminModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
     <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-xl w-full p-6 relative shadow-2xl">
       <button 
@@ -512,7 +512,7 @@
     </div>
   </div>
 
-  <!-- Dedicated Admin Inbox Modal (Messages Only) -->
+  <!-- Dedicated Admin Inbox Modal -->
   <div id="inboxModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
     <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-3xl w-full p-6 relative max-h-[92vh] overflow-y-auto shadow-2xl">
       <button 
@@ -545,7 +545,7 @@
     </div>
   </div>
 
-  <!-- Add / Edit Product Modal (Opened via Floating Button or Edit) -->
+  <!-- Add / Edit Product Modal -->
   <div id="productFormModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
     <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-2xl w-full p-6 relative max-h-[92vh] overflow-y-auto shadow-2xl">
       <button 
@@ -1168,7 +1168,6 @@
     };
 
     function updateAdminUnreadBadge() {
-      const unreadCount = customerMessages.filter(m => !m.read).length;
       renderDynamicHeaderContact();
     }
 
@@ -2167,7 +2166,7 @@
           if (!isDown) return;
           e.preventDefault();
           const x = e.pageX - slider.offsetLeft;
-          const walk = (x - startX) * 2; // scroll-fast multiplier
+          const walk = (x - startX) * 2;
           slider.scrollLeft = scrollLeft - walk;
         });
 
