@@ -84,7 +84,7 @@
         </div>
       </div>
 
-      <!-- Actions: Android App, Language, Direct Message/Call, Admin, Cart -->
+      <!-- Actions: Android App, Language, Dynamic Contact/Inbox Button, Admin, Cart -->
       <div class="flex items-center gap-2">
         <!-- Android App Download Button -->
         <button 
@@ -110,17 +110,8 @@
           <option value="en">🇬🇧 English</option>
         </select>
 
-        <!-- Customer Contact Message Button -->
-        <button 
-          type="button" 
-          onclick="toggleModal('customerMessageModal')" 
-          class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 font-bold rounded-xl text-xs flex items-center gap-1.5 transition active:scale-95 cursor-pointer"
-        >
-          <svg class="w-3.5 h-3.5 text-amber-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
-          </svg>
-          <span class="hidden sm:inline" data-i18n="contactUsBtn">راسلنا</span>
-        </button>
+        <!-- Dynamic Customer Contact vs Admin Inbox Button -->
+        <div id="dynamicHeaderContactContainer"></div>
 
         <!-- Admin Control Button -->
         <button 
@@ -132,7 +123,6 @@
           <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
           </svg>
-          <span id="adminUnreadBadge" class="hidden absolute -top-1.5 -right-1.5 bg-rose-600 text-white text-[10px] font-black px-1.5 py-0.2 rounded-full ring-2 ring-slate-900 min-w-4 text-center">0</span>
         </button>
 
         <!-- Cart Button with Counter -->
@@ -156,32 +146,6 @@
 
     <div class="overflow-hidden">
       <div id="brandsTrack" class="brands-track-rtl items-center gap-3 cursor-pointer">
-        <!-- 23 Brands with object-fill to completely fill container -->
-        <button type="button" onclick="filterByBrand('Black+Decker')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/BlackplusDecker.png" alt="Black+Decker" class="w-full h-full object-fill" /></button>
-        <button type="button" onclick="filterByBrand('Bosch')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Bosch.png" alt="Bosch" class="w-full h-full object-fill" /></button>
-        <button type="button" onclick="filterByBrand('DeWalt')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/DeWalt.png" alt="DeWalt" class="w-full h-full object-fill" /></button>
-        <button type="button" onclick="filterByBrand('Facom')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Facom.png" alt="Facom" class="w-full h-full object-fill" /></button>
-        <button type="button" onclick="filterByBrand('Festo')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Festo.png" alt="Festo" class="w-full h-full object-fill" /></button>
-        <button type="button" onclick="filterByBrand('Fluke')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Fluke.png" alt="Fluke" class="w-full h-full object-fill" /></button>
-        <button type="button" onclick="filterByBrand('HiKOKI')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/HiKOKI.png" alt="HiKOKI" class="w-full h-full object-fill" /></button>
-        <button type="button" onclick="filterByBrand('Hilti')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Hilti.png" alt="Hilti" class="w-full h-full object-fill" /></button>
-        <button type="button" onclick="filterByBrand('Jokari')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Jokari.png" alt="Jokari" class="w-full h-full object-fill" /></button>
-        <button type="button" onclick="filterByBrand('Karcher')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Karcher.png" alt="Karcher" class="w-full h-full object-fill" /></button>
-        <button type="button" onclick="filterByBrand('Knipex')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Knipex.png" alt="Knipex" class="w-full h-full object-fill" /></button>
-        <button type="button" onclick="filterByBrand('Makita')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Makita.png" alt="Makita" class="w-full h-full object-fill" /></button>
-        <button type="button" onclick="filterByBrand('Metabo')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Metabo.png" alt="Metabo" class="w-full h-full object-fill" /></button>
-        <button type="button" onclick="filterByBrand('Milwaukee')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Milwaukee.png" alt="Milwaukee" class="w-full h-full object-fill" /></button>
-        <button type="button" onclick="filterByBrand('Parkside')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Parkside.png" alt="Parkside" class="w-full h-full object-fill" /></button>
-        <button type="button" onclick="filterByBrand('REMS')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/REMS.png" alt="REMS" class="w-full h-full object-fill" /></button>
-        <button type="button" onclick="filterByBrand('Ryobi')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Ryobi.png" alt="Ryobi" class="w-full h-full object-fill" /></button>
-        <button type="button" onclick="filterByBrand('Stanley')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Stanley.png" alt="Stanley" class="w-full h-full object-fill" /></button>
-        <button type="button" onclick="filterByBrand('Stihl')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Stihl.png" alt="Stihl" class="w-full h-full object-fill" /></button>
-        <button type="button" onclick="filterByBrand('Virax')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Virax.png" alt="Virax" class="w-full h-full object-fill" /></button>
-        <button type="button" onclick="filterByBrand('Wera')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Wera.png" alt="Wera" class="w-full h-full object-fill" /></button>
-        <button type="button" onclick="filterByBrand('Wiha')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Wiha.png" alt="Wiha" class="w-full h-full object-fill" /></button>
-        <button type="button" onclick="filterByBrand('Wurth')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Wurth.png" alt="Wurth" class="w-full h-full object-fill" /></button>
-
-        <!-- Repeat for seamless marquee animation -->
         <button type="button" onclick="filterByBrand('Black+Decker')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/BlackplusDecker.png" alt="Black+Decker" class="w-full h-full object-fill" /></button>
         <button type="button" onclick="filterByBrand('Bosch')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/Bosch.png" alt="Bosch" class="w-full h-full object-fill" /></button>
         <button type="button" onclick="filterByBrand('DeWalt')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-0"><img src="logos_23_marques/DeWalt.png" alt="DeWalt" class="w-full h-full object-fill" /></button>
@@ -388,7 +352,6 @@
     </main>
   </div>
 
-  <!-- Product Detail Modal -->
   <div id="productDetailModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-2xl w-full p-6 relative max-h-[90vh] overflow-y-auto shadow-2xl">
       <button 
@@ -471,7 +434,7 @@
     </div>
   </div>
 
-  <!-- Admin Control Modal -->
+  <!-- Admin Control & Messages Modal -->
   <div id="adminModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
     <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-4xl w-full p-6 relative max-h-[92vh] overflow-y-auto shadow-2xl">
       <button 
@@ -647,7 +610,7 @@
         </svg>
       </button>
       <h3 class="text-base font-black text-white mb-2">راسل إدارة Zinou Outillage</h3>
-      <p class="text-xs text-slate-400 mb-4">أدخل معلوماتك (الاسم، والولاية، ورقم الهاتف) ثم رسالتك.</p>
+      <p class="text-xs text-slate-400 mb-4">أدخل معلوماتك (الاسم واللقب، والولاية، ورقم الهاتف) ثم رسالتك.</p>
       
       <form onsubmit="handleCustomerMessageSubmit(event)" class="space-y-3 text-xs font-bold">
         <div>
@@ -694,6 +657,7 @@
         dir: "rtl",
         drawerBtn: "الفئات والأقسام",
         contactUsBtn: "راسلنا",
+        inboxBtn: "الرسائل",
         searchPlaceholder: "ابحث عن عتاد، ماركة، طراز...",
         brandFilterLabel: "الماركة:",
         allBrands: "جميع الماركات",
@@ -769,7 +733,8 @@
       fr: {
         dir: "ltr",
         drawerBtn: "Catégories",
-        call: "Appeler",
+        contactUsBtn: "Contactez-nous",
+        inboxBtn: "Messages",
         searchPlaceholder: "Rechercher matériel, marque, réf...",
         brandFilterLabel: "Marque:",
         allBrands: "Toutes les marques",
@@ -845,7 +810,8 @@
       en: {
         dir: "ltr",
         drawerBtn: "Categories",
-        call: "Call Now",
+        contactUsBtn: "Contact Us",
+        inboxBtn: "Messages",
         searchPlaceholder: "Search equipment, brand, ref...",
         brandFilterLabel: "Brand:",
         allBrands: "All Brands",
@@ -1055,6 +1021,7 @@
       localStorage.setItem("zinou_cart_v3", JSON.stringify(cart));
       localStorage.setItem("zinou_customer_messages_v1", JSON.stringify(customerMessages));
       updateCartBadge();
+      renderDynamicHeaderContact();
       updateAdminUnreadBadge();
     }
 
@@ -1063,19 +1030,52 @@
       if (badge) badge.textContent = cart.length;
     }
 
+    function renderDynamicHeaderContact() {
+      const container = document.getElementById("dynamicHeaderContactContainer");
+      if (!container) return;
+      const t = i18nData[currentLang];
+      const unreadCount = customerMessages.filter(m => !m.read).length;
+
+      if (isDeveloper) {
+        // Admin is logged in: button transforms to Inbox (الرسائل) with badge counter
+        container.innerHTML = `
+          <button 
+            type="button" 
+            onclick="openAdminModalToInbox()" 
+            class="relative px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 font-bold rounded-xl text-xs flex items-center gap-1.5 transition active:scale-95 cursor-pointer"
+          >
+            <svg class="w-3.5 h-3.5 text-amber-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+            </svg>
+            <span class="hidden sm:inline" data-i18n="inboxBtn">${t.inboxBtn}</span>
+            ${unreadCount > 0 ? `<span class="absolute -top-1.5 -right-1.5 bg-rose-600 text-white text-[10px] font-black px-1.5 py-0.2 rounded-full ring-2 ring-slate-900 min-w-4 text-center">${unreadCount}</span>` : ''}
+          </button>
+        `;
+      } else {
+        // Regular customer: button is "Contact Us" (راسلنا)
+        container.innerHTML = `
+          <button 
+            type="button" 
+            onclick="toggleModal('customerMessageModal')" 
+            class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 font-bold rounded-xl text-xs flex items-center gap-1.5 transition active:scale-95 cursor-pointer"
+          >
+            <svg class="w-3.5 h-3.5 text-amber-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+            </svg>
+            <span class="hidden sm:inline" data-i18n="contactUsBtn">${t.contactUsBtn}</span>
+          </button>
+        `;
+      }
+    }
+
+    window.openAdminModalToInbox = function() {
+      openAdminModal();
+      switchAdminTab('inbox');
+    };
+
     function updateAdminUnreadBadge() {
       const unreadCount = customerMessages.filter(m => !m.read).length;
-      const badge = document.getElementById("adminUnreadBadge");
       const inboxTabBadge = document.getElementById("inboxTabBadge");
-      
-      if (badge) {
-        if (unreadCount > 0) {
-          badge.textContent = unreadCount;
-          badge.classList.remove("hidden");
-        } else {
-          badge.classList.add("hidden");
-        }
-      }
 
       if (inboxTabBadge) {
         if (unreadCount > 0) {
@@ -1085,6 +1085,7 @@
           inboxTabBadge.classList.add("hidden");
         }
       }
+      renderDynamicHeaderContact();
     }
 
     window.unlockAdmin = function() {
@@ -1099,6 +1100,7 @@
         renderAdminTable();
         renderAdminAutocompletes();
         renderAdminMessages();
+        renderDynamicHeaderContact();
         applyFilters();
         showToast("تم الدخول للوضع الإداري بنجاح!", "success");
       } else {
@@ -1115,6 +1117,7 @@
       const passInput = document.getElementById("adminPassInput");
       if (passInput) passInput.value = "";
       toggleModal("adminModal");
+      renderDynamicHeaderContact();
       applyFilters();
       showToast("تم تسجيل الخروج بنجاح وأصبحت في وضع الزبون العادي.", "info");
     };
@@ -1918,6 +1921,7 @@
 
       renderCategoriesDrawer();
       renderCartList();
+      renderDynamicHeaderContact();
       renderAdminCategoryOptions();
       renderAdminImagesPreview();
       applyFilters();
@@ -2048,6 +2052,7 @@
       applyFilters();
       syncState();
       renderCartList();
+      renderDynamicHeaderContact();
       updateAdminUnreadBadge();
     });
   </script>
