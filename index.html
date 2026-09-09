@@ -1134,8 +1134,8 @@
         </button>
       `).join("");
 
-      // Render 4 sets for true infinite seamless loop cylinder
-      track.innerHTML = buildItemsHTML() + buildItemsHTML() + buildItemsHTML() + buildItemsHTML();
+      // Render 6 sets for true seamless infinite cylinder loop in any language direction
+      track.innerHTML = buildItemsHTML() + buildItemsHTML() + buildItemsHTML() + buildItemsHTML() + buildItemsHTML() + buildItemsHTML();
     }
 
     function renderDynamicHeaderContact() {
@@ -1144,7 +1144,6 @@
       if (!container) return;
       const t = i18nData[currentLang];
       
-      // Load freshest messages from storage
       customerMessages = JSON.parse(localStorage.getItem("zinou_customer_messages_v1") || "[]");
       const unreadCount = customerMessages.filter(m => !m.read).length;
 
@@ -1314,7 +1313,6 @@
         reply: ""
       };
 
-      // Force direct fresh read and write to localStorage
       let existing = JSON.parse(localStorage.getItem("zinou_customer_messages_v1") || "[]");
       existing.unshift(newMsg);
       localStorage.setItem("zinou_customer_messages_v1", JSON.stringify(existing));
@@ -1330,7 +1328,6 @@
       showToast("Message sent successfully!", "success");
     };
 
-    // Robust polling and event syncing for messages across tabs/windows
     window.addEventListener("storage", (e) => {
       if (e.key === "zinou_customer_messages_v1") {
         customerMessages = JSON.parse(e.newValue || "[]");
@@ -2215,38 +2212,37 @@
       renderDynamicHeaderContact();
       updateAdminUnreadBadge();
 
-      // Setup seamless true-infinite cylinder scroll for brands track
+      // Robust infinite cylinder auto-scroll and manual drag-to-scroll for all languages (RTL/LTR)
       const slider = document.getElementById("brandsScrollContainer");
       const track = document.getElementById("brandsTrack");
       let isDown = false;
       let startX;
       let scrollLeft;
-      let autoScrollSpeed = 1; // pixels per frame
+      let autoScrollSpeed = 0.8;
 
       if (slider && track) {
-        // Continuous smooth auto-scroll
+        // Center initial scroll position so infinite scrolling works in both directions smoothly
+        setTimeout(() => {
+          const singleSetWidth = track.scrollWidth / 6;
+          slider.scrollLeft = singleSetWidth * 3;
+        }, 100);
+
+        // Continuous smooth auto-scroll loop
         setInterval(() => {
           if (!isDown && !slider.matches(':hover')) {
+            const singleSetWidth = track.scrollWidth / 6;
             slider.scrollLeft += autoScrollSpeed;
+            
+            // Seamless cylinder reset
+            if (slider.scrollLeft >= singleSetWidth * 4) {
+              slider.scrollLeft -= singleSetWidth * 2;
+            } else if (slider.scrollLeft <= singleSetWidth) {
+              slider.scrollLeft += singleSetWidth * 2;
+            }
           }
-        }, 25);
+        }, 20);
 
-        // Infinite cylinder loop jumping logic
-        slider.addEventListener('scroll', () => {
-          const singleWidth = track.scrollWidth / 4;
-          if (slider.scrollLeft <= 5) {
-            slider.scrollLeft += singleWidth;
-          } else if (slider.scrollLeft >= (singleWidth * 3) - 5) {
-            slider.scrollLeft -= singleWidth;
-          }
-        });
-
-        // Initial jump to center set for immediate smooth bidirectional scrolling
-        setTimeout(() => {
-          const singleWidth = track.scrollWidth / 4;
-          slider.scrollLeft = singleWidth * 1.5;
-        }, 300);
-
+        // Manual drag & touch scrolling
         slider.addEventListener("mousedown", (e) => {
           isDown = true;
           slider.classList.add("active");
