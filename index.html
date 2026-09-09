@@ -134,7 +134,7 @@
           <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
           </svg>
-          <span id="cartCountBadge" class="absolute -top-1.5 -right-1.5 bg-rose-600 text-white text-[10px] font-black px-1.5 py-0.2 rounded-full ring-2 ring-slate-900 min-w-4 text-center">0</span>
+          <span id="cartCountBadge" class="hidden absolute -top-1.5 -right-1.5 bg-rose-600 text-white text-[10px] font-black px-1.5 py-0.2 rounded-full ring-2 ring-slate-900 min-w-4 text-center">0</span>
         </button>
       </div>
     </div>
@@ -420,8 +420,8 @@
           <input required id="buyerName" type="text" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
         </div>
         <div>
-          <label class="block mb-1 text-slate-400" data-i18n="phoneLabel">رقم الهاتف:</label>
-          <input required id="buyerPhone" type="tel" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+          <label class="block mb-1 text-slate-400" data-i18n="phoneLabel">رقم الهاتف (05 / 06 / 07 + 8 أرقام):</label>
+          <input required id="buyerPhone" type="tel" placeholder="05XXXXXXXX" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
         </div>
         <div>
           <label class="block mb-1 text-slate-400" data-i18n="addressLabel">الولاية والعنوان:</label>
@@ -622,8 +622,8 @@
           <input required id="clientMsgWilaya" type="text" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500" placeholder="مثال: الجزائر، البليدة، وهران...">
         </div>
         <div>
-          <label class="block mb-1 text-slate-400">رقم الهاتف:</label>
-          <input required id="clientMsgPhone" type="tel" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500" placeholder="0555000000">
+          <label class="block mb-1 text-slate-400">رقم الهاتف (05 / 06 / 07 + 8 أرقام):</label>
+          <input required id="clientMsgPhone" type="tel" placeholder="05XXXXXXXX" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
         </div>
         <div>
           <label class="block mb-1 text-slate-400">نص الرسالة أو الاستفسار:</label>
@@ -728,6 +728,7 @@
         deleteConfirmMsg: "هل أنت متأكد تماماً من رغبتك في حذف هذه السلعة نهائياً؟",
         orderSuccessMsg: "تم تسجيل طلبيتك بنجاح! سنتصل بك قريباً لتأكيد التوصيل.",
         minOrderError: "عذراً، الحد الأدنى لتأكيد الطلبية هو 10000 دج فما فوق.",
+        phoneErrorMsg: "رقم الهاتف غير صحيح! يجب أن يبدأ بـ 05، 06 أو 07 ويتكون من 10 أرقام بالضبط (مثال: 0550123456).",
         newBadge: "جديد"
       },
       fr: {
@@ -805,6 +806,7 @@
         deleteConfirmMsg: "Êtes-vous sûr de vouloir supprimer cet article ?",
         orderSuccessMsg: "Commande enregistrée avec succès !",
         minOrderError: "Désolé, le montant minimum de commande est de 10000 DZD.",
+        phoneErrorMsg: "Numéro de téléphone invalide ! Doit commencer par 05, 06 ou 07 (10 chiffres).",
         newBadge: "NOUVEAU"
       },
       en: {
@@ -882,6 +884,7 @@
         deleteConfirmMsg: "Are you sure you want to delete this item permanently?",
         orderSuccessMsg: "Order placed successfully! We will contact you soon.",
         minOrderError: "Sorry, the minimum order amount is 10000 DZD.",
+        phoneErrorMsg: "Invalid phone number! Must start with 05, 06, or 07 followed by 8 digits.",
         newBadge: "NEW"
       }
     };
@@ -983,6 +986,14 @@
       }
     ]));
 
+    // Helper function for validation of Algerian phone numbers (05, 06, 07 + 8 digits, allowing spaces/dashes)
+    function validateAlgerianPhone(phoneStr) {
+      if (!phoneStr) return false;
+      const cleaned = phoneStr.replace(/\s+/g, '').replace(/-/g, '').replace(/\+/g, '');
+      const algerianPhoneRegex = /^(0)(5|6|7)[0-9]{8}$/;
+      return algerianPhoneRegex.test(cleaned);
+    }
+
     // Helper function for localization safely attached globally
     window.getLocalized = function(val) {
       if (!val) return "";
@@ -1027,7 +1038,14 @@
 
     function updateCartBadge() {
       const badge = document.getElementById("cartCountBadge");
-      if (badge) badge.textContent = cart.length;
+      if (!badge) return;
+      if (cart.length > 0) {
+        badge.textContent = cart.length;
+        badge.classList.remove("hidden");
+      } else {
+        badge.textContent = "0";
+        badge.classList.add("hidden");
+      }
     }
 
     function renderDynamicHeaderContact() {
@@ -1167,6 +1185,11 @@
       const wilaya = document.getElementById("clientMsgWilaya")?.value || "";
       const phone = document.getElementById("clientMsgPhone")?.value || "";
       const text = document.getElementById("clientMsgTextarea")?.value || "";
+
+      if (!validateAlgerianPhone(phone)) {
+        showToast(i18nData[currentLang].phoneErrorMsg, "error");
+        return;
+      }
 
       const newMsg = {
         id: Date.now(),
@@ -1508,6 +1531,12 @@
       let total = cart.reduce((sum, p) => sum + (p.offerPrice || p.price), 0);
       if (total < 10000) {
         showToast(i18nData[currentLang].minOrderError, "error");
+        return;
+      }
+
+      const phoneInput = document.getElementById("buyerPhone")?.value || "";
+      if (!validateAlgerianPhone(phoneInput)) {
+        showToast(i18nData[currentLang].phoneErrorMsg, "error");
         return;
       }
 
