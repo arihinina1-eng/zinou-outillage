@@ -78,13 +78,13 @@
           <span data-i18n="drawerBtn">الفئات والأقسام</span>
         </button>
 
-        <!-- Brand Identity Image Logo (Reverted to the previous balanced step before x2) -->
+        <!-- Brand Identity Image Logo -->
         <div class="flex items-center cursor-pointer select-none py-1" onclick="resetAllFilters()" title="Zinou Outillage">
           <img src="LOGO SITE.png" alt="Zinou Outillage Logo" class="h-11 sm:h-14 w-auto object-contain" />
         </div>
       </div>
 
-      <!-- Actions: Android App, Language, Direct Call, Admin, Cart -->
+      <!-- Actions: Android App, Language, Direct Message/Call, Admin, Cart -->
       <div class="flex items-center gap-2">
         <!-- Android App Download Button -->
         <button 
@@ -110,27 +110,29 @@
           <option value="en">🇬🇧 English</option>
         </select>
 
-        <!-- Direct Phone Call Button -->
-        <a 
-          href="tel:0555000000" 
-          class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 font-bold rounded-xl text-xs flex items-center gap-1.5 transition active:scale-95"
+        <!-- Customer Contact Message Button -->
+        <button 
+          type="button" 
+          onclick="toggleModal('customerMessageModal')" 
+          class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 font-bold rounded-xl text-xs flex items-center gap-1.5 transition active:scale-95 cursor-pointer"
         >
-          <svg class="w-3.5 h-3.5 text-amber-500" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+          <svg class="w-3.5 h-3.5 text-amber-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
           </svg>
-          <span class="hidden sm:inline" data-i18n="call">اتصل الآن</span>
-        </a>
+          <span class="hidden sm:inline" data-i18n="contactUsBtn">راسلنا</span>
+        </button>
 
         <!-- Admin Control Button -->
         <button 
           type="button" 
           onclick="openAdminModal()" 
-          class="p-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-amber-400 rounded-xl border border-slate-700 text-xs font-bold transition cursor-pointer" 
+          class="relative p-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-amber-400 rounded-xl border border-slate-700 text-xs font-bold transition cursor-pointer" 
           title="Admin"
         >
           <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
           </svg>
+          <span id="adminUnreadBadge" class="hidden absolute -top-1.5 -right-1.5 bg-rose-600 text-white text-[10px] font-black px-1.5 py-0.2 rounded-full ring-2 ring-slate-900 min-w-4 text-center">0</span>
         </button>
 
         <!-- Cart Button with Counter -->
@@ -471,7 +473,7 @@
 
   <!-- Admin Control Modal -->
   <div id="adminModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-3xl w-full p-6 relative max-h-[92vh] overflow-y-auto shadow-2xl">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-4xl w-full p-6 relative max-h-[92vh] overflow-y-auto shadow-2xl">
       <button 
         type="button" 
         onclick="toggleModal('adminModal')" 
@@ -485,7 +487,7 @@
       <!-- Modal Header with Logout Button if logged in -->
       <div class="flex items-center justify-between mb-4">
         <h3 class="text-base font-black text-amber-500 flex items-center gap-2">
-          <span data-i18n="adminPanelTitle">لوحة تحكم إدارة السلع والمخزون</span>
+          <span data-i18n="adminPanelTitle">لوحة تحكم إدارة السلع والمخزون والرسائل</span>
         </h3>
         <div id="adminHeaderLogoutBtn" class="hidden">
           <button type="button" onclick="lockAdminSession()" class="px-3 py-1.5 bg-rose-900/80 hover:bg-rose-900 text-rose-200 text-xs font-black rounded-xl border border-rose-700/60 transition cursor-pointer flex items-center gap-1.5">
@@ -503,104 +505,171 @@
         </div>
       </div>
 
-      <!-- Product Form -->
-      <div id="adminContent" class="hidden space-y-5">
-        <form onsubmit="saveProduct(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-bold">
-          <input type="hidden" id="editProductId" value="">
-          
-          <div>
-            <label class="block mb-1 text-slate-400" data-i18n="formBrandLabel">الماركة:</label>
-            <input required id="formBrand" list="brandSuggestionsList" type="text" oninput="updateTitleSuggestions()" placeholder="Hilti, Bosch, Milwaukee..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
-            <datalist id="brandSuggestionsList"></datalist>
-          </div>
-          <div>
-            <label class="block mb-1 text-slate-400" data-i18n="formTitleLabel">اسم العتاد / الآلة:</label>
-            <input required id="formTitle" list="titleSuggestionsList" type="text" placeholder="شينيور، فيسوز، مطرقة هدم..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
-            <datalist id="titleSuggestionsList"></datalist>
-          </div>
-          <div>
-            <label class="block mb-1 text-slate-400" data-i18n="formRefLabel">رقم الطراز (Référence):</label>
-            <input required id="formRef" list="refSuggestionsList" type="text" placeholder="TE 70, M18, DCD996..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
-            <datalist id="refSuggestionsList"></datalist>
-          </div>
-          <div>
-            <label class="block mb-1 text-slate-400" data-i18n="formCategoryLabel">الفئة:</label>
-            <select id="formCategory" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500 cursor-pointer"></select>
-          </div>
-          <div>
-            <label class="block mb-1 text-slate-400" data-i18n="formYearLabel">سنة الإنتاج:</label>
-            <input required id="formYear" type="number" value="2024" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
-          </div>
-          <div>
-            <label class="block mb-1 text-slate-400" data-i18n="formCountryLabel">بلد الصنع / المنشأ:</label>
-            <input required id="formCountry" list="countrySuggestionsList" type="text" placeholder="ألمانيا، أمريكا، اليابان..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
-            <datalist id="countrySuggestionsList"></datalist>
-          </div>
-          <div>
-            <label class="block mb-1 text-slate-400" data-i18n="formConditionLabel">الحالة:</label>
-            <select id="formCondition" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500 cursor-pointer">
-              <option value="new" data-i18n="condNew">جديد</option>
-              <option value="like_new" data-i18n="condLikeNew">جديد يشبه المستعمل</option>
-              <option value="used" data-i18n="condUsed">مستعمل</option>
-            </select>
-          </div>
-          <div>
-            <label class="block mb-1 text-slate-400" data-i18n="formStockLabel">الكمية المتوفرة:</label>
-            <input required id="formStock" type="number" min="0" value="1" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
-          </div>
-          <div>
-            <label class="block mb-1 text-slate-400" data-i18n="formPriceLabel">السعر الأصلي:</label>
-            <input required id="formPrice" type="number" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
-          </div>
-          <div>
-            <label class="block mb-1 text-amber-400" data-i18n="formOfferPriceLabel">سعر التخفيض (OFFRE):</label>
-            <input id="formOfferPrice" type="number" class="w-full bg-slate-950 border border-amber-500/50 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
-          </div>
+      <!-- Product & Messages Management Content -->
+      <div id="adminContent" class="hidden space-y-6">
+        
+        <!-- Tabs for Products vs Inbox Messages -->
+        <div class="flex gap-2 border-b border-slate-800 pb-3">
+          <button type="button" onclick="switchAdminTab('products')" id="adminTabProductsBtn" class="px-4 py-2 bg-amber-500 text-slate-950 rounded-xl font-black text-xs transition cursor-pointer">إدارة السلع والمخزون</button>
+          <button type="button" onclick="switchAdminTab('inbox')" id="adminTabInboxBtn" class="relative px-4 py-2 bg-slate-800 text-slate-300 hover:text-white rounded-xl font-bold text-xs transition cursor-pointer">
+            صندوق رسائل الزبائن <span id="inboxTabBadge" class="hidden bg-rose-600 text-white text-[10px] font-black px-1.5 py-0.2 rounded-full ml-1">0</span>
+          </button>
+        </div>
 
-          <!-- Multi-Image Upload Section -->
-          <div class="sm:col-span-2">
-            <label class="block mb-1 text-slate-400" data-i18n="formImagesLabel">صور العتاد (رفع عدة صور، واختر الرئيسية):</label>
-            <label class="flex flex-col items-center justify-center border-2 border-dashed border-slate-700 hover:border-amber-500 rounded-2xl p-4 cursor-pointer bg-slate-950/60 transition group mb-3">
-              <svg class="w-7 h-7 text-slate-400 group-hover:text-amber-400 mb-1 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-              </svg>
-              <span class="text-xs font-bold text-slate-300 group-hover:text-amber-400" data-i18n="uploadMultiplePrompt">اضغط لاختيار عدة صور دفعة واحدة</span>
-              <input id="formImagesInput" type="file" accept="image/*" multiple class="hidden" onchange="handleMultipleImagesUpload(event)">
-            </label>
+        <!-- Tab 1: Products Management -->
+        <div id="adminSectionProducts" class="space-y-5">
+          <form onsubmit="saveProduct(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-bold">
+            <input type="hidden" id="editProductId" value="">
+            
+            <div>
+              <label class="block mb-1 text-slate-400" data-i18n="formBrandLabel">الماركة:</label>
+              <input required id="formBrand" list="brandSuggestionsList" type="text" oninput="updateTitleSuggestions()" placeholder="Hilti, Bosch, Milwaukee..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+              <datalist id="brandSuggestionsList"></datalist>
+            </div>
+            <div>
+              <label class="block mb-1 text-slate-400" data-i18n="formTitleLabel">اسم العتاد / الآلة:</label>
+              <input required id="formTitle" list="titleSuggestionsList" type="text" placeholder="شينيور، فيسوز، مطرقة هدم..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+              <datalist id="titleSuggestionsList"></datalist>
+            </div>
+            <div>
+              <label class="block mb-1 text-slate-400" data-i18n="formRefLabel">رقم الطراز (Référence):</label>
+              <input required id="formRef" list="refSuggestionsList" type="text" placeholder="TE 70, M18, DCD996..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+              <datalist id="refSuggestionsList"></datalist>
+            </div>
+            <div>
+              <label class="block mb-1 text-slate-400" data-i18n="formCategoryLabel">الفئة:</label>
+              <select id="formCategory" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500 cursor-pointer"></select>
+            </div>
+            <div>
+              <label class="block mb-1 text-slate-400" data-i18n="formYearLabel">سنة الإنتاج:</label>
+              <input required id="formYear" type="number" value="2024" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+            </div>
+            <div>
+              <label class="block mb-1 text-slate-400" data-i18n="formCountryLabel">بلد الصنع / المنشأ:</label>
+              <input required id="formCountry" list="countrySuggestionsList" type="text" placeholder="ألمانيا، أمريكا، اليابان..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+              <datalist id="countrySuggestionsList"></datalist>
+            </div>
+            <div>
+              <label class="block mb-1 text-slate-400" data-i18n="formConditionLabel">الحالة:</label>
+              <select id="formCondition" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500 cursor-pointer">
+                <option value="new" data-i18n="condNew">جديد</option>
+                <option value="like_new" data-i18n="condLikeNew">جديد يشبه المستعمل</option>
+                <option value="used" data-i18n="condUsed">مستعمل</option>
+              </select>
+            </div>
+            <div>
+              <label class="block mb-1 text-slate-400" data-i18n="formStockLabel">الكمية المتوفرة:</label>
+              <input required id="formStock" type="number" min="0" value="1" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+            </div>
+            <div>
+              <label class="block mb-1 text-slate-400" data-i18n="formPriceLabel">السعر الأصلي:</label>
+              <input required id="formPrice" type="number" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+            </div>
+            <div>
+              <label class="block mb-1 text-amber-400" data-i18n="formOfferPriceLabel">سعر التخفيض (OFFRE):</label>
+              <input id="formOfferPrice" type="number" class="w-full bg-slate-950 border border-amber-500/50 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500">
+            </div>
 
-            <!-- Dynamic Image Gallery Preview with Main Image Selector -->
-            <div id="adminImagesPreviewGrid" class="grid grid-cols-2 sm:grid-cols-4 gap-3"></div>
-          </div>
+            <!-- Multi-Image Upload Section -->
+            <div class="sm:col-span-2">
+              <label class="block mb-1 text-slate-400" data-i18n="formImagesLabel">صور العتاد (رفع عدة صور، واختر الرئيسية):</label>
+              <label class="flex flex-col items-center justify-center border-2 border-dashed border-slate-700 hover:border-amber-500 rounded-2xl p-4 cursor-pointer bg-slate-950/60 transition group mb-3">
+                <svg class="w-7 h-7 text-slate-400 group-hover:text-amber-400 mb-1 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+                <span class="text-xs font-bold text-slate-300 group-hover:text-amber-400" data-i18n="uploadMultiplePrompt">اضغط لاختيار عدة صور دفعة واحدة</span>
+                <input id="formImagesInput" type="file" accept="image/*" multiple class="hidden" onchange="handleMultipleImagesUpload(event)">
+              </label>
 
-          <div class="sm:col-span-2">
-            <label class="block mb-1 text-slate-400" data-i18n="formDescLabel">مواصفات ونبذة تفصيلية:</label>
-            <textarea id="formDesc" rows="3" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500"></textarea>
-          </div>
+              <!-- Dynamic Image Gallery Preview with Main Image Selector -->
+              <div id="adminImagesPreviewGrid" class="grid grid-cols-2 sm:grid-cols-4 gap-3"></div>
+            </div>
 
-          <div class="sm:col-span-2 flex justify-end gap-3 pt-3 border-t border-slate-800">
-            <button type="button" onclick="resetAdminForm()" class="px-4 py-2 bg-slate-800 text-slate-300 rounded-xl font-bold cursor-pointer" data-i18n="cancelBtn">إلغاء</button>
-            <button type="submit" class="px-5 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black rounded-xl transition cursor-pointer" data-i18n="saveProductBtn">حفظ ونشر السلعة</button>
-          </div>
-        </form>
+            <div class="sm:col-span-2">
+              <label class="block mb-1 text-slate-400" data-i18n="formDescLabel">مواصفات ونبذة تفصيلية:</label>
+              <textarea id="formDesc" rows="3" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500"></textarea>
+            </div>
 
-        <!-- Current Products Table -->
-        <div class="pt-4 border-t border-slate-800">
-          <h4 class="font-black text-xs text-white mb-2" data-i18n="warehouseListTitle">قائمة السلع بالمستودع:</h4>
-          <div class="overflow-x-auto">
-            <table class="w-full text-start text-xs">
-              <thead class="bg-slate-950 text-slate-400 font-bold">
-                <tr>
-                  <th class="p-2" data-i18n="tableProduct">السلعة</th>
-                  <th class="p-2" data-i18n="tablePrice">السعر</th>
-                  <th class="p-2" data-i18n="tableStock">المخزون</th>
-                  <th class="p-2 text-center" data-i18n="tableActions">إجراءات</th>
-                </tr>
-              </thead>
-              <tbody id="adminProductsTable" class="divide-y divide-slate-800"></tbody>
-            </table>
+            <div class="sm:col-span-2 flex justify-end gap-3 pt-3 border-t border-slate-800">
+              <button type="button" onclick="resetAdminForm()" class="px-4 py-2 bg-slate-800 text-slate-300 rounded-xl font-bold cursor-pointer" data-i18n="cancelBtn">إلغاء</button>
+              <button type="submit" class="px-5 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black rounded-xl transition cursor-pointer" data-i18n="saveProductBtn">حفظ ونشر السلعة</button>
+            </div>
+          </form>
+
+          <!-- Current Products Table -->
+          <div class="pt-4 border-t border-slate-800">
+            <h4 class="font-black text-xs text-white mb-2" data-i18n="warehouseListTitle">قائمة السلع بالمستودع:</h4>
+            <div class="overflow-x-auto">
+              <table class="w-full text-start text-xs">
+                <thead class="bg-slate-950 text-slate-400 font-bold">
+                  <tr>
+                    <th class="p-2" data-i18n="tableProduct">السلعة</th>
+                    <th class="p-2" data-i18n="tablePrice">السعر</th>
+                    <th class="p-2" data-i18n="tableStock">المخزون</th>
+                    <th class="p-2 text-center" data-i18n="tableActions">إجراءات</th>
+                  </tr>
+                </thead>
+                <tbody id="adminProductsTable" class="divide-y divide-slate-800"></tbody>
+              </table>
+            </div>
           </div>
         </div>
+
+        <!-- Tab 2: Customer Messages Inbox -->
+        <div id="adminSectionInbox" class="hidden space-y-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <input type="checkbox" id="selectAllMessagesCheckbox" onchange="toggleSelectAllMessages(this)" class="accent-amber-500">
+              <span class="text-xs font-bold text-slate-300">تحديد الكل</span>
+            </div>
+            <button type="button" onclick="deleteSelectedMessages()" class="px-3 py-1.5 bg-rose-600 hover:bg-rose-500 text-white rounded-xl text-xs font-black transition cursor-pointer">
+              🗑️ حذف المحدد
+            </button>
+          </div>
+
+          <div id="adminMessagesList" class="space-y-3 max-h-[60vh] overflow-y-auto"></div>
+        </div>
+
       </div>
+    </div>
+  </div>
+
+  <!-- Customer Contact Message Modal -->
+  <div id="customerMessageModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-6 relative shadow-2xl">
+      <button 
+        type="button" 
+        onclick="toggleModal('customerMessageModal')" 
+        class="absolute top-4 left-4 w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition cursor-pointer"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+      <h3 class="text-base font-black text-white mb-2">راسل إدارة Zinou Outillage</h3>
+      <p class="text-xs text-slate-400 mb-4">أدخل معلوماتك (الاسم، والولاية، ورقم الهاتف) ثم رسالتك.</p>
+      
+      <form onsubmit="handleCustomerMessageSubmit(event)" class="space-y-3 text-xs font-bold">
+        <div>
+          <label class="block mb-1 text-slate-400">الاسم واللقب:</label>
+          <input required id="clientMsgName" type="text" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500" placeholder="مثال: محمد بن علي">
+        </div>
+        <div>
+          <label class="block mb-1 text-slate-400">الولاية:</label>
+          <input required id="clientMsgWilaya" type="text" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500" placeholder="مثال: الجزائر، البليدة، وهران...">
+        </div>
+        <div>
+          <label class="block mb-1 text-slate-400">رقم الهاتف:</label>
+          <input required id="clientMsgPhone" type="tel" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500" placeholder="0555000000">
+        </div>
+        <div>
+          <label class="block mb-1 text-slate-400">نص الرسالة أو الاستفسار:</label>
+          <textarea required id="clientMsgTextarea" rows="3" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-amber-500 mt-1" placeholder="اكتب تفاصيل طلبك أو استفسارك هنا..."></textarea>
+        </div>
+        <button type="submit" class="w-full py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black rounded-xl transition cursor-pointer">
+          إرسال الرسالة الآن
+        </button>
+      </form>
     </div>
   </div>
 
@@ -624,7 +693,7 @@
       ar: {
         dir: "rtl",
         drawerBtn: "الفئات والأقسام",
-        call: "اتصل الآن",
+        contactUsBtn: "راسلنا",
         searchPlaceholder: "ابحث عن عتاد، ماركة، طراز...",
         brandFilterLabel: "الماركة:",
         allBrands: "جميع الماركات",
@@ -874,6 +943,7 @@
     let currentLang = "ar";
     let activeCategory = "all";
     let cart = JSON.parse(localStorage.getItem("zinou_cart_v3") || "[]");
+    let customerMessages = JSON.parse(localStorage.getItem("zinou_customer_messages_v1") || "[]");
     let isDeveloper = sessionStorage.getItem("zinou_developer_session") === "true";
     let currentAdminImages = [];
     let currentAdminMainIndex = 0;
@@ -947,10 +1017,45 @@
       }
     ]));
 
+    // Helper function for localization safely attached globally
+    window.getLocalized = function(val) {
+      if (!val) return "";
+      if (typeof val === "object") {
+        return val[currentLang] || val.ar || Object.values(val)[0] || "";
+      }
+      return val;
+    };
+
+    // Helper function for toggling modals safely attached globally
+    window.toggleModal = function(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.classList.toggle("hidden");
+      }
+    };
+
+    window.toggleCategoriesDrawer = function() {
+      const drawer = document.getElementById("categoriesDrawer");
+      const backdrop = document.getElementById("drawerBackdrop");
+      if (!drawer || !backdrop) return;
+      const t = i18nData[currentLang];
+      const isOpen = !drawer.classList.contains("translate-x-0") && drawer.style.transform === "translateX(0px)";
+
+      if (isOpen) {
+        drawer.style.transform = t.dir === "rtl" ? "translateX(100%)" : "translateX(-100%)";
+        backdrop.classList.add("hidden");
+      } else {
+        drawer.style.transform = "translateX(0px)";
+        backdrop.classList.remove("hidden");
+      }
+    };
+
     function syncState() {
       localStorage.setItem("zinou_products_v3", JSON.stringify(products));
       localStorage.setItem("zinou_cart_v3", JSON.stringify(cart));
+      localStorage.setItem("zinou_customer_messages_v1", JSON.stringify(customerMessages));
       updateCartBadge();
+      updateAdminUnreadBadge();
     }
 
     function updateCartBadge() {
@@ -958,28 +1063,31 @@
       if (badge) badge.textContent = cart.length;
     }
 
-    function toggleModal(id) {
-      const modal = document.getElementById(id);
-      if (modal) modal.classList.toggle("hidden");
-    }
+    function updateAdminUnreadBadge() {
+      const unreadCount = customerMessages.filter(m => !m.read).length;
+      const badge = document.getElementById("adminUnreadBadge");
+      const inboxTabBadge = document.getElementById("inboxTabBadge");
+      
+      if (badge) {
+        if (unreadCount > 0) {
+          badge.textContent = unreadCount;
+          badge.classList.remove("hidden");
+        } else {
+          badge.classList.add("hidden");
+        }
+      }
 
-    function toggleCategoriesDrawer() {
-      const drawer = document.getElementById("categoriesDrawer");
-      const backdrop = document.getElementById("drawerBackdrop");
-      if (!drawer || !backdrop) return;
-      const isOpen = !drawer.classList.contains("translate-x-0");
-      if (isOpen) {
-        drawer.classList.add("translate-x-0");
-        drawer.style.transform = "translateX(0)";
-        backdrop.classList.remove("hidden");
-      } else {
-        drawer.classList.remove("translate-x-0");
-        drawer.style.transform = currentLang === "ar" ? "translateX(100%)" : "translateX(-100%)";
-        backdrop.classList.add("hidden");
+      if (inboxTabBadge) {
+        if (unreadCount > 0) {
+          inboxTabBadge.textContent = unreadCount;
+          inboxTabBadge.classList.remove("hidden");
+        } else {
+          inboxTabBadge.classList.add("hidden");
+        }
       }
     }
 
-    function unlockAdmin() {
+    window.unlockAdmin = function() {
       const pass = document.getElementById("adminPassInput")?.value;
       if (pass === "1234") {
         isDeveloper = true;
@@ -990,14 +1098,15 @@
         renderAdminCategoryOptions();
         renderAdminTable();
         renderAdminAutocompletes();
+        renderAdminMessages();
         applyFilters();
         showToast("تم الدخول للوضع الإداري بنجاح!", "success");
       } else {
         showToast("كلمة المرور غير صحيحة!", "error");
       }
-    }
+    };
 
-    function lockAdminSession() {
+    window.lockAdminSession = function() {
       isDeveloper = false;
       sessionStorage.removeItem("zinou_developer_session");
       document.getElementById("adminLock")?.classList.remove("hidden");
@@ -1008,9 +1117,9 @@
       toggleModal("adminModal");
       applyFilters();
       showToast("تم تسجيل الخروج بنجاح وأصبحت في وضع الزبون العادي.", "info");
-    }
+    };
 
-    function openAdminModal() {
+    window.openAdminModal = function() {
       toggleModal("adminModal");
       if (isDeveloper) {
         document.getElementById("adminLock")?.classList.add("hidden");
@@ -1019,6 +1128,7 @@
         renderAdminCategoryOptions();
         renderAdminTable();
         renderAdminAutocompletes();
+        renderAdminMessages();
       } else {
         document.getElementById("adminLock")?.classList.remove("hidden");
         document.getElementById("adminContent")?.classList.add("hidden");
@@ -1026,27 +1136,141 @@
         const passInput = document.getElementById("adminPassInput");
         if (passInput) passInput.value = "";
       }
+    };
+
+    window.switchAdminTab = function(tabName) {
+      const productsSec = document.getElementById("adminSectionProducts");
+      const inboxSec = document.getElementById("adminSectionInbox");
+      const prodBtn = document.getElementById("adminTabProductsBtn");
+      const inboxBtn = document.getElementById("adminTabInboxBtn");
+
+      if (tabName === 'products') {
+        productsSec.classList.remove("hidden");
+        inboxSec.classList.add("hidden");
+        prodBtn.className = "px-4 py-2 bg-amber-500 text-slate-950 rounded-xl font-black text-xs transition cursor-pointer";
+        inboxBtn.className = "relative px-4 py-2 bg-slate-800 text-slate-300 hover:text-white rounded-xl font-bold text-xs transition cursor-pointer";
+      } else {
+        productsSec.classList.add("hidden");
+        inboxSec.classList.remove("hidden");
+        prodBtn.className = "relative px-4 py-2 bg-slate-800 text-slate-300 hover:text-white rounded-xl font-bold text-xs transition cursor-pointer";
+        inboxBtn.className = "px-4 py-2 bg-amber-500 text-slate-950 rounded-xl font-black text-xs transition cursor-pointer";
+        markAllMessagesRead();
+      }
+    };
+
+    window.handleCustomerMessageSubmit = function(e) {
+      e.preventDefault();
+      const name = document.getElementById("clientMsgName")?.value || "";
+      const wilaya = document.getElementById("clientMsgWilaya")?.value || "";
+      const phone = document.getElementById("clientMsgPhone")?.value || "";
+      const text = document.getElementById("clientMsgTextarea")?.value || "";
+
+      const newMsg = {
+        id: Date.now(),
+        createdAt: Date.now(),
+        name,
+        wilaya,
+        contact: phone,
+        text,
+        read: false,
+        reply: ""
+      };
+
+      customerMessages.unshift(newMsg);
+      syncState();
+      toggleModal("customerMessageModal");
+      document.getElementById("clientMsgName").value = "";
+      document.getElementById("clientMsgWilaya").value = "";
+      document.getElementById("clientMsgPhone").value = "";
+      document.getElementById("clientMsgTextarea").value = "";
+      showToast("تم إرسال رسالتك بنجاح إلى الإدارة!", "success");
+    };
+
+    function renderAdminMessages() {
+      const container = document.getElementById("adminMessagesList");
+      if (!container) return;
+
+      if (customerMessages.length === 0) {
+        container.innerHTML = `<div class="py-12 text-center text-slate-500 text-xs font-bold">لا توجد رسائل من الزبائن حالياً.</div>`;
+        return;
+      }
+
+      container.innerHTML = customerMessages.map((msg, index) => {
+        const dateStr = new Date(msg.createdAt).toLocaleString();
+        return `
+          <div class="bg-slate-950 border ${msg.read ? 'border-slate-800' : 'border-amber-500/60 ring-1 ring-amber-500/20'} rounded-2xl p-4 space-y-2.5">
+            <div class="flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <input type="checkbox" data-msg-id="${msg.id}" class="accent-amber-500 msg-checkbox">
+                <span class="font-black text-white text-xs">${msg.name}</span>
+                <span class="text-[10px] text-amber-400 font-bold">(${msg.wilaya || 'غير محددة'})</span>
+                <span class="text-[10px] text-slate-300 font-mono">(${msg.contact})</span>
+                ${!msg.read ? '<span class="bg-amber-500 text-slate-950 text-[9px] font-black px-1.5 py-0.5 rounded-md">جديدة</span>' : ''}
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] text-slate-500">${dateStr}</span>
+                <button type="button" onclick="deleteSingleMessage(${msg.id})" class="text-rose-400 hover:text-rose-300 text-xs p-1 cursor-pointer">🗑️</button>
+              </div>
+            </div>
+
+            <p class="text-xs text-slate-300 bg-slate-900 p-2.5 rounded-xl border border-slate-800">${msg.text}</p>
+
+            <!-- Reply section -->
+            <div class="pt-2 border-t border-slate-900 space-y-2">
+              ${msg.reply ? `
+                <div class="bg-emerald-950/40 border border-emerald-900/60 p-2.5 rounded-xl text-xs text-emerald-200">
+                  <span class="font-bold text-emerald-400">الرد المرسل:</span> ${msg.reply}
+                </div>
+              ` : ''}
+              <div class="flex gap-2">
+                <input id="replyInput_${msg.id}" type="text" placeholder="اكتب رداً للزبون..." class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-white text-xs outline-none focus:border-amber-500">
+                <button type="button" onclick="sendAdminReply(${msg.id})" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-black transition cursor-pointer">إرسال رد</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("");
     }
 
-    function getLocalized(textObj) {
-      if (!textObj) return "";
-      if (typeof textObj === "string") return textObj;
-      return textObj[currentLang] || textObj.ar || "";
-    }
+    window.markAllMessagesRead = function() {
+      customerMessages.forEach(m => m.read = true);
+      syncState();
+      renderAdminMessages();
+    };
 
-    function getConditionText(cond) {
-      const t = i18nData[currentLang];
-      if (cond === "new") return t.condNew;
-      if (cond === "like_new") return t.condLikeNew;
-      return t.condUsed;
-    }
+    window.toggleSelectAllMessages = function(masterCheckbox) {
+      const checkboxes = document.querySelectorAll(".msg-checkbox");
+      checkboxes.forEach(cb => cb.checked = masterCheckbox.checked);
+    };
 
-    window.filterByBrand = function(brandName) {
-      const brandSelect = document.getElementById("brandSelect");
-      if (brandSelect) {
-        brandSelect.value = brandName;
-        applyFilters();
-        window.scrollTo({ top: 400, behavior: 'smooth' });
+    window.deleteSingleMessage = function(id) {
+      customerMessages = customerMessages.filter(m => m.id !== id);
+      syncState();
+      renderAdminMessages();
+    };
+
+    window.deleteSelectedMessages = function() {
+      const checkboxes = document.querySelectorAll(".msg-checkbox:checked");
+      if (checkboxes.length === 0) {
+        showToast("الرجاء تحديد رسالة واحدة على الأقل للحذف.", "error");
+        return;
+      }
+      const idsToDelete = Array.from(checkboxes).map(cb => parseInt(cb.getAttribute("data-msg-id")));
+      customerMessages = customerMessages.filter(m => !idsToDelete.includes(m.id));
+      syncState();
+      renderAdminMessages();
+      showToast("تم حذف الرسائل المحددة بنجاح.", "success");
+    };
+
+    window.sendAdminReply = function(id) {
+      const input = document.getElementById(`replyInput_${id}`);
+      if (!input || !input.value.trim()) return;
+      const msg = customerMessages.find(m => m.id === id);
+      if (msg) {
+        msg.reply = input.value.trim();
+        syncState();
+        renderAdminMessages();
+        showToast("تم حفظ وإرسال الرد بنجاح!", "success");
       }
     };
 
@@ -1086,10 +1310,10 @@
         if (effectivePrice < minPrice || effectivePrice > maxPrice) return false;
 
         if (searchTerm) {
-          const matchTitle = getLocalized(p.title).toLowerCase().includes(searchTerm);
+          const matchTitle = window.getLocalized(p.title).toLowerCase().includes(searchTerm);
           const matchBrand = p.brand.toLowerCase().includes(searchTerm);
           const matchRef = p.ref.toLowerCase().includes(searchTerm);
-          const matchCountry = getLocalized(p.country).toLowerCase().includes(searchTerm);
+          const matchCountry = window.getLocalized(p.country).toLowerCase().includes(searchTerm);
           if (!matchTitle && !matchBrand && !matchRef && !matchCountry) return false;
         }
 
@@ -1156,7 +1380,7 @@
                     OFFRE
                   </span>
                 ` : ''}
-                <img src="${primaryImg}" alt="${getLocalized(p.title)}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500 ${!isAvailable ? 'grayscale opacity-40' : ''}" />
+                <img src="${primaryImg}" alt="${window.getLocalized(p.title)}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500 ${!isAvailable ? 'grayscale opacity-40' : ''}" />
                 
                 ${isDeveloper ? `
                   <div class="absolute bottom-2 left-2 z-25 flex gap-1 bg-slate-950/90 backdrop-blur-md p-1 rounded-xl border border-slate-700 shadow" onclick="event.stopPropagation()">
@@ -1172,7 +1396,7 @@
                   <span class="text-amber-400 font-bold">${p.brand}</span>
                   <span class="text-slate-500 font-mono">${p.ref}</span>
                 </div>
-                <h3 onclick="openProductDetail(${p.id})" class="font-black text-white text-xs line-clamp-1 hover:text-amber-400 transition cursor-pointer">${getLocalized(p.title)}</h3>
+                <h3 onclick="openProductDetail(${p.id})" class="font-black text-white text-xs line-clamp-1 hover:text-amber-400 transition cursor-pointer">${window.getLocalized(p.title)}</h3>
                 
                 <div class="flex items-baseline gap-1.5 pt-1">
                   <span class="text-amber-400 font-black text-sm font-mono">${effectivePrice}</span>
@@ -1214,7 +1438,7 @@
       }
 
       const matches = products.filter(p => 
-        getLocalized(p.title).toLowerCase().includes(val) || 
+        window.getLocalized(p.title).toLowerCase().includes(val) || 
         p.brand.toLowerCase().includes(val) || 
         p.ref.toLowerCase().includes(val)
       ).slice(0, 5);
@@ -1228,7 +1452,7 @@
         <div onclick="openProductDetail(${m.id}); document.getElementById('searchSuggestions').classList.add('hidden');" class="p-2.5 hover:bg-slate-800 cursor-pointer flex items-center gap-3 text-xs">
           <img src="${m.images && m.images.length > 0 ? m.images[m.mainImageIndex || 0] : (m.img || '')}" class="w-8 h-8 rounded-lg object-cover">
           <div>
-            <div class="font-bold text-white">${m.brand} - ${getLocalized(m.title)}</div>
+            <div class="font-bold text-white">${m.brand} - ${window.getLocalized(m.title)}</div>
             <div class="text-[10px] text-amber-400 font-mono">${m.price} ${i18nData[currentLang].currency}</div>
           </div>
         </div>
@@ -1322,7 +1546,7 @@
                   <button type="button" onclick="confirmDeleteProduct(${p.id}); toggleModal('productDetailModal');" class="px-2.5 py-1 bg-rose-600 hover:bg-rose-500 text-white rounded-lg text-xs font-black cursor-pointer">🗑️ حذف</button>
                 </div>
               ` : ''}
-              <img id="detailMainImg" src="${primaryImg}" alt="${getLocalized(p.title)}" class="w-full h-72 object-cover group-hover:scale-110 transition duration-500 ${!isAvailable ? 'grayscale opacity-50' : ''}" />
+              <img id="detailMainImg" src="${primaryImg}" alt="${window.getLocalized(p.title)}" class="w-full h-72 object-cover group-hover:scale-110 transition duration-500 ${!isAvailable ? 'grayscale opacity-50' : ''}" />
               <div class="absolute bottom-2 right-2 bg-slate-900/80 backdrop-blur-md px-2 py-1 rounded-lg text-[10px] text-amber-400 font-bold pointer-events-none flex items-center gap-1">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
                 تكبير الصورة
@@ -1346,16 +1570,16 @@
               <span class="px-2.5 py-1 bg-amber-500 text-slate-950 font-black text-xs rounded-xl">${p.brand}</span>
               <span class="text-xs font-mono text-slate-400">${t.ref} ${p.ref}</span>
             </div>
-            <h2 class="text-lg font-black text-white">${getLocalized(p.title)}</h2>
+            <h2 class="text-lg font-black text-white">${window.getLocalized(p.title)}</h2>
             
             <div class="grid grid-cols-2 gap-2 text-xs bg-slate-950 p-3 rounded-2xl border border-slate-800">
               <div><span class="text-slate-400">${t.year}</span> <span class="font-bold text-white">${p.year}</span></div>
-              <div><span class="text-slate-400">${t.country}</span> <span class="font-bold text-white">${getLocalized(p.country)}</span></div>
+              <div><span class="text-slate-400">${t.country}</span> <span class="font-bold text-white">${window.getLocalized(p.country)}</span></div>
               <div><span class="text-slate-400">${t.condition}</span> <span class="font-bold text-amber-400">${getConditionText(p.condition)}</span></div>
               <div><span class="text-slate-400">${t.stockLabel}</span> <span class="font-bold ${isAvailable ? 'text-emerald-400' : 'text-rose-400'}">${isAvailable ? '' : t.outOfStock}</span></div>
             </div>
 
-            <p class="text-xs text-slate-300 leading-relaxed">${getLocalized(p.desc)}</p>
+            <p class="text-xs text-slate-300 leading-relaxed">${window.getLocalized(p.desc)}</p>
 
             <div class="py-2">
               ${hasOffer ? `<span class="block text-xs text-slate-500 line-through font-mono">${p.price} ${t.currency}</span>` : ''}
@@ -1376,6 +1600,13 @@
 
       toggleModal("productDetailModal");
     };
+
+    function getConditionText(cond) {
+      const t = i18nData[currentLang];
+      if (cond === 'new') return t.condNew;
+      if (cond === 'like_new') return t.condLikeNew;
+      return t.condUsed;
+    }
 
     window.openImageZoom = function(imgSrc) {
       const zoomModal = document.getElementById("imageZoomModal");
@@ -1406,7 +1637,7 @@
 
       tbody.innerHTML = products.map(p => `
         <tr class="hover:bg-slate-950/60">
-          <td class="p-2 font-bold text-white">${p.brand} - ${getLocalized(p.title)}</td>
+          <td class="p-2 font-bold text-white">${p.brand} - ${window.getLocalized(p.title)}</td>
           <td class="p-2 font-mono text-amber-400">${p.price} ${t.currency}</td>
           <td class="p-2 font-bold ${p.stock > 0 ? 'text-emerald-400' : 'text-rose-400'}">${p.stock}</td>
           <td class="p-2 text-center space-x-1">
@@ -1553,11 +1784,11 @@
       if (!p) return;
       document.getElementById("editProductId").value = p.id;
       document.getElementById("formBrand").value = p.brand;
-      document.getElementById("formTitle").value = getLocalized(p.title);
+      document.getElementById("formTitle").value = window.getLocalized(p.title);
       document.getElementById("formRef").value = p.ref;
       document.getElementById("formCategory").value = p.category;
       document.getElementById("formYear").value = p.year;
-      document.getElementById("formCountry").value = getLocalized(p.country);
+      document.getElementById("formCountry").value = window.getLocalized(p.country);
       document.getElementById("formCondition").value = p.condition;
       document.getElementById("formStock").value = p.stock;
       document.getElementById("formPrice").value = p.price;
@@ -1567,7 +1798,7 @@
       currentAdminMainIndex = p.mainImageIndex !== undefined && p.mainImageIndex < currentAdminImages.length ? p.mainImageIndex : 0;
       renderAdminImagesPreview();
 
-      document.getElementById("formDesc").value = getLocalized(p.desc);
+      document.getElementById("formDesc").value = window.getLocalized(p.desc);
       updateTitleSuggestions();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
@@ -1777,7 +2008,7 @@
             <div class="flex items-center gap-2.5">
               <img src="${img}" class="w-10 h-10 rounded-xl object-cover border border-slate-800">
               <div>
-                <div class="font-bold text-white">${item.brand} - ${getLocalized(item.title)}</div>
+                <div class="font-bold text-white">${item.brand} - ${window.getLocalized(item.title)}</div>
                 <div class="text-[10px] text-amber-400 font-mono">${itemPrice} ${t.currency}</div>
               </div>
             </div>
@@ -1817,6 +2048,7 @@
       applyFilters();
       syncState();
       renderCartList();
+      updateAdminUnreadBadge();
     });
   </script>
 </body>
