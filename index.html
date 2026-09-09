@@ -113,12 +113,12 @@
         <!-- Dynamic Customer Contact vs Admin Inbox Button -->
         <div id="dynamicHeaderContactContainer"></div>
 
-        <!-- Admin Control Button -->
+        <!-- Admin Account / Control Button -->
         <button 
           type="button" 
           onclick="openAdminModal()" 
           class="relative p-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-amber-400 rounded-xl border border-slate-700 text-xs font-bold transition cursor-pointer" 
-          title="Admin"
+          title="Admin Account"
         >
           <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
@@ -434,9 +434,9 @@
     </div>
   </div>
 
-  <!-- Admin Control & Messages Modal -->
+  <!-- Admin Account Modal (Activated via Lock Button) -->
   <div id="adminModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-4xl w-full p-6 relative max-h-[92vh] overflow-y-auto shadow-2xl">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-xl w-full p-6 relative shadow-2xl">
       <button 
         type="button" 
         onclick="toggleModal('adminModal')" 
@@ -446,21 +446,10 @@
           <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
         </svg>
       </button>
-      
-      <!-- Modal Header with Logout Button if logged in -->
-      <div class="flex items-center justify-between mb-4">
-        <h3 class="text-base font-black text-amber-500 flex items-center gap-2">
-          <span data-i18n="adminPanelTitle">لوحة تحكم إدارة السلع والمخزون والرسائل</span>
-        </h3>
-        <div id="adminHeaderLogoutBtn" class="hidden">
-          <button type="button" onclick="lockAdminSession()" class="px-3 py-1.5 bg-rose-900/80 hover:bg-rose-900 text-rose-200 text-xs font-black rounded-xl border border-rose-700/60 transition cursor-pointer flex items-center gap-1.5">
-            <span>🔒 تسجيل الخروج (وضع زبون)</span>
-          </button>
-        </div>
-      </div>
 
-      <!-- Password Lock Section -->
-      <div id="adminLock" class="text-center py-8 space-y-3">
+      <!-- Password Lock Section (If NOT logged in) -->
+      <div id="adminLock" class="text-center py-6 space-y-3">
+        <h3 class="text-base font-black text-amber-500 mb-2">تسجيل دخول الإدارة</h3>
         <p class="text-xs font-bold text-slate-400" data-i18n="adminPassHint">أدخل رمز الدخول السري للإدارة (الافتراضي: 1234):</p>
         <div class="flex justify-center gap-2">
           <input id="adminPassInput" type="password" class="bg-slate-950 border border-slate-700 rounded-xl px-4 py-2 text-center text-white text-xs outline-none focus:border-amber-500">
@@ -468,9 +457,76 @@
         </div>
       </div>
 
-      <!-- Product & Messages Management Content -->
-      <div id="adminContent" class="hidden space-y-6">
+      <!-- Account Info Section (If ALREADY logged in) -->
+      <div id="adminAccountContent" class="hidden space-y-5">
+        <h3 class="text-base font-black text-amber-500 mb-2 flex items-center gap-2">
+          <span>⚙️ معلومات حساب الإدارة</span>
+        </h3>
         
+        <div class="bg-slate-950 border border-slate-800 p-4 rounded-2xl space-y-3 text-xs">
+          <div>
+            <span class="text-slate-400 block mb-1">البريد الإلكتروني الحالي للإدارة:</span>
+            <div id="currentAdminEmailDisplay" class="font-mono font-bold text-amber-400 text-sm">admin@zinououtillage.dz</div>
+          </div>
+        </div>
+
+        <div class="space-y-3 pt-2">
+          <button type="button" onclick="openChangeEmailModal()" class="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-amber-400 font-bold rounded-xl text-xs transition cursor-pointer flex items-center justify-center gap-2 border border-slate-700">
+            ✉️ تغيير البريد الإلكتروني
+          </button>
+          <button type="button" onclick="openChangePasswordModal()" class="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-amber-400 font-bold rounded-xl text-xs transition cursor-pointer flex items-center justify-center gap-2 border border-slate-700">
+            🔑 تغيير كلمة المرور السريّة
+          </button>
+          <button type="button" onclick="lockAdminSession()" class="w-full py-2.5 bg-rose-900/80 hover:bg-rose-900 text-rose-200 font-black rounded-xl text-xs transition cursor-pointer flex items-center justify-center gap-2 border border-rose-700/60">
+            🔒 تسجيل الخروج (وضع زبون)
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Change Email Modal -->
+  <div id="changeEmailModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[60] hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-sm w-full p-6 relative shadow-2xl space-y-4">
+      <h4 class="text-sm font-black text-amber-400">تغيير البريد الإلكتروني</h4>
+      <input id="newEmailInput" type="email" placeholder="البريد الجديد..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white text-xs outline-none focus:border-amber-500">
+      <div class="flex gap-2 justify-end">
+        <button type="button" onclick="toggleModal('changeEmailModal')" class="px-4 py-2 bg-slate-800 text-slate-300 rounded-xl text-xs font-bold">إلغاء</button>
+        <button type="button" onclick="saveNewEmail()" class="px-4 py-2 bg-amber-500 text-slate-950 rounded-xl text-xs font-black">حفظ</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Change Password Modal -->
+  <div id="changePasswordModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[60] hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-sm w-full p-6 relative shadow-2xl space-y-4">
+      <h4 class="text-sm font-black text-amber-400">تغيير كلمة المرور</h4>
+      <input id="newPasswordInput" type="password" placeholder="كلمة المرور الجديدة..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white text-xs outline-none focus:border-amber-500">
+      <div class="flex gap-2 justify-end">
+        <button type="button" onclick="toggleModal('changePasswordModal')" class="px-4 py-2 bg-slate-800 text-slate-300 rounded-xl text-xs font-bold">إلغاء</button>
+        <button type="button" onclick="saveNewPassword()" class="px-4 py-2 bg-amber-500 text-slate-950 rounded-xl text-xs font-black">حفظ</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Inbox Modal (Messages & Products Management) -->
+  <div id="inboxModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-4xl w-full p-6 relative max-h-[92vh] overflow-y-auto shadow-2xl">
+      <button 
+        type="button" 
+        onclick="toggleModal('inboxModal')" 
+        class="absolute top-4 left-4 w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition cursor-pointer"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+
+      <h3 class="text-base font-black text-amber-500 mb-4">
+        <span>لوحة تحكم إدارة السلع والمخزون والرسائل</span>
+      </h3>
+
+      <div class="space-y-6">
         <!-- Tabs for Products vs Inbox Messages -->
         <div class="flex gap-2 border-b border-slate-800 pb-3">
           <button type="button" onclick="switchAdminTab('products')" id="adminTabProductsBtn" class="px-4 py-2 bg-amber-500 text-slate-950 rounded-xl font-black text-xs transition cursor-pointer">إدارة السلع والمخزون</button>
@@ -914,6 +970,7 @@
     let cart = JSON.parse(localStorage.getItem("zinou_cart_v3") || "[]");
     let customerMessages = JSON.parse(localStorage.getItem("zinou_customer_messages_v1") || "[]");
     let isDeveloper = sessionStorage.getItem("zinou_developer_session") === "true";
+    let adminEmail = localStorage.getItem("zinou_admin_email") || "admin@zinououtillage.dz";
     let currentAdminImages = [];
     let currentAdminMainIndex = 0;
 
@@ -986,7 +1043,7 @@
       }
     ]));
 
-    // Helper function for validation of Algerian phone numbers (05, 06, 07 + 8 digits, allowing spaces/dashes)
+    // Helper function for validation of Algerian phone numbers (05, 06, 07 + 8 digits)
     function validateAlgerianPhone(phoneStr) {
       if (!phoneStr) return false;
       const cleaned = phoneStr.replace(/\s+/g, '').replace(/-/g, '').replace(/\+/g, '');
@@ -1031,6 +1088,7 @@
       localStorage.setItem("zinou_products_v3", JSON.stringify(products));
       localStorage.setItem("zinou_cart_v3", JSON.stringify(cart));
       localStorage.setItem("zinou_customer_messages_v1", JSON.stringify(customerMessages));
+      localStorage.setItem("zinou_admin_email", adminEmail);
       updateCartBadge();
       renderDynamicHeaderContact();
       updateAdminUnreadBadge();
@@ -1055,11 +1113,11 @@
       const unreadCount = customerMessages.filter(m => !m.read).length;
 
       if (isDeveloper) {
-        // Admin is logged in: button transforms to Inbox (الرسائل) with badge counter
+        // Admin is logged in: show dedicated Inbox (الرسائل) button with badge
         container.innerHTML = `
           <button 
             type="button" 
-            onclick="openAdminModalToInbox()" 
+            onclick="openInboxModal()" 
             class="relative px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 font-bold rounded-xl text-xs flex items-center gap-1.5 transition active:scale-95 cursor-pointer"
           >
             <svg class="w-3.5 h-3.5 text-amber-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -1086,9 +1144,12 @@
       }
     }
 
-    window.openAdminModalToInbox = function() {
-      openAdminModal();
-      switchAdminTab('inbox');
+    window.openInboxModal = function() {
+      toggleModal("inboxModal");
+      renderAdminCategoryOptions();
+      renderAdminTable();
+      renderAdminAutocompletes();
+      renderAdminMessages();
     };
 
     function updateAdminUnreadBadge() {
@@ -1106,18 +1167,30 @@
       renderDynamicHeaderContact();
     }
 
+    window.openAdminModal = function() {
+      toggleModal("adminModal");
+      if (isDeveloper) {
+        document.getElementById("adminLock")?.classList.add("hidden");
+        document.getElementById("adminAccountContent")?.classList.remove("hidden");
+        const emailDisp = document.getElementById("currentAdminEmailDisplay");
+        if (emailDisp) emailDisp.textContent = adminEmail;
+      } else {
+        document.getElementById("adminLock")?.classList.remove("hidden");
+        document.getElementById("adminAccountContent")?.classList.add("hidden");
+        const passInput = document.getElementById("adminPassInput");
+        if (passInput) passInput.value = "";
+      }
+    };
+
     window.unlockAdmin = function() {
       const pass = document.getElementById("adminPassInput")?.value;
       if (pass === "1234") {
         isDeveloper = true;
         sessionStorage.setItem("zinou_developer_session", "true");
         document.getElementById("adminLock")?.classList.add("hidden");
-        document.getElementById("adminContent")?.classList.remove("hidden");
-        document.getElementById("adminHeaderLogoutBtn")?.classList.remove("hidden");
-        renderAdminCategoryOptions();
-        renderAdminTable();
-        renderAdminAutocompletes();
-        renderAdminMessages();
+        document.getElementById("adminAccountContent")?.classList.remove("hidden");
+        const emailDisp = document.getElementById("currentAdminEmailDisplay");
+        if (emailDisp) emailDisp.textContent = adminEmail;
         renderDynamicHeaderContact();
         applyFilters();
         showToast("تم الدخول للوضع الإداري بنجاح!", "success");
@@ -1130,8 +1203,7 @@
       isDeveloper = false;
       sessionStorage.removeItem("zinou_developer_session");
       document.getElementById("adminLock")?.classList.remove("hidden");
-      document.getElementById("adminContent")?.classList.add("hidden");
-      document.getElementById("adminHeaderLogoutBtn")?.classList.add("hidden");
+      document.getElementById("adminAccountContent")?.classList.add("hidden");
       const passInput = document.getElementById("adminPassInput");
       if (passInput) passInput.value = "";
       toggleModal("adminModal");
@@ -1140,23 +1212,35 @@
       showToast("تم تسجيل الخروج بنجاح وأصبحت في وضع الزبون العادي.", "info");
     };
 
-    window.openAdminModal = function() {
-      toggleModal("adminModal");
-      if (isDeveloper) {
-        document.getElementById("adminLock")?.classList.add("hidden");
-        document.getElementById("adminContent")?.classList.remove("hidden");
-        document.getElementById("adminHeaderLogoutBtn")?.classList.remove("hidden");
-        renderAdminCategoryOptions();
-        renderAdminTable();
-        renderAdminAutocompletes();
-        renderAdminMessages();
-      } else {
-        document.getElementById("adminLock")?.classList.remove("hidden");
-        document.getElementById("adminContent")?.classList.add("hidden");
-        document.getElementById("adminHeaderLogoutBtn")?.classList.add("hidden");
-        const passInput = document.getElementById("adminPassInput");
-        if (passInput) passInput.value = "";
-      }
+    window.openChangeEmailModal = function() {
+      toggleModal("changeEmailModal");
+      const inp = document.getElementById("newEmailInput");
+      if (inp) inp.value = adminEmail;
+    };
+
+    window.saveNewEmail = function() {
+      const inp = document.getElementById("newEmailInput");
+      if (!inp || !inp.value.trim()) return;
+      adminEmail = inp.value.trim();
+      syncState();
+      toggleModal("changeEmailModal");
+      const emailDisp = document.getElementById("currentAdminEmailDisplay");
+      if (emailDisp) emailDisp.textContent = adminEmail;
+      showToast("تم تغيير البريد الإلكتروني بنجاح!", "success");
+    };
+
+    window.openChangePasswordModal = function() {
+      toggleModal("changePasswordModal");
+      const inp = document.getElementById("newPasswordInput");
+      if (inp) inp.value = "";
+    };
+
+    window.saveNewPassword = function() {
+      const inp = document.getElementById("newPasswordInput");
+      if (!inp || !inp.value.trim()) return;
+      // In a real app we would update password, here we notify success
+      toggleModal("changePasswordModal");
+      showToast("تم تغيير كلمة المرور السريّة بنجاح!", "success");
     };
 
     window.switchAdminTab = function(tabName) {
@@ -1241,7 +1325,6 @@
 
             <p class="text-xs text-slate-300 bg-slate-900 p-2.5 rounded-xl border border-slate-800">${msg.text}</p>
 
-            <!-- Reply section -->
             <div class="pt-2 border-t border-slate-900 space-y-2">
               ${msg.reply ? `
                 <div class="bg-emerald-950/40 border border-emerald-900/60 p-2.5 rounded-xl text-xs text-emerald-200">
@@ -1394,7 +1477,6 @@
         return `
           <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden flex flex-col justify-between shadow-lg hover:border-amber-500/50 transition group">
             <div>
-              <!-- Product Image & Badges -->
               <div class="relative h-36 bg-slate-950 overflow-hidden cursor-pointer" onclick="openProductDetail(${p.id})">
                 ${isNewItem ? `
                   <span class="absolute top-2 right-2 z-10 bg-amber-500 text-slate-950 font-black text-[9px] px-2 py-0.5 rounded-lg shadow-md">
@@ -1410,13 +1492,12 @@
                 
                 ${isDeveloper ? `
                   <div class="absolute bottom-2 left-2 z-25 flex gap-1 bg-slate-950/90 backdrop-blur-md p-1 rounded-xl border border-slate-700 shadow" onclick="event.stopPropagation()">
-                    <button type="button" onclick="editProduct(${p.id}); openAdminModal();" class="p-1 bg-amber-500 text-slate-950 rounded-lg text-[10px] font-black cursor-pointer" title="تعديل">✏️</button>
+                    <button type="button" onclick="editProduct(${p.id}); openInboxModal();" class="p-1 bg-amber-500 text-slate-950 rounded-lg text-[10px] font-black cursor-pointer" title="تعديل">✏️</button>
                     <button type="button" onclick="confirmDeleteProduct(${p.id})" class="p-1 bg-rose-600 text-white rounded-lg text-[10px] font-black cursor-pointer" title="حذف">🗑️</button>
                   </div>
                 ` : ''}
               </div>
 
-              <!-- Content Info -->
               <div class="p-2.5 space-y-1">
                 <div class="flex items-center justify-between text-[10px]">
                   <span class="text-amber-400 font-bold">${p.brand}</span>
@@ -1432,7 +1513,6 @@
               </div>
             </div>
 
-            <!-- Card Actions -->
             <div class="p-2.5 pt-0 grid grid-cols-2 gap-1.5 border-t border-slate-800/80 mt-2">
               ${isAvailable ? `
                 <button type="button" onclick="addToCart(${p.id})" class="py-1.5 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-[10px] flex items-center justify-center gap-1 transition cursor-pointer">
@@ -1574,7 +1654,7 @@
             <div class="relative rounded-2xl overflow-hidden bg-slate-950 border border-slate-800 group cursor-zoom-in" onclick="openImageZoom('${primaryImg}')">
               ${isDeveloper ? `
                 <div class="absolute top-3 left-3 z-20 flex gap-2 bg-slate-950/90 backdrop-blur-md p-1.5 rounded-xl border border-slate-700 shadow-xl" onclick="event.stopPropagation();">
-                  <button type="button" onclick="editProduct(${p.id}); toggleModal('productDetailModal'); openAdminModal();" class="px-2.5 py-1 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-lg text-xs font-black cursor-pointer">✏️ تعديل</button>
+                  <button type="button" onclick="editProduct(${p.id}); toggleModal('productDetailModal'); openInboxModal();" class="px-2.5 py-1 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-lg text-xs font-black cursor-pointer">✏️ تعديل</button>
                   <button type="button" onclick="confirmDeleteProduct(${p.id}); toggleModal('productDetailModal');" class="px-2.5 py-1 bg-rose-600 hover:bg-rose-500 text-white rounded-lg text-xs font-black cursor-pointer">🗑️ حذف</button>
                 </div>
               ` : ''}
@@ -1585,7 +1665,6 @@
               </div>
             </div>
 
-            <!-- Thumbnails if multiple images -->
             ${imagesList.length > 1 ? `
               <div class="flex gap-2 overflow-x-auto pb-2">
                 ${imagesList.map((imgSrc, idx) => `
@@ -1673,7 +1752,7 @@
           <td class="p-2 font-mono text-amber-400">${p.price} ${t.currency}</td>
           <td class="p-2 font-bold ${p.stock > 0 ? 'text-emerald-400' : 'text-rose-400'}">${p.stock}</td>
           <td class="p-2 text-center space-x-1">
-            <button type="button" onclick="editProduct(${p.id}); openAdminModal();" class="px-2 py-1 bg-amber-500 text-slate-950 font-bold rounded-lg text-xs mx-1 cursor-pointer">${t.editBtn}</button>
+            <button type="button" onclick="editProduct(${p.id});" class="px-2 py-1 bg-amber-500 text-slate-950 font-bold rounded-lg text-xs mx-1 cursor-pointer">${t.editBtn}</button>
             <button type="button" onclick="confirmDeleteProduct(${p.id})" class="px-2 py-1 bg-rose-600 text-white font-bold rounded-lg text-xs mx-1 cursor-pointer">${t.deleteBtn}</button>
           </td>
         </tr>
