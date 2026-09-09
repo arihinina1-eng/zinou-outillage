@@ -1311,8 +1311,11 @@
         reply: ""
       };
 
+      // Ensure we pull latest from localStorage before pushing
+      customerMessages = JSON.parse(localStorage.getItem("zinou_customer_messages_v1") || "[]");
       customerMessages.unshift(newMsg);
       syncState();
+      
       toggleModal("customerMessageModal");
       document.getElementById("clientMsgName").value = "";
       document.getElementById("clientMsgWilaya").value = "";
@@ -1321,7 +1324,19 @@
       showToast("Message sent successfully!", "success");
     };
 
+    window.addEventListener("storage", (e) => {
+      if (e.key === "zinou_customer_messages_v1") {
+        customerMessages = JSON.parse(e.newValue || "[]");
+        updateAdminUnreadBadge();
+        if (!document.getElementById("inboxModal").classList.contains("hidden")) {
+          renderAdminMessages();
+        }
+      }
+    });
+
     function renderAdminMessages() {
+      // Reload from storage to ensure latest data
+      customerMessages = JSON.parse(localStorage.getItem("zinou_customer_messages_v1") || "[]");
       const container = document.getElementById("adminMessagesList");
       if (!container) return;
 
