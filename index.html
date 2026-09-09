@@ -325,6 +325,20 @@
             />
           </div>
 
+          <!-- Sort Dropdown & Quick Add Product Button -->
+          <div class="flex items-center gap-2">
+            <div class="flex items-center gap-1.5">
+              <span class="text-amber-400" data-i18n="sortLabel">الترتيب:</span>
+              <select id="sortSelect" onchange="applyFilters()" class="bg-slate-950 border border-slate-700 rounded-lg px-2 py-1 text-white outline-none focus:border-amber-500 cursor-pointer text-xs">
+                <option value="newest" data-i18n="sortNewest">الأحدث إضافة</option>
+                <option value="priceAsc" data-i18n="sortPriceAsc">السعر: من الأقل للأعلى</option>
+                <option value="priceDesc" data-i18n="sortPriceDesc">السعر: من الأعلى للأقل</option>
+              </select>
+            </div>
+
+            <!-- Quick Add (+) Button for Admin -->
+            <button 
+              type="button" 
           <!-- Sort Dropdown -->
           <div class="flex items-center gap-1.5">
             <span class="text-amber-400" data-i18n="sortLabel">الترتيب:</span>
@@ -334,6 +348,7 @@
               <option value="priceDesc" data-i18n="sortPriceDesc">السعر: من الأعلى للأقل</option>
             </select>
           </div>
+
         </div>
       </div>
 
@@ -351,6 +366,18 @@
       <div id="productsGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2.5 sm:gap-3"></div>
     </main>
   </div>
+
+  <!-- Floating Add Product Button (FAB) -->
+  <button 
+    type="button" 
+    onclick="openQuickAddProductModal()" 
+    class="fixed bottom-6 left-6 z-40 w-14 h-14 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-full shadow-2xl flex items-center justify-center transition active:scale-95 cursor-pointer border-2 border-slate-900 group"
+    title="إضافة سلعة جديدة"
+  >
+    <svg class="w-7 h-7 font-black group-hover:rotate-90 transition duration-300" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path>
+    </svg>
+  </button>
 
   <div id="productDetailModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-2xl w-full p-6 relative max-h-[90vh] overflow-y-auto shadow-2xl">
@@ -1150,6 +1177,17 @@
       renderAdminTable();
       renderAdminAutocompletes();
       renderAdminMessages();
+    };
+
+    window.openQuickAddProductModal = function() {
+      if (!isDeveloper) {
+        showToast("يجب تسجيل دخول الإدارة أولاً لتتمكن من إضافة سلع!", "error");
+        openAdminModal();
+        return;
+      }
+      resetAdminForm();
+      switchAdminTab('products');
+      openInboxModal();
     };
 
     function updateAdminUnreadBadge() {
