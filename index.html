@@ -33,19 +33,6 @@
     ::-webkit-scrollbar-thumb:hover {
       background: #f59e0b;
     }
-
-    @keyframes infiniteBrands {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-    .brands-track-infinite {
-      display: flex;
-      width: max-content;
-      animation: infiniteBrands 30s linear infinite;
-    }
-    .brands-track-infinite:hover {
-      animation-play-state: paused;
-    }
   </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-amber-500 selection:text-slate-950">
@@ -135,9 +122,9 @@
     <div class="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-slate-950 to-transparent z-10 pointer-events-none"></div>
     <div class="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-slate-950 to-transparent z-10 pointer-events-none"></div>
 
-    <div id="brandsScrollContainer" class="overflow-x-auto scrollbar-none cursor-grab active:cursor-grabbing select-none">
-      <div id="brandsTrack" class="brands-track-infinite items-center gap-3 cursor-pointer">
-        <!-- Will be populated dynamically twice for seamless infinite loop -->
+    <div id="brandsScrollContainer" class="overflow-x-auto scrollbar-none cursor-grab active:cursor-grabbing select-none flex">
+      <div id="brandsTrack" class="flex w-max items-center gap-3 cursor-pointer">
+        <!-- Will be populated dynamically for seamless infinite loop -->
       </div>
     </div>
   </section>
@@ -1142,12 +1129,13 @@
       if (!track) return;
       
       const buildItemsHTML = () => brandsData.map(b => `
-        <button type="button" onclick="filterByBrand('${b.name}')" class="w-32 sm:w-36 h-14 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition flex items-center justify-center shrink-0 shadow overflow-hidden p-2 cursor-pointer">
-          <img src="${b.src}" alt="${b.name}" class="w-full h-full object-contain pointer-events-none" />
+        <button type="button" onclick="filterByBrand('${b.name}')" class="w-28 sm:w-36 h-14 sm:h-16 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 transition overflow-hidden flex items-center justify-center shrink-0 shadow-md p-0 cursor-pointer">
+          <img src="${b.src}" alt="${b.name}" class="w-full h-full object-cover pointer-events-none" />
         </button>
       `).join("");
 
-      track.innerHTML = buildItemsHTML() + buildItemsHTML();
+      // Render 4 sets for seamless infinite cylinder loop
+      track.innerHTML = buildItemsHTML() + buildItemsHTML() + buildItemsHTML() + buildItemsHTML();
     }
 
     function renderDynamicHeaderContact() {
@@ -2193,11 +2181,43 @@
 
       // Setup drag-to-scroll functionality for the brands track
       const slider = document.getElementById("brandsScrollContainer");
+      const track = document.getElementById("brandsTrack");
       let isDown = false;
       let startX;
       let scrollLeft;
+      let autoScrollSpeed = 1; // pixels per frame
 
-      if (slider) {
+      if (slider && track) {
+        // Continuous smooth auto-scroll
+        setInterval(() => {
+          if (!isDown && !slider.matches(':hover')) {
+            if (document.documentElement.dir === 'rtl') {
+               slider.scrollLeft -= autoScrollSpeed;
+               if (slider.scrollLeft === 0) slider.scrollLeft += autoScrollSpeed; // Fallback for some browsers
+            } else {
+               slider.scrollLeft += autoScrollSpeed;
+            }
+          }
+        }, 25);
+
+        // Infinite loop jumping logic
+        slider.addEventListener('scroll', () => {
+          const singleWidth = track.scrollWidth / 4;
+          const absScroll = Math.abs(slider.scrollLeft);
+          
+          if (absScroll <= 5) {
+            slider.scrollLeft = (slider.scrollLeft <= 0 ? -singleWidth : singleWidth);
+          } else if (absScroll >= (singleWidth * 3) - slider.clientWidth - 5) {
+            slider.scrollLeft = (slider.scrollLeft <= 0 ? -(singleWidth * 2) : singleWidth * 2);
+          }
+        });
+
+        // Initial jump away from 0 to allow immediate smooth scrolling in both directions
+        setTimeout(() => {
+          const singleWidth = track.scrollWidth / 4;
+          slider.scrollLeft = document.documentElement.dir === 'rtl' ? -singleWidth : singleWidth;
+        }, 300);
+
         slider.addEventListener("mousedown", (e) => {
           isDown = true;
           slider.classList.add("active");
